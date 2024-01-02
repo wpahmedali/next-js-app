@@ -9,7 +9,7 @@ export const getServerSideProps = withCSR(async (ctx) => {
 
   const params = await useServerRouterParams(ctx.query);
 
-  // queryClient = await callReactQueryApis(queryClient, params);
+  queryClient = await callReactQueryApis(queryClient, params);
 
   return {
     props: {
