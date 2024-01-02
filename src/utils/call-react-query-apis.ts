@@ -49,9 +49,9 @@ export const callReactQueryApis = async (
     ['makerModel', params.countryId, params.auctionId],
     () => getMakerModel(params.countryId, params.auctionId)
   );
-  // await queryClient.prefetchQuery(['banner', params.countryId], () =>
-  //   getBanner(params.countryId)
-  // );
+  await queryClient.prefetchQuery(['banner', params.countryId], () =>
+    getBanner(params.countryId)
+  );
   // await queryClient.prefetchQuery(
   //   ['bodyType', params.countryId, params.auctionId],
   //   () => getBodyType(params.countryId, params.auctionId)
