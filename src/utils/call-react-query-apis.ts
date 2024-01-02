@@ -78,23 +78,23 @@ export const callReactQueryApis = async (
     );
   }
 
-  // const customerReviewParams = {
-  //   ...params,
-  //   page: 1,
-  // };
-  // await queryClient.prefetchQuery(
-  //   [
-  //     'customerReview',
-  //     customerReviewParams.countryId,
-  //     customerReviewParams.page,
-  //     customerReviewParams.customerReviewPerPage,
-  //   ],
-  //   () =>
-  //     getCustomerReview(
-  //       customerReviewParams.countryId,
-  //       customerReviewParams.page,
-  //       customerReviewParams.customerReviewPerPage
-  //     )
-  // );
+  const customerReviewParams = {
+    ...params,
+    page: 1,
+  };
+  await queryClient.prefetchQuery(
+    [
+      'customerReview',
+      customerReviewParams.countryId,
+      customerReviewParams.page,
+      customerReviewParams.customerReviewPerPage,
+    ],
+    () =>
+      getCustomerReview(
+        customerReviewParams.countryId,
+        customerReviewParams.page,
+        customerReviewParams.customerReviewPerPage
+      )
+  );
   return queryClient;
 };
