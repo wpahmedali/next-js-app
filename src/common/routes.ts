@@ -1,0 +1,15 @@
+export const ROUTES = Object.freeze({
+  HOME: '/',
+  ALL_STOCK: '/all_stock',
+  BODY_TYPE: '/body-type',
+  COUNTRY_CAR_LIST: '/stock/location',
+  AUCTION: '/stock/auction',
+  AUCTIONS: '/stock/auctions',
+  ABOUT_US: '/about-us',
+  DETAIL: '/detail',
+  JAPAN_OFFICES: '/japan-offices',
+  USED_CARS: '/used-cars',
+  SEARCH: '/used-cars/search',
+  USED_CAR: '/used-car',
+  USED_VEHICLES: '/used-vehicles',
+});
