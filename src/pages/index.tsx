@@ -7,7 +7,7 @@ import { useServerRouterParams } from 'src/hooks/server-router-params';
 export const getServerSideProps = withCSR(async (ctx) => {
   let queryClient = new QueryClient();
 
-  // const params = await useServerRouterParams(ctx.query);
+  const params = await useServerRouterParams(ctx.query);
 
   // queryClient = await callReactQueryApis(queryClient, params);
 
