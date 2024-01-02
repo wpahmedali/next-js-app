@@ -44,7 +44,7 @@ export const callReactQueryApis = async (
     ],
     () => getNextPreviousCarList(params)
   );
-  // await queryClient.prefetchQuery(['steeringTransFuel'], getSteeringTransFuel);
+  await queryClient.prefetchQuery(['steeringTransFuel'], getSteeringTransFuel);
   // await queryClient.prefetchQuery(
   //   ['makerModel', params.countryId, params.auctionId],
   //   () => getMakerModel(params.countryId, params.auctionId)
