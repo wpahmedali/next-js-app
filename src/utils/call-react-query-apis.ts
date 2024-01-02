@@ -18,8 +18,8 @@ export const callReactQueryApis = async (
   params: ICarListParams,
   isContact?: boolean
 ) => {
-  await queryClient.prefetchQuery(['userLocation'], getLocation);
-  const countrys = await queryClient.prefetchQuery(['country'], getCountry);
+  // await queryClient.prefetchQuery(['userLocation'], getLocation);
+  // const countrys = await queryClient.prefetchQuery(['country'], getCountry);
 
   // if (countrys) {
   //   const countries: ICountryApiRes = await getCountry();
@@ -34,49 +34,49 @@ export const callReactQueryApis = async (
   //     }
   //   }
   // }
-  await queryClient.prefetchQuery(
-    [
-      'nextPreviousCar',
-      params.countryId,
-      params.makerId,
-      params.modelId,
-      params.bodyTypeId,
-    ],
-    () => getNextPreviousCarList(params)
-  );
-  await queryClient.prefetchQuery(['steeringTransFuel'], getSteeringTransFuel);
-  await queryClient.prefetchQuery(
-    ['makerModel', params.countryId, params.auctionId],
-    () => getMakerModel(params.countryId, params.auctionId)
-  );
-  await queryClient.prefetchQuery(['banner', params.countryId], () =>
-    getBanner(params.countryId)
-  );
-  await queryClient.prefetchQuery(
-    ['bodyType', params.countryId, params.auctionId],
-    () => getBodyType(params.countryId, params.auctionId)
-  );
+  // await queryClient.prefetchQuery(
+  //   [
+  //     'nextPreviousCar',
+  //     params.countryId,
+  //     params.makerId,
+  //     params.modelId,
+  //     params.bodyTypeId,
+  //   ],
+  //   () => getNextPreviousCarList(params)
+  // );
+  // await queryClient.prefetchQuery(['steeringTransFuel'], getSteeringTransFuel);
+  // await queryClient.prefetchQuery(
+  //   ['makerModel', params.countryId, params.auctionId],
+  //   () => getMakerModel(params.countryId, params.auctionId)
+  // );
+  // await queryClient.prefetchQuery(['banner', params.countryId], () =>
+  //   getBanner(params.countryId)
+  // );
+  // await queryClient.prefetchQuery(
+  //   ['bodyType', params.countryId, params.auctionId],
+  //   () => getBodyType(params.countryId, params.auctionId)
+  // );
 
-  await queryClient.prefetchQuery(['tyreSharjah', params.countryId], () =>
-    getTyreSharjah(params.countryId)
-  );
+  // await queryClient.prefetchQuery(['tyreSharjah', params.countryId], () =>
+  //   getTyreSharjah(params.countryId)
+  // );
 
-  if (!isContact) {
-    await queryClient.prefetchQuery(
-      [reactQuery.vehicleList.tabular, params],
-      () => getVehicleList(params)
-    );
+  // if (!isContact) {
+  //   await queryClient.prefetchQuery(
+  //     [reactQuery.vehicleList.tabular, params],
+  //     () => getVehicleList(params)
+  //   );
 
-    const gridParams = {
-      ...params,
-      perPage: params.page * params.perPage,
-      page: 1,
-    };
-    await queryClient.prefetchQuery(
-      [reactQuery.vehicleList.grid, gridParams],
-      () => getVehicleList(gridParams)
-    );
-  }
+  //   const gridParams = {
+  //     ...params,
+  //     perPage: params.page * params.perPage,
+  //     page: 1,
+  //   };
+  //   await queryClient.prefetchQuery(
+  //     [reactQuery.vehicleList.grid, gridParams],
+  //     () => getVehicleList(gridParams)
+  //   );
+  // }
 
   // const customerReviewParams = {
   //   ...params,
