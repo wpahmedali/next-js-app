@@ -1,4 +1,3 @@
-import React, { Fragment } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import TyreCard from './components/TyreCard';
 import { NextRouter, useRouter } from 'next/router';
@@ -8,6 +7,7 @@ import { zambiaCountry } from 'components/tyre-dashboard/common/constants';
 import { useLoadingState } from 'src/providers/LoadingContext';
 import PageLoader from 'components/page-loader';
 import Pagination from 'components/pagination';
+import { Fragment } from 'react';
 
 const TyreListing = () => {
   const loadingState = useLoadingState();
