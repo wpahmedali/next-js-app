@@ -52,10 +52,10 @@ export const callReactQueryApis = async (
   await queryClient.prefetchQuery(['banner', params.countryId], () =>
     getBanner(params.countryId)
   );
-  await queryClient.prefetchQuery(
-    ['bodyType', params.countryId, params.auctionId],
-    () => getBodyType(params.countryId, params.auctionId)
-  );
+  // await queryClient.prefetchQuery(
+  //   ['bodyType', params.countryId, params.auctionId],
+  //   () => getBodyType(params.countryId, params.auctionId)
+  // );
 
   // await queryClient.prefetchQuery(['tyreSharjah', params.countryId], () =>
   //   getTyreSharjah(params.countryId)
