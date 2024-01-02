@@ -21,19 +21,19 @@ export const callReactQueryApis = async (
   await queryClient.prefetchQuery(['userLocation'], getLocation);
   const countrys = await queryClient.prefetchQuery(['country'], getCountry);
 
-  // if (countrys) {
-  //   const countries: ICountryApiRes = await getCountry();
-  //   if (countries) {
-  //     const findAuctionCountry = countries.data.find(
-  //       (country) => country.auctionDisplay && country.id === params.countryId
-  //     );
-  //     if (findAuctionCountry) {
-  //       await queryClient.prefetchQuery(['auction', params.countryId], () =>
-  //         getAuction(params.countryId)
-  //       );
-  //     }
-  //   }
-  // }
+  if (countrys) {
+    const countries: ICountryApiRes = await getCountry();
+    if (countries) {
+      const findAuctionCountry = countries.data.find(
+        (country) => country.auctionDisplay && country.id === params.countryId
+      );
+      if (findAuctionCountry) {
+        await queryClient.prefetchQuery(['auction', params.countryId], () =>
+          getAuction(params.countryId)
+        );
+      }
+    }
+  }
   await queryClient.prefetchQuery(
     [
       'nextPreviousCar',
