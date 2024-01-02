@@ -19,7 +19,7 @@ export const callReactQueryApis = async (
   isContact?: boolean
 ) => {
   await queryClient.prefetchQuery(['userLocation'], getLocation);
-  // const countrys = await queryClient.prefetchQuery(['country'], getCountry);
+  const countrys = await queryClient.prefetchQuery(['country'], getCountry);
 
   // if (countrys) {
   //   const countries: ICountryApiRes = await getCountry();
