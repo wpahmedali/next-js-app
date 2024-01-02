@@ -19,7 +19,7 @@ export const callReactQueryApis = async (
   isContact?: boolean
 ) => {
   await queryClient.prefetchQuery(['userLocation'], getLocation);
-  // const countrys = await queryClient.prefetchQuery(['country'], getCountry);
+  const countrys = await queryClient.prefetchQuery(['country'], getCountry);
 
   // if (countrys) {
   //   const countries: ICountryApiRes = await getCountry();
@@ -34,16 +34,16 @@ export const callReactQueryApis = async (
   //     }
   //   }
   // }
-  // await queryClient.prefetchQuery(
-  //   [
-  //     'nextPreviousCar',
-  //     params.countryId,
-  //     params.makerId,
-  //     params.modelId,
-  //     params.bodyTypeId,
-  //   ],
-  //   () => getNextPreviousCarList(params)
-  // );
+  await queryClient.prefetchQuery(
+    [
+      'nextPreviousCar',
+      params.countryId,
+      params.makerId,
+      params.modelId,
+      params.bodyTypeId,
+    ],
+    () => getNextPreviousCarList(params)
+  );
   // await queryClient.prefetchQuery(['steeringTransFuel'], getSteeringTransFuel);
   // await queryClient.prefetchQuery(
   //   ['makerModel', params.countryId, params.auctionId],
