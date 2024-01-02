@@ -57,9 +57,9 @@ export const callReactQueryApis = async (
     () => getBodyType(params.countryId, params.auctionId)
   );
 
-  // await queryClient.prefetchQuery(['tyreSharjah', params.countryId], () =>
-  //   getTyreSharjah(params.countryId)
-  // );
+  await queryClient.prefetchQuery(['tyreSharjah', params.countryId], () =>
+    getTyreSharjah(params.countryId)
+  );
 
   // if (!isContact) {
   //   await queryClient.prefetchQuery(
