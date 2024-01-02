@@ -18,7 +18,7 @@ export const callReactQueryApis = async (
   params: ICarListParams,
   isContact?: boolean
 ) => {
-  // await queryClient.prefetchQuery(['userLocation'], getLocation);
+  await queryClient.prefetchQuery(['userLocation'], getLocation);
   // const countrys = await queryClient.prefetchQuery(['country'], getCountry);
 
   // if (countrys) {
