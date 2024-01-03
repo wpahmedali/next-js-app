@@ -57,26 +57,26 @@ export const callReactQueryApis = async (
     () => getBodyType(params.countryId, params.auctionId)
   );
 
-  await queryClient.prefetchQuery(['tyreSharjah', params.countryId], () =>
-    getTyreSharjah(params.countryId)
-  );
+  // await queryClient.prefetchQuery(['tyreSharjah', params.countryId], () =>
+  //   getTyreSharjah(params.countryId)
+  // );
 
-  if (!isContact) {
-    await queryClient.prefetchQuery(
-      [reactQuery.vehicleList.tabular, params],
-      () => getVehicleList(params)
-    );
+  // if (!isContact) {
+  //   await queryClient.prefetchQuery(
+  //     [reactQuery.vehicleList.tabular, params],
+  //     () => getVehicleList(params)
+  //   );
 
-    const gridParams = {
-      ...params,
-      perPage: params.page * params.perPage,
-      page: 1,
-    };
-    await queryClient.prefetchQuery(
-      [reactQuery.vehicleList.grid, gridParams],
-      () => getVehicleList(gridParams)
-    );
-  }
+  //   const gridParams = {
+  //     ...params,
+  //     perPage: params.page * params.perPage,
+  //     page: 1,
+  //   };
+  //   await queryClient.prefetchQuery(
+  //     [reactQuery.vehicleList.grid, gridParams],
+  //     () => getVehicleList(gridParams)
+  //   );
+  // }
 
   const customerReviewParams = {
     ...params,
