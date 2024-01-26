@@ -70,11 +70,11 @@ const SignupForm = () => {
       aria-hidden="true"
       className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-0rem)] max-h-full inset-0 bg-gray-500 bg-opacity-90 transition-opacity"
     >
-      <div className="relative p-4 w-full max-w-2xl max-h-full m-auto flex h-screen justify-center items-center">
-        <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 ">
+      <div className="p-4 flex max-w-lg justify-end items-center right-0 absolute h-screen 3xl:w-[512px] 2xl:w-[512px] lg:w-[512px] md:w-[512px] sm:w-full xs:w-full xxs:w-full">
+        <div className="bg-white rounded-lg h-screen 3xl:w-[512px] 2xl:w-[512px] lg:w-[512px] md:w-[512px] sm:w-full xs:w-full xxs:w-full">
           <ModelHeader setModelIsOpen={setContext} title="Register Yourself" />
 
-          <div className="bg-white rounded-lg overflow-hidden shadow-lg transition-transform transform border">
+          <div className="bg-white overflow-hidden transition-transform transform">
             <form onSubmit={handleSubmit} className="p-4 md:p-5">
               <div className="grid gap-4 mb-4 grid-cols-1">
                 <FormInput

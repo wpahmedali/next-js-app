@@ -59,7 +59,11 @@ const Dropdown = ({ data, title }: IDropdown): JSX.Element => {
             {data.isError && !data.isLoading && <Error />}
             {data.isSuccess &&
               data.data.map((item) => (
-                <DropdownItem item={item} key={item.name} />
+                <DropdownItem
+                  item={item}
+                  key={item.name}
+                  handleIsPopOver={handleIsPopOver}
+                />
               ))}
           </div>
         </Popover.Panel>

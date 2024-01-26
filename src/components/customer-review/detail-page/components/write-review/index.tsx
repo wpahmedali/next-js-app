@@ -6,26 +6,29 @@ import Rating from './components/Rating';
 import { createCustomerReview } from 'react-query/api/write-customer-review';
 import SubmitBtn from './components/SubmitBtn';
 import Form from './components/FormData';
+import CloseIcon from 'components/common/CloseIcon';
+import { validationSchema } from './validations/WriteReview';
+import * as Yup from 'yup';
+
+export const defaultFormData = {
+  country_id: null,
+  car_id: null,
+  title: '',
+  review_rating: '',
+  reviews: '',
+  customer_name: '',
+  email: '',
+  maker_name: '',
+  model_name: '',
+  customer_image: null,
+  car_image: null,
+  system_car_img: '',
+  customer_video: null,
+};
 
 const CustomerWriteReview = ({ open, setOpen }) => {
   const [allErrors, setAllErrors] = useState(null);
   const cancelButtonRef = useRef(null);
-
-  const defaultFormData = {
-    country_id: null,
-    car_id: null,
-    title: '',
-    review_rating: '',
-    reviews: '',
-    customer_name: '',
-    email: '',
-    maker_name: '',
-    model_name: '',
-    customer_image: null,
-    car_image: null,
-    system_car_img: '',
-    customer_video: null,
-  };
 
   const [formData, setFormData] =
     useState<IWriteCustomerReview>(defaultFormData);
@@ -33,6 +36,8 @@ const CustomerWriteReview = ({ open, setOpen }) => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      await validationSchema.validate(formData, { abortEarly: false });
+
       const bodyFormData = new FormData();
       bodyFormData.append('country_id', (formData.country_id || '').toString());
       bodyFormData.append('car_id', (formData.car_id || '').toString());
@@ -49,22 +54,28 @@ const CustomerWriteReview = ({ open, setOpen }) => {
       // bodyFormData.append('customer_video', formData.customer_video);
 
       await createCustomerReview(bodyFormData);
-      setOpen(false);
+      setOpen('');
       setFormData(defaultFormData);
       setAllErrors(null);
     } catch (error) {
-      setAllErrors(error.response.data.data);
+      const validationErrors = {};
+      if (error instanceof Yup.ValidationError) {
+        error.inner.forEach((err) => {
+          validationErrors[err.path] = err.message;
+        });
+      }
+      setAllErrors(validationErrors);
     }
   };
 
   return (
-    <Transition.Root show={open} as={Fragment}>
+    <Transition.Root show={open === 'customerReview'} as={Fragment}>
       <Dialog
         as="div"
         className="relative z-50"
         initialFocus={cancelButtonRef}
         onClose={() => {
-          setOpen(false);
+          setOpen('');
           setFormData(defaultFormData);
           setAllErrors(null);
         }}
@@ -93,6 +104,11 @@ const CustomerWriteReview = ({ open, setOpen }) => {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-5xl">
+                <CloseIcon
+                  hideDialog={setOpen}
+                  setAllErrors={setAllErrors}
+                  setFormData={setFormData}
+                />
                 <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
                     <div className="mt-3 text-center sm:mt-0 sm:text-left w-full">
@@ -102,7 +118,10 @@ const CustomerWriteReview = ({ open, setOpen }) => {
                       >
                         WRITE A REVIEW
                       </Dialog.Title>
-                      <ChassisFilter setFormData={setFormData} />
+                      <ChassisFilter
+                        setFormData={setFormData}
+                        allErrors={allErrors}
+                      />
                       <div className="w-full mt-2">
                         <span className="text-red-500">*</span>Indicates a
                         required field
@@ -116,7 +135,12 @@ const CustomerWriteReview = ({ open, setOpen }) => {
                     </div>
                   </div>
                 </div>
-                <SubmitBtn handleSubmit={handleSubmit} />
+                <SubmitBtn
+                  handleSubmit={handleSubmit}
+                  setOpen={setOpen}
+                  setAllErrors={setAllErrors}
+                  setFormData={setFormData}
+                />
               </Dialog.Panel>
             </Transition.Child>
           </div>

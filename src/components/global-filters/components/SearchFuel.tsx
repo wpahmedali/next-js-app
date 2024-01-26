@@ -4,7 +4,12 @@ import SearchItem from './search-item';
 import { IDropdownData } from '../interfaces/dropdown-data.interface';
 import { ISearchFuel } from '../interfaces/search-fuel.interface';
 
-const SearchFuel = ({ updateFilters, resetToggle }: ISearchFuel) => {
+const SearchFuel = ({
+  updateFilters,
+  resetToggle,
+  dropdownState,
+  setDropdownState,
+}: ISearchFuel) => {
   const {
     query: { fuels },
   } = useRouter();
@@ -35,6 +40,8 @@ const SearchFuel = ({ updateFilters, resetToggle }: ISearchFuel) => {
       isError={!data || isError}
       isLoading={isLoading}
       isSuccess={isSuccess}
+      dropdownState={dropdownState}
+      setDropdownState={setDropdownState}
     />
   );
 };

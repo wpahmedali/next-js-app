@@ -1,34 +1,31 @@
 import { useRouter } from 'next/router';
 import { useCountry } from '../react-query/hooks/api/country';
 import { useEffect, useState } from 'react';
-import { getIdFromParam } from 'utils/get-id-from-param';
 import { getCountryIcon } from 'utils/get-country-icon';
 import { GlobeAltIcon } from '@heroicons/react/24/outline';
+import { ICurrentCountry } from 'src/interfaces/current-country.interface';
+import { useRouterParams } from './router-params';
 
-export interface ICurrentCountry {
-  isSuccess: boolean;
-  countryName: string;
-  flagIcon: JSX.Element;
-}
-
-export const useCurrentCountry = (): ICurrentCountry => {
+export const useCurrentCountry = (
+  specificCountryId?: number
+): ICurrentCountry => {
   const [currentCountry, setCurrentCountry] = useState<ICurrentCountry>({
     isSuccess: false,
+    isDelivered: 1,
     countryName: '',
     flagIcon: <></>,
   });
+  const { query } = useRouter();
+  let { countryId } = useRouterParams(query);
+
+  if (specificCountryId) {
+    countryId = specificCountryId;
+  }
 
   const { data, isLoading, isSuccess } = useCountry();
 
-  const {
-    query: { country },
-  } = useRouter();
-
   useEffect(() => {
     if (isSuccess) {
-      const countryId =
-        country && !Array.isArray(country) ? getIdFromParam(country) : 0;
-
       const currentCountry = data.data.find(
         (country) => country.id === countryId
       );
@@ -36,7 +33,12 @@ export const useCurrentCountry = (): ICurrentCountry => {
       currentCountry
         ? setCurrentCountry({
             isSuccess: true,
+            isDelivered: currentCountry.showReservedTag,
+            isCount: currentCountry.is_count,
+            isAuctionSheetDisplay: currentCountry.isAuctionSheetDisplay,
             countryName: currentCountry.countryName,
+            FBPageName: currentCountry.FBPageName,
+            FBAppId: currentCountry.FBAppId,
             flagIcon: getCountryIcon(currentCountry.cssClass),
           })
         : setCurrentCountry({
@@ -45,7 +47,7 @@ export const useCurrentCountry = (): ICurrentCountry => {
             flagIcon: <GlobeAltIcon className="w-6 h-6" />,
           });
     }
-  }, [isLoading, country, isSuccess, data]);
+  }, [isLoading, countryId, isSuccess, data]);
 
   return currentCountry;
 };

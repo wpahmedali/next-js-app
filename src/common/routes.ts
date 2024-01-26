@@ -3,6 +3,7 @@ export const ROUTES = Object.freeze({
   ALL_STOCK: '/all_stock',
   BODY_TYPE: '/body-type',
   COUNTRY_CAR_LIST: '/stock/location',
+  DUBAI_SPECIAL_COUNTRY_CAR_LIST: '/stock/special',
   AUCTION: '/stock/auction',
   AUCTIONS: '/stock/auctions',
   ABOUT_US: '/about-us',

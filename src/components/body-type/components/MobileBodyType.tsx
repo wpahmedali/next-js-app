@@ -52,7 +52,7 @@ const MobileBodyTypes = ({
               >
                 <Dialog.Panel className="pointer-events-auto relative w-screen max-w-screen-2xl">
                   <CloseIcon hideDialog={hideDialog} />
-                  <div className="flex h-3/3 flex-col overflow-auto max-h-screen bg-white py-6 shadow-xl 2xl:mt-36 2xl:mr-64 xl:mt-32 xl:mr-48 lg:mt-32 lg:mr-8">
+                  <div className="flex h-3/3 flex-col overflow-auto max-h-screen bg-white py-6 shadow-xl 2xl:mt-36 2xl:mr-64 xl:mt-32 xl:mr-48 lg:mt-32 lg:mr-8 ">
                     <div className="px-4 sm:px-6">
                       <div className="text-base font-semibold leading-6 text-gray-900">
                         <Dialog.Title>All Countries Stock</Dialog.Title>
@@ -60,7 +60,7 @@ const MobileBodyTypes = ({
                         {isLoading && <Loading />}
                         {(!data || isError) && !isLoading && <Error />}
                         {isSuccess && (
-                          <div className="container-fluid mx-auto grid sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-6 pt-2 gap-4">
+                          <div className="container-fluid mx-auto grid sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 pt-2 gap-4">
                             {data?.data?.map((item, i) => (
                               <BodyTypeItem
                                 key={i}

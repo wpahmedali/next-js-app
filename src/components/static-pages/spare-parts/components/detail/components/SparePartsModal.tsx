@@ -6,7 +6,7 @@ const SparePartModal = ({ setisOpenModal, shareWhatsapp, imgName }) => {
     <div
       id="authentication-modal"
       aria-hidden="true"
-      className="overflow-y-auto overflow-x-hidden fixed inset-0 flex items-center z-50"
+      className="overflow-y-auto overflow-x-hidden fixed inset-0 flex items-center"
     >
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity opacity-100"></div>
       <div className="relative p-4 max-w-2xl max-h-full m-auto ">

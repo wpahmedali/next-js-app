@@ -11,6 +11,7 @@ export const getEmptyFiltersData = (query: ParsedUrlQuery): IFilters => {
     steerings,
     transmissions,
     fuels,
+    stock_no,
     chassis_no,
   } = query;
 
@@ -28,6 +29,7 @@ export const getEmptyFiltersData = (query: ParsedUrlQuery): IFilters => {
     maxYear: to_year && !Array.isArray(to_year) ? [to_year] : [],
     bodyTypes:
       body_types && !Array.isArray(body_types) ? body_types.split(',') : [],
+    stockNo: stock_no && !Array.isArray(stock_no) ? stock_no : '',
     chassisNo: chassis_no && !Array.isArray(chassis_no) ? chassis_no : '',
   };
 };

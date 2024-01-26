@@ -1,45 +1,28 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { NextRouter, useRouter } from 'next/router';
-import { allModelsStr } from 'src/common/constants';
-import { getIdFromParam } from 'utils/get-id-from-param';
 import DropdownItem from './search-item/DropdownItem';
 import { IDropdownData } from '../interfaces/dropdown-data.interface';
 import DropDownIcon from 'components/common/Dropdownicon';
 import SearchInput from './search-item/SearchInput';
 import { ISearchModel } from '../interfaces/search-model.interface';
 
-const SearchModel = ({ updateFilters, resetToggle, models }: ISearchModel) => {
+const SearchModel = ({
+  updateFilters,
+  resetToggle,
+  models,
+  dropdownState,
+  setDropdownState,
+}: ISearchModel) => {
   const [dropdownData, setDropdownData] = useState<IDropdownData[]>([]);
   const [allData, setAllData] = useState<IDropdownData[]>([]);
   const [selectedNames, setSelectedNames] = useState<string | null>(null);
 
-  const router: NextRouter = useRouter();
-  const {
-    query: { model },
-  } = router;
-
   useEffect(() => {
-    const newData = models.map((item) => {
-      const find = allData.find(
-        (x) => x.id === item.id && x.name === item.name
-      );
-      return {
-        ...item,
-        isChecked: find
-          ? find.isChecked
-          : model &&
-            !Array.isArray(model) &&
-            model !== allModelsStr &&
-            getIdFromParam(model) === item.id,
-      };
-    });
+    setDropdownData(models);
+    setAllData(models);
 
-    setDropdownData(newData);
-    setAllData(newData);
-
-    const names = newData.filter((x) => x.isChecked);
+    const names = models?.filter((x) => x.isChecked);
     setSelectedNames(
-      names.length > 0
+      names?.length > 0
         ? names.length > 1
           ? `${names[0].name}...`
           : names[0].name
@@ -82,6 +65,14 @@ const SearchModel = ({ updateFilters, resetToggle, models }: ISearchModel) => {
     setAllData(newAllData);
   };
 
+  const handleToggleDropdown = () => {
+    if (dropdownState === 'modelFilter') {
+      setDropdownState('');
+    } else {
+      setDropdownState('modelFilter');
+    }
+  };
+
   useEffect(() => {
     if (resetToggle) {
       setSelectedNames(null);
@@ -97,45 +88,43 @@ const SearchModel = ({ updateFilters, resetToggle, models }: ISearchModel) => {
       : 0;
 
   return (
-    <div className="2xl:w-1/5 lg:w-1/5 md:w-1/2 sm:w-full xs:w-full xxs:w-full px-2 2xl:mb-2 lg:mb-2 md:mb-2 sm:mb-2 xs:mb-2 xxs:mb-2">
+    <div className="2xl:w-1/6 lg:w-1/6 md:w-1/2 sm:w-full xs:w-full xxs:w-full px-2 2xl:mb-2 lg:mb-2 md:mb-2 sm:mb-2 xs:mb-2 xxs:mb-2">
       <div className="relative">
         <button
           id="modelDropdownButton"
-          data-dropdown-toggle="modeldropdownSearch"
-          data-dropdown-placement="bottom"
+          onClick={handleToggleDropdown}
           className={`w-full text-${
             trueCount > 0 ? 'red-500' : 'gray-700'
-          } bg-white focus:outline-none focus:ring-blue-300 font-medium text-xs px-4 py-2 text-center inline-flex items-center md:p-1 lg:p-1 xl:p-2 2xl:p-2`}
+          } bg-white focus:outline-none focus:ring-blue-300 font-medium text-xs px-4 py-2 text-center inline-flex items-center md:p-1 lg:p-1 xl:p-2 2xl:p-2 border`}
           type="button"
         >
           {selectedNames || 'Model'}
           <DropDownIcon />
         </button>
 
-        <div
-          id="modeldropdownSearch"
-          className="z-10 hidden bg-white rounded-lg shadow w-60 dark:bg-gray-700"
-        >
-          <SearchInput
-            name="Model"
-            allData={allData}
-            setDropdownData={setDropdownData}
-          />
+        {dropdownState === 'modelFilter' && (
+          <div className="z-10 bg-white rounded-lg shadow 3xl:w-60 2xl:w-60 lg:w-60 md:w-60 sm:w-full xs:w-full xxs:w-full dark:bg-gray-700 absolute">
+            <SearchInput
+              name="Model"
+              allData={allData}
+              setDropdownData={setDropdownData}
+            />
 
-          <ul
-            className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
-            aria-labelledby="modelDropdownButton"
-          >
-            {dropdownData.map((item) => (
-              <DropdownItem
-                key={`${item.name}${item.id}`}
-                item={item}
-                isYear={false}
-                handleCheck={handleCheck}
-              />
-            ))}
-          </ul>
-        </div>
+            <ul
+              className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
+              aria-labelledby="modelDropdownButton"
+            >
+              {dropdownData.map((item) => (
+                <DropdownItem
+                  key={`${item.name}${item.id}`}
+                  item={item}
+                  isYear={false}
+                  handleCheck={handleCheck}
+                />
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

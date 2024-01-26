@@ -31,8 +31,8 @@ const Rating = ({ allErrors, setFormData }) => {
           ))}
         </div>
       </div>
-      {allErrors?.review_rating?.[0] && (
-        <p className="text-red-500 block">{allErrors.review_rating[0]}</p>
+      {allErrors?.review_rating && (
+        <p className="text-red-500 block">{allErrors.review_rating}</p>
       )}
     </Fragment>
   );

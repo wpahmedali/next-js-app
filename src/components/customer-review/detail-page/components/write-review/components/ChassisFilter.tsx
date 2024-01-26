@@ -9,7 +9,7 @@ import Loading from 'components/loading';
 import { ISearchByChassissNumberData } from 'src/interfaces/philippine-country-list.interface copy';
 import SelectedItem from './SelectedItem';
 
-const ChassisFilter = ({ setFormData }): JSX.Element => {
+const ChassisFilter = ({ setFormData, allErrors }): JSX.Element => {
   const [selectedData, setSelectedData] =
     useState<ISearchByChassissNumberData>(null);
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -77,6 +77,9 @@ const ChassisFilter = ({ setFormData }): JSX.Element => {
         </ul>
       )}
       {selectedData && <SelectedItem selectedData={selectedData} />}
+      {allErrors?.system_car_img && (
+        <p className="text-red-500 block">{allErrors.system_car_img}</p>
+      )}
     </div>
   );
 };

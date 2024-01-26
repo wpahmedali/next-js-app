@@ -13,39 +13,41 @@ export const callReactQueryApisFavourite = async (
   params: ICarListParams
 ) => {
   await queryClient.prefetchQuery(['userLocation'], getLocation);
-  await queryClient.prefetchQuery(['country'], getCountry);
-  await queryClient.prefetchQuery(['steeringTransFuel'], getSteeringTransFuel);
-  await queryClient.prefetchQuery(
-    ['makerModel', params.countryId, params.auctionId],
-    () => getMakerModel(params.countryId, params.auctionId)
-  );
-  await queryClient.prefetchQuery(['banner', params.countryId], () =>
-    getBanner(params.countryId)
-  );
-  await queryClient.prefetchQuery(
-    ['bodyType', params.countryId, params.auctionId],
-    () => getBodyType(params.countryId, params.auctionId)
-  );
-  await queryClient.prefetchQuery(['tyreSharjah', params.countryId], () =>
-    getTyreSharjah(params.countryId)
-  );
-  const customerReviewParams = {
-    ...params,
-    page: 1,
-  };
-  await queryClient.prefetchQuery(
-    [
-      'customerReview',
-      customerReviewParams.countryId,
-      customerReviewParams.page,
-      customerReviewParams.customerReviewPerPage,
-    ],
-    () =>
-      getCustomerReview(
-        customerReviewParams.countryId,
-        customerReviewParams.page,
-        customerReviewParams.customerReviewPerPage
-      )
-  );
+
+  const promisesToFetch = [
+    queryClient.prefetchQuery(['country'], getCountry),
+    queryClient.prefetchQuery(['steeringTransFuel'], getSteeringTransFuel),
+    queryClient.prefetchQuery(
+      ['makerModel', params.countryId, params.auctionId],
+      () => getMakerModel(params.countryId, params.auctionId)
+    ),
+    queryClient.prefetchQuery(['banner', params.countryId], () =>
+      getBanner(params.countryId)
+    ),
+    queryClient.prefetchQuery(
+      ['bodyType', params.countryId, params.auctionId],
+      () => getBodyType(params.countryId, params.auctionId)
+    ),
+    queryClient.prefetchQuery(['tyreSharjah', params.countryId], () =>
+      getTyreSharjah(params.countryId)
+    ),
+    queryClient.prefetchQuery(
+      [
+        'customerReview',
+        params.countryId,
+        params.fixPage,
+        params.customerReviewPerPage,
+      ],
+      () =>
+        getCustomerReview(
+          params.countryId,
+          params.fixPage,
+          params.customerReviewPerPage
+        )
+    ),
+  ];
+
+  await Promise.all(promisesToFetch);
+
   return queryClient;
 };

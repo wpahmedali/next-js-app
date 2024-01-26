@@ -26,7 +26,7 @@ const CountryItem = ({
   const gotoCountryCarList = () => {
     let url = ROUTES.ALL_STOCK + '/1';
 
-    if (item !== null) {
+    if (item.id !== 0) {
       if (isAuctionCountry) {
         url = `${ROUTES.AUCTION}/${item.auctionShortName.toLowerCase()}-${
           item.auctionId
@@ -51,9 +51,9 @@ const CountryItem = ({
       loadingState === 'countryLoading' &&
       params.countryId === item?.id
     ) {
-      return <Loading height="h-4" width="w-4" />;
+      return <Loading height="h-5" width="w-5" />;
     } else {
-      return <span className="flex items-center">{icon}</span>;
+      return <span className="flex items-center border">{icon}</span>;
     }
   };
 
@@ -63,8 +63,7 @@ const CountryItem = ({
         {renderContent()}
         <div className="mx-2 text-xs flex items-center">
           {name.toUpperCase()}
-          {item?.is_count ||
-            (true && <span className="ml-2">{item?.countryCount}</span>)}
+          {item?.is_count && <span className="ml-2">{item?.countryCount}</span>}
         </div>
       </div>
     </button>

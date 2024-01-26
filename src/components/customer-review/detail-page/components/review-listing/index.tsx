@@ -10,10 +10,8 @@ import { useRouterParams } from 'src/hooks/router-params';
 
 const ReviewListing = ({ setLightBox, setLightboxIndex }) => {
   const { query }: NextRouter = useRouter();
-
   const params = useRouterParams(query);
 
-  params.page = 1;
   const { data, isLoading, isSuccess, isError, isPreviousData } =
     useCustomerReview(params.countryId, params.page, params.perPage);
 

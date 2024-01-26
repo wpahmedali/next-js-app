@@ -1,1 +1,2 @@
-# next-js-app
+# janjapan-frontend
+Janjapan website main front end

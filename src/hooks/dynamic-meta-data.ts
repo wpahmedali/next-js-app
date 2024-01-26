@@ -1,10 +1,11 @@
 import { allModelsStr } from 'src/common/constants';
 import { getNameFromParam } from 'utils/get-name-from-param';
 import { capitalizeWord } from 'utils/capitalize-word';
-import { IVehicleDetail } from 'src/interfaces/vehicle-detail.interface';
+import { useVehicleDetail } from 'react-query/hooks/api/vehicle-detail';
+import { getIdFromParam } from 'utils/get-id-from-param';
 
-export const useDynamicMetaData = (router, vehicleDetail?: IVehicleDetail) => {
-  const { country, auction, maker, model, carId, contact } = router.query;
+export const useDynamicMetaData = (router) => {
+  const { country, auction, maker, model, contact, carId } = router.query;
 
   if (
     carId &&
@@ -13,62 +14,13 @@ export const useDynamicMetaData = (router, vehicleDetail?: IVehicleDetail) => {
     model &&
     !Array.isArray(model)
   ) {
-    const description = `Buy the best quality ${capitalizeWord(
-      getNameFromParam(maker)
-    )} ${capitalizeWord(getNameFromParam(model))}${
-      country ? ` in ${capitalizeWord(getNameFromParam(country))}` : ''
-    } at an affordable price. Stock # ${carId} – Jan's Group, one of the largest importers and exporters of used Japanese cars`;
-
-    if (vehicleDetail) {
-      const title = `Buy Used ${capitalizeWord(
+    return {
+      description: `Buy the best quality ${capitalizeWord(
         getNameFromParam(maker)
       )} ${capitalizeWord(getNameFromParam(model))}${
         country ? ` in ${capitalizeWord(getNameFromParam(country))}` : ''
-      } Stock # ${carId} ${
-        vehicleDetail?.engineCode
-          ? `Engine Code ${vehicleDetail?.engineCode}`
-          : ''
-      } ${
-        vehicleDetail?.chassisNo
-          ? `Chassis Code ${vehicleDetail?.chassisNo}`
-          : ''
-      }`;
-
-      const vehicleData = [
-        { property: 'og:title', content: 'jan japan' },
-        {
-          property: 'og:description',
-          content: `Stock No: ${vehicleDetail.carId} | Chassis #: ${vehicleDetail.chassisNo} | Model: ${vehicleDetail.modelName} | Engine Capacity: ${vehicleDetail.engineSize}CC | Reg Year/month: ${vehicleDetail.registrationYear}/${vehicleDetail.registrationMonth} | Steering: ${vehicleDetail.steeringName} | Engine Code: ${vehicleDetail.engineCode} | Chassis Code: ${vehicleDetail.chassisNo}`,
-        },
-        { property: 'og:url', content: '/car_detail/facebook_share//' },
-        { property: 'og:site_name', content: 'jan japan' },
-        { property: 'article:section', content: 'Car Detail' },
-        {
-          property: 'og:image',
-          content: vehicleDetail.carImages?.[0]?.imagePath.replace(
-            '/s_thumb',
-            '/thumb'
-          ),
-        },
-        {
-          property: 'og:image',
-          content: vehicleDetail.carImages?.[1]?.imagePath.replace(
-            '/s_thumb',
-            '/thumb'
-          ),
-        },
-      ];
-
-      return { title, description, vehicleData };
-    }
-
-    const title = `Buy Used ${capitalizeWord(
-      getNameFromParam(maker)
-    )} ${capitalizeWord(getNameFromParam(model))}${
-      country ? ` in ${capitalizeWord(getNameFromParam(country))}` : ''
-    } Stock # ${carId}`;
-
-    return { title, description };
+      } at an affordable price. Stock # ${carId} – Jan's Group, one of the largest importers and exporters of used Japanese cars`,
+    };
   }
 
   if (
@@ -149,5 +101,71 @@ export const useDynamicMetaData = (router, vehicleDetail?: IVehicleDetail) => {
           : capitalizeWord(getNameFromParam(country))
       }`,
     };
+  }
+};
+
+export const useVehicleDetailDynamicMetaData = (router) => {
+  const { country, maker, model, carId } = router.query;
+
+  const { data } = useVehicleDetail(
+    router.query.country &&
+      !Array.isArray(router.query.country) &&
+      getIdFromParam(router.query.country),
+    +router.query.carId
+  );
+
+  if (
+    carId &&
+    maker &&
+    !Array.isArray(maker) &&
+    model &&
+    !Array.isArray(model)
+  ) {
+    if (data?.data) {
+      const title = `Buy Used ${capitalizeWord(
+        getNameFromParam(maker)
+      )} ${capitalizeWord(getNameFromParam(model))}${
+        country ? ` in ${capitalizeWord(getNameFromParam(country))}` : ''
+      } Stock # ${carId} ${
+        data?.data?.engineCode ? `Engine Code ${data?.data?.engineCode}` : ''
+      } ${
+        data?.data?.chassisNo ? `Chassis Code ${data?.data?.chassisNo}` : ''
+      }`;
+
+      const vehicleData = [
+        { property: 'og:title', content: 'jan japan' },
+        {
+          property: 'og:description',
+          content: `Stock No: ${data?.data?.carId} | Chassis #: ${data?.data?.chassisNo} | Model: ${data?.data?.modelName} | Engine Capacity: ${data?.data?.engineSize}CC | Reg Year/month: ${data?.data?.registrationYear}/${data?.data?.registrationMonth} | Steering: ${data?.data?.steeringName} | Engine Code: ${data?.data?.engineCode} | Chassis Code: ${data?.data?.chassisNo}`,
+        },
+        { property: 'og:url', content: '/car_detail/facebook_share//' },
+        { property: 'og:site_name', content: 'jan japan' },
+        { property: 'article:section', content: 'Car Detail' },
+        {
+          property: 'og:image',
+          content: data?.data?.carImages?.[0]?.imagePath.replace(
+            '/s_thumb',
+            '/thumb'
+          ),
+        },
+        {
+          property: 'og:image',
+          content: data?.data?.carImages?.[1]?.imagePath.replace(
+            '/s_thumb',
+            '/thumb'
+          ),
+        },
+      ];
+
+      return { title, vehicleData };
+    }
+
+    const title = `Buy Used ${capitalizeWord(
+      getNameFromParam(maker)
+    )} ${capitalizeWord(getNameFromParam(model))}${
+      country ? ` in ${capitalizeWord(getNameFromParam(country))}` : ''
+    } Stock # ${carId}`;
+
+    return { title };
   }
 };

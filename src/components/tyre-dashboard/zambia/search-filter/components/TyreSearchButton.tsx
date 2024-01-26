@@ -85,7 +85,7 @@ const TyreSearchButton = ({
           }`}
         >
           {loadingState === 'tyreSearchLoader' && isPreviousData && (
-            <Loading height="h-4" width="w-4" />
+            <Loading height="h-5" width="w-5" />
           )}
           Search
         </button>

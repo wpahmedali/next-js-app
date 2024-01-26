@@ -44,7 +44,7 @@ const ModelDialog = ({
                   <div className="flex h-3/3 flex-col overflow-scroll max-h-screen bg-white py-6 shadow-xl 2xl:mt-36 2xl:mr-64 xl:mt-32 xl:mr-48 lg:mt-32 lg:mr-8">
                     <div className="px-4 sm:px-6">
                       <div className="text-base font-semibold leading-6 text-gray-900">
-                        <Dialog.Title>All Maker List</Dialog.Title>
+                        <Dialog.Title>All {makerName} Models</Dialog.Title>
                         <div className="container-fluid mx-auto grid sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-6 pt-2 gap-2">
                           <div className="w-full shadow-md transition-all hover:shadow-lg hover:shadow-gray-200 focus:opacity-[0.85] hover:bg-black hover:text-white border border-slate-200">
                             <input

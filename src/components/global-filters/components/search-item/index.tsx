@@ -23,6 +23,8 @@ const SearchItem = ({
   isSuccess,
   updateFilters,
   setMinYear,
+  dropdownState,
+  setDropdownState,
 }: ISearchItem) => {
   const [dropdownData, setDropdownData] = useState<IDropdownData[]>([]);
   const [allData, setAllData] = useState<IDropdownData[]>([]);
@@ -74,6 +76,14 @@ const SearchItem = ({
       : setSelectedNames(null);
   };
 
+  const handleToggleDropdown = () => {
+    if (dropdownState === `${name}Filter`) {
+      setDropdownState('');
+    } else {
+      setDropdownState(`${name}Filter`);
+    }
+  };
+
   useEffect(() => {
     if (isSuccess) {
       if (resetToggle) {
@@ -120,12 +130,20 @@ const SearchItem = ({
         setSelectedNames(null);
       }
 
+      const selectedData = [];
+      newData.forEach((item) => {
+        if (item.isChecked) {
+          selectedData.push(
+            isYear ? item.name : `${item.name.toLowerCase()}-${item.id}`
+          );
+        }
+      });
+
+      getSelectedData(selectedData);
       setDropdownData(newData);
       setAllData(newData);
     }
-  }, [isSuccess, resetToggle, query]);
 
-  useEffect(() => {
     if (clearToggle) {
       const newAllData = allData.map((item) => ({
         ...item,
@@ -137,7 +155,7 @@ const SearchItem = ({
       setMinYear(1970);
       setClearToggle(false);
     }
-  }, [clearToggle]);
+  }, [isSuccess, resetToggle, query, clearToggle]);
 
   const trueCount =
     Array.isArray(allData) && allData.length > 0
@@ -148,58 +166,56 @@ const SearchItem = ({
       : 0;
 
   return (
-    <div className="2xl:w-1/5 lg:w-1/5 md:w-1/2 sm:w-full xs:w-full xxs:w-full px-2 2xl:mb-2 lg:mb-2 md:mb-2 sm:mb-2 xs:mb-2 xxs:mb-2">
+    <div className="2xl:w-1/6 lg:w-1/6 md:w-1/2 sm:w-full xs:w-full xxs:w-full px-2 2xl:mb-2 lg:mb-2 md:mb-2 sm:mb-2 xs:mb-2 xxs:mb-2">
       <div className="relative">
         <button
           id={`${name}DropdownButton`}
-          data-dropdown-toggle={`${name}dropdownSearch`}
-          data-dropdown-placement="bottom"
-          className={`w-full  text-${
+          onClick={handleToggleDropdown}
+          className={`w-full text-${
             trueCount > 0 ? 'red-500' : 'gray-700'
-          } bg-white focus:outline-none focus:ring-blue-300 font-medium text-xs px-4 py-2 text-center inline-flex items-center md:p-1 lg:p-1 xl:p-2 2xl:p-2`}
+          } bg-white focus:outline-none focus:ring-blue-300 font-medium text-xs px-4 py-2 text-center inline-flex items-center md:p-1 lg:p-1 xl:p-2 2xl:p-2 border`}
           type="button"
         >
           {selectedNames ? selectedNames : name}
           <DropDownIcon />
         </button>
 
-        <div
-          id={`${name}dropdownSearch`}
-          className="z-10 hidden bg-white rounded-lg shadow w-60 dark:bg-gray-700"
-        >
-          <SearchInput
-            name={name}
-            allData={allData}
-            setDropdownData={setDropdownData}
-          />
-
-          {name === 'Min Year' && (
-            <ClearButton
-              name="minYear"
-              updateFilters={updateFilters}
-              setClearToggle={setClearToggle}
+        {dropdownState === `${name}Filter` && (
+          <div className="z-10 bg-white rounded-lg shadow 3xl:w-60 2xl:w-60 lg:w-60 md:w-60 sm:w-full xs:w-full xxs:w-full dark:bg-gray-700 absolute">
+            <SearchInput
+              name={name}
+              allData={allData}
+              setDropdownData={setDropdownData}
             />
-          )}
 
-          <ul
-            className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
-            aria-labelledby={`${name}DropdownButton`}
-          >
-            {isLoading && <Loading />}
-            {(!data || isError) && !isLoading && <Error />}
+            {name === 'Min Year' && (
+              <ClearButton
+                name="minYear"
+                updateFilters={updateFilters}
+                setClearToggle={setClearToggle}
+              />
+            )}
 
-            {isSuccess &&
-              dropdownData.map((item) => (
-                <DropdownItem
-                  yearType="min"
-                  key={item.id}
-                  item={item}
-                  isYear={isYear}
-                  handleCheck={handleCheck}
-                />
-              ))}
-          </ul>
-        </div>
+            <ul
+              className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
+              aria-labelledby={`${name}DropdownButton`}
+            >
+              {isLoading && <Loading />}
+              {(!data || isError) && !isLoading && <Error />}
+
+              {isSuccess &&
+                dropdownData.map((item) => (
+                  <DropdownItem
+                    yearType="min"
+                    key={item.id}
+                    item={item}
+                    isYear={isYear}
+                    handleCheck={handleCheck}
+                  />
+                ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,9 +1,14 @@
 export interface ICountry {
   id: number;
   countryName: string;
+  countryCode: string;
   cssClass: string;
+  FBPageName: string;
+  FBAppId: string;
   countryCount: number;
-  is_count?: boolean;
+  is_count: boolean;
+  showReservedTag: number;
+  isAuctionSheetDisplay: number;
   auctionDisplay: boolean;
   auctionId: number;
   auctionShortName: string;

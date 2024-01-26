@@ -1,7 +1,13 @@
 import axios from 'axios';
+const https = require('https');
+
+const httpsAgent = new https.Agent({
+  rejectUnauthorized: false,
+});
 
 const fetcher = axios.create({
-  baseURL: 'http://jjbackups.com/api',
+  baseURL: 'https://jjbackend.com/api',
+ httpsAgent,
   responseType: 'json',
   headers: {
     'Content-Type': 'multipart/form-data',

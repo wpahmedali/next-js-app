@@ -20,7 +20,7 @@ const Form = ({ allErrors, formData, setFormData }) => {
           value={formData.title}
           placeholder="Title"
           onChangeHandler={onChangeHandler}
-          error={allErrors?.title?.[0] || ''}
+          error={allErrors?.title || ''}
         />
 
         <TextArea
@@ -28,38 +28,41 @@ const Form = ({ allErrors, formData, setFormData }) => {
           value={formData.reviews}
           placeholder="Type Here"
           onChangeHandler={onChangeHandler}
-          error={allErrors?.reviews?.[0] || ''}
+          error={allErrors?.reviews || ''}
         />
         <InputField
           name="customer_name"
           value={formData.customer_name}
           placeholder="Customer Name"
           onChangeHandler={onChangeHandler}
-          error={allErrors?.customer_name?.[0] || ''}
+          error={allErrors?.customer_name || ''}
         />
         <InputField
           name="email"
           value={formData.email}
           placeholder="Email"
           onChangeHandler={onChangeHandler}
-          error={allErrors?.email?.[0] || ''}
+          error={allErrors?.email || ''}
         />
       </form>
-      <div className="flex mt-4 gap-2">
+      <div className="grid 3xl:grid-cols-3 2xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 xs:grid-cols-1 xxs:grid-cols-1 mt-4 gap-2">
         <InputFile
           title="Customer Image"
           name="customer_image"
           setFormData={setFormData}
+          error={allErrors?.customer_image || ''}
         />
         <InputFile
           title="Car Image"
           name="car_image"
           setFormData={setFormData}
+          error={allErrors?.car_image || ''}
         />
         <InputFile
           title="Customer Video"
           name="customer_video"
           setFormData={setFormData}
+          error={allErrors?.customer_video || ''}
         />
       </div>
     </div>

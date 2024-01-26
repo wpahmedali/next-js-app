@@ -2,12 +2,6 @@ export const getRightMenuData = () => {
   const zambiaBanners = [
     {
       height: 101,
-      alt: 'sdf',
-      src: '/asset/images/ads/special-offer.gif',
-      url: '/',
-    },
-    {
-      height: 101,
       alt: 'tyre-ads',
       src: '/asset/images/ads/tyre-ads.jpg',
       url: '/tyres/1',

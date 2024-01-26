@@ -4,7 +4,12 @@ import { IDropdownData } from '../interfaces/dropdown-data.interface';
 import SearchItem from './search-item';
 import { ISearchSteering } from '../interfaces/search-steering.interface';
 
-const SearchSteering = ({ updateFilters, resetToggle }: ISearchSteering) => {
+const SearchSteering = ({
+  updateFilters,
+  resetToggle,
+  dropdownState,
+  setDropdownState,
+}: ISearchSteering) => {
   const {
     query: { steerings },
   } = useRouter();
@@ -36,6 +41,8 @@ const SearchSteering = ({ updateFilters, resetToggle }: ISearchSteering) => {
       isError={!data || isError}
       isLoading={isLoading}
       isSuccess={isSuccess}
+      dropdownState={dropdownState}
+      setDropdownState={setDropdownState}
     />
   );
 };

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import UserFeedback from 'components/testimonial/UserFeedback';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -11,12 +11,12 @@ import { useCustomerReview } from 'react-query/hooks/api/customer-review';
 import Loading from 'components/loading';
 import Error from 'components/error';
 import { ROUTES } from 'src/common/routes';
-import { useSelectedCountry } from 'src/hooks/selected-country';
+import { useCurrentCountryName } from 'src/hooks/current-country-name';
 import { useRouterParams } from 'src/hooks/router-params';
 
 const TestiMonial = () => {
   const { query } = useRouter();
-  const selectedCountry = useSelectedCountry();
+  const selectedCountry = useCurrentCountryName();
   const params = useRouterParams(query);
   const { country } = query;
 
@@ -36,38 +36,36 @@ const TestiMonial = () => {
       }/1`;
 
   return (
-    <Fragment>
-      <div className="bg-primary py-12 mt-5">
-        <div className="flex items-center justify-between sm:px-2 gap-2 lg:flex-row md:flex-row sm:flex-col">
-          <div className="w-full">
-            <Swiper
-              spaceBetween={50}
-              slidesPerView={2}
-              centeredSlides={true}
-              autoplay={{
-                delay: 3500,
-                disableOnInteraction: false,
-              }}
-              pagination={{
-                clickable: true,
-              }}
-              navigation={true}
-              modules={[Autoplay, Pagination, Navigation]}
-              className="mySwiper"
-            >
-              {isLoading && <Loading />}
-              {(!data || isError) && !isLoading && <Error />}
-              {isSuccess &&
-                data?.data?.reviewList.map((item) => (
-                  <SwiperSlide key={item.id}>
-                    <UserFeedback data={item} url={url} />
-                  </SwiperSlide>
-                ))}
-            </Swiper>
-          </div>
+    <div className="bg-primary py-12 mt-5">
+      <div className="flex items-center justify-between sm:px-2 gap-2 lg:flex-row md:flex-row sm:flex-col">
+        <div className="w-full">
+          <Swiper
+            spaceBetween={50}
+            slidesPerView={2}
+            centeredSlides={true}
+            autoplay={{
+              delay: 3500,
+              disableOnInteraction: false,
+            }}
+            pagination={{
+              clickable: true,
+            }}
+            navigation={true}
+            modules={[Autoplay, Pagination, Navigation]}
+            className="mySwiper"
+          >
+            {isLoading && <Loading />}
+            {(!data || isError) && !isLoading && <Error />}
+            {isSuccess &&
+              data?.data?.reviewList.map((item) => (
+                <SwiperSlide key={item.id}>
+                  <UserFeedback data={item} url={url} />
+                </SwiperSlide>
+              ))}
+          </Swiper>
         </div>
       </div>
-    </Fragment>
+    </div>
   );
 };
 

@@ -4,7 +4,6 @@ import React, {
   useContext,
   FC,
   ReactNode,
-  useEffect,
 } from 'react';
 import { IVehicleDetail } from 'src/interfaces/vehicle-detail.interface';
 
@@ -19,7 +18,7 @@ const FavoriteCarsContext = createContext<FavoriteCarsContextType | undefined>(
 
 const isLocalStorageAvailable = (): boolean => {
   try {
-    const testKey = 'favoriteVehicleList';
+    const testKey = '__test__';
     localStorage.setItem(testKey, testKey);
     localStorage.removeItem(testKey);
     return true;
@@ -28,8 +27,6 @@ const isLocalStorageAvailable = (): boolean => {
   }
 };
 
-const EXPIRY_TIME = 24 * 60 * 60 * 1000;
-
 export const FavoriteCarsProvider: FC<{ children: ReactNode }> = ({
   children,
 }) => {
@@ -37,45 +34,10 @@ export const FavoriteCarsProvider: FC<{ children: ReactNode }> = ({
     if (isLocalStorageAvailable()) {
       const storedFavoriteCars =
         JSON.parse(localStorage.getItem('favoriteVehicleList')) || [];
-
-      const currentTime = Date.now();
-      const updatedFavoriteCars = storedFavoriteCars.filter(
-        (car) => currentTime - car.timestamp < EXPIRY_TIME
-      );
-
-      localStorage.setItem(
-        'favoriteVehicleList',
-        JSON.stringify(updatedFavoriteCars)
-      );
-
-      return updatedFavoriteCars;
+      return storedFavoriteCars;
     }
     return [];
   });
-
-  useEffect(() => {
-    const updateLocalStorage = () => {
-      if (isLocalStorageAvailable()) {
-        const storedFavoriteCars =
-          JSON.parse(localStorage.getItem('favoriteVehicleList')) || [];
-
-        const currentTime = Date.now();
-        const updatedFavoriteCars = storedFavoriteCars.filter(
-          (car) => currentTime - car.timestamp < EXPIRY_TIME
-        );
-
-        localStorage.setItem(
-          'favoriteVehicleList',
-          JSON.stringify(updatedFavoriteCars)
-        );
-
-        setFavoriteCars(updatedFavoriteCars);
-      }
-    };
-
-    const interval = setInterval(updateLocalStorage, 60000);
-    return () => clearInterval(interval);
-  }, []);
 
   const toggleFavorite = (carDetails: IVehicleDetail) => {
     let favoriteVehicleData =
@@ -85,13 +47,10 @@ export const FavoriteCarsProvider: FC<{ children: ReactNode }> = ({
       (item) => item.carId === carDetails.carId
     );
 
-    const currentTime = Date.now();
-
     if (isDataExistingIndex !== -1) {
       favoriteVehicleData.splice(isDataExistingIndex, 1);
     } else {
-      const updatedCarDetails = { ...carDetails, timestamp: currentTime };
-      favoriteVehicleData.push(updatedCarDetails);
+      favoriteVehicleData.push(carDetails);
     }
 
     localStorage.setItem(

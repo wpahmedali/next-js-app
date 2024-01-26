@@ -3,11 +3,6 @@ export const zambiaCountry = Object.freeze({
   name: 'zambia',
 });
 
-export const uaeCountry = Object.freeze({
-  id: 17,
-  name: 'U.A.E',
-});
-
 export const sharjahCountry = Object.freeze({
   id: 17,
   name: 'sharjah',

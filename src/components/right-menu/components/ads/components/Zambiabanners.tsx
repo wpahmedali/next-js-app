@@ -29,7 +29,7 @@ const ZambiaBanners = (): JSX.Element | null => {
             <Image
               className="sm:w-full"
               src={item.src}
-              width={300}
+              width={400}
               height={item.height}
               alt={item.alt}
               priority={true}

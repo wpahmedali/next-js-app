@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import MakerModelItem from 'components/makers/components/web-view/components/MakerModelItem';
@@ -6,7 +6,7 @@ import { IMakerModel } from 'components/makers/interfaces/maker-model.interface'
 import { ROUTES } from 'src/common/routes';
 import { NextRouter, useRouter } from 'next/router';
 import Loading from 'components/loading';
-import { useSelectedCountry } from 'src/hooks/selected-country';
+import { useCurrentCountryName } from 'src/hooks/current-country-name';
 import { useRouterParams } from 'src/hooks/router-params';
 
 const WebMakerModel = ({
@@ -19,8 +19,9 @@ const WebMakerModel = ({
   image,
   models,
 }: IMakerModel): JSX.Element => {
+  const [isHovered, setIsHovered] = useState(false);
   const router: NextRouter = useRouter();
-  const selectedCountry = useSelectedCountry();
+  const selectedCountry = useCurrentCountryName();
   const params = useRouterParams(router.query);
   const { auction, country } = router.query;
 
@@ -35,8 +36,12 @@ const WebMakerModel = ({
       }`;
 
   return (
-    // <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-    <motion.div>
+    <motion.div
+      // whileHover={{ scale: 1.1 }}
+      // whileTap={{ scale: 0.9 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <li
         className={`${
           isEven ? 'bg-[#E8E8E8]' : 'bg-[#CECECE]'
@@ -44,7 +49,7 @@ const WebMakerModel = ({
       >
         <button className="w-full text-left flex items-center outline-none focus:outline-none">
           {makerIsLoading && loadingMakerId === makerId ? (
-            <Loading height="h-4" width="w-4" />
+            <Loading height="h-5" width="w-5" />
           ) : (
             <Image
               className="flex-none w-8 h-full"
@@ -68,24 +73,28 @@ const WebMakerModel = ({
           </span>
         </button>
 
-        <ul className="h-96 sm:h-auto xs:h-auto xxs:h-auto py-2 overflow-y-auto text-xs w-48 backdrop-blur-lg bg-black/50 bg-primaryDark text-white dark:text-gray-20 border border-black rounded-sm absolute md:w-full sm:w-full xs:w-full xxs:w-full top-0 right-0 z-50">
-          <MakerModelItem
-            url={`${baseUrl}/${makerName.toLowerCase()}-${makerId}/all-models/1`}
-            model="All Models"
-            modelCount={makerCount}
-            isActive={true}
-          />
-          {models.map((item) => (
+        {isHovered && (
+          <ul className="h-96 sm:h-auto xs:h-auto xxs:h-auto py-2 overflow-y-auto text-xs w-48 backdrop-blur-lg bg-black/50 bg-primaryDark text-white dark:text-gray-20 border border-black rounded-sm absolute md:w-full sm:w-full xs:w-full xxs:w-full top-0 right-0 z-50">
             <MakerModelItem
-              url={`${baseUrl}/${makerName.toLowerCase()}-${makerId}/${item.modelName.toLowerCase()}-${
-                item.modelId
-              }/1`}
-              model={item.modelName}
-              modelCount={item.modelCount}
-              key={item.modelName}
+              url={`${baseUrl}/${makerName.toLowerCase()}-${makerId}/all-models/1`}
+              model="All Models"
+              modelCount={makerCount}
+              isActive={true}
+              setIsHovered={setIsHovered}
             />
-          ))}
-        </ul>
+            {models.map((item) => (
+              <MakerModelItem
+                url={`${baseUrl}/${makerName.toLowerCase()}-${makerId}/${item.modelName.toLowerCase()}-${
+                  item.modelId
+                }/1`}
+                model={item.modelName}
+                modelCount={item.modelCount}
+                key={item.modelName}
+                setIsHovered={setIsHovered}
+              />
+            ))}
+          </ul>
+        )}
       </li>
     </motion.div>
   );

@@ -1,26 +1,26 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import WebMakers from './components/web-view';
-import MobileMakers from './components/mobile-view';
 import { useLoadingState } from 'src/providers/LoadingContext';
 import { NextRouter, useRouter } from 'next/router';
 import { useVehicleListView } from 'src/providers/VehicleListView';
-import { useVehicleListGrid } from 'react-query/hooks/api/vehicle-list-grid';
-import { useVehicleListTabular } from 'react-query/hooks/api/vehicle-list-tabular';
+import { useVehicleList } from 'react-query/hooks/api/vehicle-list';
+import { reactQuery } from 'src/common/constants';
 import { listingViews } from 'src/common/listing-views';
 import { useRouterParams } from 'src/hooks/router-params';
 
 const Makers = (): JSX.Element => {
   const { query }: NextRouter = useRouter();
+  const params = useRouterParams(query);
   const view = useVehicleListView();
   const loadingState = useLoadingState();
 
-  const params = useRouterParams(query);
-
-  const { isPreviousData: gridPrevious } = useVehicleListGrid(params);
-  const { isPreviousData: tabularPrevious } = useVehicleListTabular(params);
-
-  const isPreviousData =
-    view === listingViews.tabular ? tabularPrevious : gridPrevious;
+  let viewParam = reactQuery.vehicleList.tabular;
+  if (view === listingViews.grid) {
+    params.perPage = params.page * params.perPage;
+    params.page = 1;
+    viewParam = reactQuery.vehicleList.grid;
+  }
+  const { isPreviousData } = useVehicleList(viewParam, params);
 
   return (
     <WebMakers

@@ -11,12 +11,14 @@ import Captions from 'yet-another-react-lightbox/plugins/captions';
 import 'yet-another-react-lightbox/plugins/captions.css';
 import { useCustomerReview } from 'react-query/hooks/api/customer-review';
 import { useRouterParams } from 'src/hooks/router-params';
+import { useModelState, useSetContext } from 'src/providers/ModelContext';
 
 const CustomerReview = () => {
-  const [open, setOpen] = useState(false);
   const [lightBox, setLightBox] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const { query } = useRouter();
+  const setContext = useSetContext();
+  const modelState = useModelState();
   const params = useRouterParams(query);
 
   params.page = 1;
@@ -34,11 +36,11 @@ const CustomerReview = () => {
 
   return (
     <div className="w-full">
-      <CustomerWriteReview open={open} setOpen={setOpen} />
+      <CustomerWriteReview open={modelState} setOpen={setContext} />
       <h1 className="bg-primaryDark text-white w-full text-center p-2 font-bold text-3xl flex-none sm:mt-2 xs:mt-2 xxs:mt-2">
         Customer Reviews
       </h1>
-      {params.countryId && <WriteReviewButton setOpen={setOpen} />}
+      {params.countryId && <WriteReviewButton setOpen={setContext} />}
       <h2 className="mt-5 text-center w-full text-2xl bg-black text-white p-2">
         - User Photo Gallery -{' '}
       </h2>

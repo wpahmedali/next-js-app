@@ -1,15 +1,12 @@
-import axios from 'axios';
-import { IGeoLocation } from 'src/interfaces/geo-location.interface';
+import fetcher from 'react-query/lib/axios';
+import { IApiResponse } from 'src/interfaces/api-response.interface';
 
-const getLocation = async (): Promise<IGeoLocation | null> => {
+const getLocation = async (): Promise<IApiResponse<{ id: number }>> => {
   try {
-    const { data: ipData } = await axios.get(
-      'https://api64.ipify.org?format=json'
-    );
-
-    const { data } = await axios<IGeoLocation>(
-      `http://api.ipstack.com/${ipData.ip}?access_key=194d29c541ad5e208fc06f93224fb4b0`
-    );
+    const { data }: { data: IApiResponse<{ id: number }> } = await fetcher({
+      url: '/geoLocation',
+      method: 'GET',
+    });
 
     return data;
   } catch (error) {

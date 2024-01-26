@@ -4,10 +4,10 @@ import Image from 'next/image';
 import { IMakerModel } from 'components/makers/interfaces/maker-model.interface';
 import { ROUTES } from 'src/common/routes';
 import { NextRouter, useRouter } from 'next/router';
-import MakerDialog from './ModelDialog';
 import Loading from 'components/loading';
-import { useSelectedCountry } from 'src/hooks/selected-country';
+import { useCurrentCountryName } from 'src/hooks/current-country-name';
 import { useRouterParams } from 'src/hooks/router-params';
+import ModelDialog from './ModelDialog';
 
 const MobileMakerModel = ({
   loadingMakerId,
@@ -21,7 +21,7 @@ const MobileMakerModel = ({
 }: IMakerModel): JSX.Element => {
   const [isShowDialog, setIsShowDialog] = useState<boolean>(false);
   const router: NextRouter = useRouter();
-  const selectedCountry = useSelectedCountry();
+  const selectedCountry = useCurrentCountryName();
   const params = useRouterParams(router.query);
   const { auction, country } = router.query;
 
@@ -48,7 +48,7 @@ const MobileMakerModel = ({
       >
         <button className="w-full text-left flex items-center outline-none focus:outline-none">
           {makerIsLoading && loadingMakerId === makerId ? (
-            <Loading height="h-4" width="w-4" />
+            <Loading height="h-5" width="w-5" />
           ) : (
             <Image
               className="flex-none w-8 h-full"
@@ -72,7 +72,7 @@ const MobileMakerModel = ({
           </span>
         </button>
       </li>
-      <MakerDialog
+      <ModelDialog
         baseUrl={baseUrl}
         makerName={makerName}
         makerId={makerId}

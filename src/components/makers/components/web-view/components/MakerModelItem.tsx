@@ -10,6 +10,7 @@ export interface IMakerModelItemProps
   url: string;
   model: string;
   modelCount: number;
+  setIsHovered: any;
 }
 
 const WebMakerModelItem = ({
@@ -17,6 +18,7 @@ const WebMakerModelItem = ({
   model,
   modelCount,
   isActive,
+  setIsHovered,
 }: IMakerModelItemProps): JSX.Element => {
   const setLoadingState = useDispatchLoadingState();
   const countryCount = useCountryCount();
@@ -26,6 +28,7 @@ const WebMakerModelItem = ({
       <Link
         onClick={() => {
           setLoadingState({ type: 'makerLoader' });
+          setIsHovered(false);
         }}
         href={url}
         className={makerModelItemClass({ isActive })}

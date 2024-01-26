@@ -44,7 +44,10 @@ const GlobalContactDetail = () => {
             <div className="bg-gray-100 text-xs text-black p-7">
               <div className="justify-between grid grid-cols-2 2xl:grid-cols-2 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 xs:grid-cols-1 xxs:grid-cols-1 grid-rows-1 grid-flow-dense gap-2">
                 <div className="text-lg">
-                  <p className="text-3xl font-bold">{item.companyName}</p>
+                  <p
+                    className="text-3xl font-bold"
+                    dangerouslySetInnerHTML={{ __html: item.companyName }}
+                  ></p>
                   <p className="font-bold my-2">Address:</p>
                   <p>
                     <strong>{item.Location}</strong>
@@ -65,7 +68,6 @@ const GlobalContactDetail = () => {
                     </div>
                     <div className="ml-2">
                       Employee Count {item.employeeCount}
-                      <span className="text-red-700 font-bold">(45)</span>
                     </div>
                   </div>
                 </div>

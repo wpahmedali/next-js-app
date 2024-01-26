@@ -7,5 +7,6 @@ export interface IFilters {
   minYear: string[];
   maxYear: string[];
   bodyTypes: string[];
+  stockNo: string;
   chassisNo: string;
 }

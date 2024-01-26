@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from 'react';
 import Image from 'next/image';
 import { listingLoaderImage } from 'src/common/listing-loader-image';
 
-const InputFile = ({ title, name, setFormData }): JSX.Element => {
+const InputFile = ({ title, name, setFormData, error }): JSX.Element => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -23,8 +23,9 @@ const InputFile = ({ title, name, setFormData }): JSX.Element => {
   return (
     <div className="border rounded-md p-2 bg-gray-100">
       <h1 className="bg-black text-white w-full p-2 mb-2">{title}</h1>
-      <form className="flex items-center space-x-6">
-        <div className="shrink-0">
+      <form className="flex items-center space-x-6 ">
+        <div className="shrink-0 rounded-full border border-gray-500">
+          
           <Image
             width={20}
             height={20}
@@ -47,6 +48,7 @@ const InputFile = ({ title, name, setFormData }): JSX.Element => {
           />
         </label>
       </form>
+      {error && <p className="text-red-500">{error}</p>}
     </div>
   );
 };

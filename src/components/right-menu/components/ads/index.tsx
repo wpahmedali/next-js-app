@@ -3,35 +3,44 @@ import { useSetContext } from 'src/providers/ModelContext';
 import Image from 'next/image';
 import ZambiaBanners from './components/Zambiabanners';
 import SharjahBanners from './components/Sharjahbanners';
+import SpecialOfferBanner from 'components/special-offers/banner';
+import { FBAppId, FBPageName } from 'src/common/constants';
+import { useCurrentCountry } from 'src/hooks/current-country';
 
 const Ads = (): JSX.Element => {
   const setContext = useSetContext();
+  const currentCountry = useCurrentCountry();
 
   return (
     <div className="ads">
       <div className="max-w-full 2xl:block lg:block md:block sm:hidden xs:hidden xxs:hidden">
-        <button onClick={() => setContext('signUp')}>
+        <button onClick={() => setContext('signUp')} className="w-full">
           <Image
-            className="sm:w-full"
+            className="w-full"
             src="/asset/images/ads/create-account-ad.jpg"
-            width={300}
+            width={400}
             height={300}
             alt="create-account-ad"
           />
         </button>
       </div>
+      <SpecialOfferBanner />
       <ZambiaBanners />
       <SharjahBanners />
-      <div className="max-w-full 2xl:block lg:block md:block sm:hidden xs:hidden xxs:hidden">
+
+      <div className="w-full 2xl:block lg:block md:block sm:hidden xs:hidden xxs:hidden">
         <iframe
-          src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fviewas%3D100000686899395%26id%3D61554880415519&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=false&hide_cover=false&show_facepile=false&appId=639792690488678"
-          style={{
-            width: '100%',
-            height: '500px',
-            border: 'none',
-            overflow: 'hidden',
-          }}
+          src={`https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F${
+            currentCountry?.FBPageName || FBPageName
+          }&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=${
+            currentCountry?.FBAppId || FBAppId
+          }`}
+          width="100%"
+          height="900"
+          style={{ border: 'none', overflow: 'hidden' }}
           scrolling="no"
+          frameBorder="0"
+          allowFullScreen={true}
           allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
         ></iframe>
       </div>

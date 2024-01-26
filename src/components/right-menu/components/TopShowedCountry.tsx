@@ -30,7 +30,7 @@ const TopShowedCountry = (): JSX.Element => {
   }
 
   if (isLoading) {
-    return <Loading height="h-6" width="w-6" />;
+    return <Loading height="h-7" width="w-7" />;
   }
 
   return (

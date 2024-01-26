@@ -1,10 +1,10 @@
 import { ROUTES } from 'src/common/routes';
-import { useSelectedCountry } from './selected-country';
+import { useCurrentCountryName } from './current-country-name';
 import { useRouterParams } from './router-params';
 
 export const GetBacklistingUrl = (router) => {
   const { country, maker, model, bodyType, auction } = router.query;
-  const selectedCountry = useSelectedCountry();
+  const selectedCountry = useCurrentCountryName();
   const params = useRouterParams(router.query);
 
   const baseCountryUrl = country

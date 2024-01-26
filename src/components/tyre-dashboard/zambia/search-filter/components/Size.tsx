@@ -30,14 +30,16 @@ const Size = ({ getSelectedSizeId, resetToggle }) => {
 
   useEffect(() => {
     if (isSuccess) {
-      const findItem = data.data.find((item) => item.tyreSizeId === tyreSizeId);
+      const findItem = data?.data?.find(
+        (item) => item.tyreSizeId === tyreSizeId
+      );
       if (findItem) {
         setCurrentSizeName(findItem.sizeName);
       } else {
         setCurrentSizeName('');
       }
 
-      const newData = data.data.map((item) => ({
+      const newData = data?.data?.map((item) => ({
         ...item,
         isChecked: tyreSizeId === item.tyreSizeId ? true : false,
       }));

@@ -4,6 +4,7 @@ import { getCountryIcon } from 'utils/get-country-icon';
 import { usePhilippineCountryList } from 'react-query/hooks/api/philippine-country-list';
 import { philippineCountry } from 'src/common/constants';
 import { useRouterParams } from './router-params';
+import { GlobeAltIcon } from '@heroicons/react/24/outline';
 
 export const useSelectedCountryIcon = () => {
   const { query }: NextRouter = useRouter();
@@ -17,7 +18,7 @@ export const useSelectedCountryIcon = () => {
   const { data: philippineCountryData, isSuccess: philippineCountryIsSuccess } =
     usePhilippineCountryList(philippineCountry.id);
 
-  let countryIcon = <></> || null;
+  let countryIcon = <GlobeAltIcon className="w-6 h-6" />;
   if (!cisLoading && !cisError) {
     let selectedCountryicon = null;
     selectedCountryicon = cdata?.data?.find(
@@ -31,9 +32,6 @@ export const useSelectedCountryIcon = () => {
     }
     if (selectedCountryicon) {
       countryIcon = getCountryIcon(selectedCountryicon.cssClass);
-    }
-    if (params.countryId === 0) {
-      countryIcon = null;
     }
   }
   return countryIcon;

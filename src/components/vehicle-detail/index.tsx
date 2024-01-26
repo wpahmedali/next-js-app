@@ -18,10 +18,12 @@ import PageLoader from 'components/page-loader';
 import { getVehicleDetail } from 'react-query/api/vehicle-detail';
 import { useQueryClient } from 'react-query';
 import { useRouterParams } from 'src/hooks/router-params';
+import { useCurrentCountry } from 'src/hooks/current-country';
 
 const VehicleDetail = (): JSX.Element => {
   const queryClient = useQueryClient();
   const isAuctionCountry = useIsAuctionCountry();
+  const currentCountry = useCurrentCountry();
 
   const { query }: NextRouter = useRouter();
   const params = useRouterParams(query);
@@ -80,22 +82,23 @@ const VehicleDetail = (): JSX.Element => {
                   <Title data={data.data} />
                   <VehicleInfo data={data.data} />
                   <ViewCountBar data={data.data} />
-                  <div className="text-white uppercase font-medium p-2 mt-2 mb-2 bg-[#099731] text-lg border w-full">
+                  <div className="text-white uppercase font-medium sm:font-normal sm:text-sm xs:text-xs xxs:text-xs p-2 mt-2 mb-2 bg-[#099731] 3xl:text-lg xl:text-lg lg:text-lg border w-full">
                     Stock Available In {data.data.countryName},{' '}
                     {data.data.cityName}
                   </div>
                   <div className="grid grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 xxs:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 gap-1">
-                    <Auction
-                      countryName={data.data.countryName}
-                      cityName={data.data.cityName}
-                      vehicleImage={
-                        data.data?.carImages?.length > 0
-                          ? data.data.carImages[
-                              data.data.carImages.length - 1
-                            ].imagePath.replace('/s_thumb', '/thumb')
-                          : ''
-                      }
-                    />
+                    {currentCountry?.isAuctionSheetDisplay === 1 &&
+                      data?.data?.carImages?.find(
+                        (item) => item.isAuctionSheet === 1
+                      ) && (
+                        <Auction
+                          countryName={data.data.countryName}
+                          cityName={data.data.cityName}
+                          vehicleImage={data?.data?.carImages
+                            ?.find((item) => item.isAuctionSheet === 1)
+                            ?.imagePath.replace('/s_thumb', '/thumb')}
+                        />
+                      )}
                     <Enquiry
                       currencySymbol={data.data.currencySymbol}
                       fobPrice={data.data.fobPrice}

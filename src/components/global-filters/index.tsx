@@ -1,12 +1,11 @@
-import React, { Fragment } from 'react';
-import MobileFilterView from './components/filter-views/MobileFilterView';
-import WebFilterView from './components/filter-views/WebFilterView';
+import React from 'react';
+import FiltersSearch from './components/filter-views/FiltersSearch';
 
 const GlobalFilters = () => {
   return (
-    <Fragment>
-      <WebFilterView />
-    </Fragment>
+    <div className="max-w-full 2xl:block lg:block md:block sm:hidden xs:hidden xxs:hidden">
+      <FiltersSearch />
+    </div>
   );
 };
 

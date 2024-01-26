@@ -22,7 +22,7 @@ const ModelHeader = ({ setModelIsOpen, title }) => {
   //-------------------------------------------------
 
   return (
-    <div className="flex items-center justify-between p-2 md:p-2 border-b rounded-t dark:border-gray-600 bg-primary">
+    <div className="flex items-center justify-between p-2 md:p-2 border-b rounded-t  bg-primary">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -39,13 +39,13 @@ const ModelHeader = ({ setModelIsOpen, title }) => {
         />
       </svg>
 
-      <h3 className="text-xl font-semibold text-gray-900 dark:text-white pl-2">
+      <h3 className="text-xl font-semibold text-gray-900 dark:text-black pl-2">
         {title}
       </h3>
       <button
         onClick={() => setModelIsOpen('')}
         type="button"
-        className="end-2.5 text-gray-400 bg-transparent hover:bg-gray-900 hover:text-white rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+        className="end-2.5 text-gray-400 bg-transparent hover:bg-gray-900 hover:text-white rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
         data-modal-hide="authentication-modal"
       >
         <XMarkIcon className="h-6 w-6" aria-hidden="true" />

@@ -1,5 +1,4 @@
 import { IFilters } from 'components/global-filters/interfaces/filters.interface';
-import { vehiclePerPageList } from 'src/common/constants';
 import { ICarListParams } from 'src/interfaces/car-list-param.interface';
 
 export const createQueryParams = (
@@ -14,13 +13,19 @@ export const createQueryParams = (
 };
 
 export const createQueryWithAllParams = (params: ICarListParams): string => {
-  let query = `?country_id=${params.countryId ? params.countryId : '0'}&
-              page=${params.page ? params.page : '1'}&
-              per_page=${params.perPage}&`;
+  let query = `?country_id=${params.countryId ? params.countryId : '0'}&page=${
+    params.page ? params.page : '1'
+  }&per_page=${params.perPage}&`;
 
   query += params.auctionId ? `auction_id=${params.auctionId}&` : '';
   query += params.makerId ? `maker_id=${params.makerId}&` : '';
-  query += params.modelId ? `model_id=${params.modelId}&` : '';
+  query += params.modelId
+    ? `model_id=${
+        params.makerModel && params.makerModel.length > 0
+          ? JSON.stringify(params.makerModel)
+          : params.modelId
+      }&`
+    : '';
   query += params.bodyTypeId ? `body_type_id=${params.bodyTypeId}&` : '';
 
   query += params.fromYear ? `from_year=${params.fromYear}&` : '';
@@ -30,6 +35,7 @@ export const createQueryWithAllParams = (params: ICarListParams): string => {
     ? `transmission_id=${params.transmissionId}&`
     : '';
   query += params.fuelId ? `fuel_id=${params.fuelId}&` : '';
+  query += params.stockNo ? `stock_no=${params.stockNo}&` : '';
   query += params.chassisNo ? `chassis_no=${params.chassisNo}&` : '';
 
   query = query.slice(0, -1);
@@ -46,7 +52,9 @@ const checkIfQueryExist = (filters: IFilters): boolean =>
   filters.steerings.length > 0 ||
   filters.trans.length > 0 ||
   filters.fuel.length > 0 ||
-  filters.chassisNo
+  filters.stockNo
+    ? true
+    : false || filters.chassisNo
     ? true
     : false;
 
@@ -77,6 +85,7 @@ export const createFilterQuery = (filters: IFilters): string => {
       ? `transmissions=${filters.trans.toString()}&`
       : '';
   query += filters.fuel.length > 0 ? `fuels=${filters.fuel.toString()}&` : '';
+  query += filters.stockNo ? `stock_no=${filters.stockNo}&` : '';
   query += filters.chassisNo ? `chassis_no=${filters.chassisNo}&` : '';
 
   query = checkIfQueryExist(filters) ? query.slice(0, -1) : query;

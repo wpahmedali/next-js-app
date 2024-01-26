@@ -11,30 +11,62 @@ import { ICountryDialog } from 'components/right-menu/components/country-dialog/
 import { getCountryIcon } from 'utils/get-country-icon';
 import { useVehicleListView } from 'src/providers/VehicleListView';
 import { useRouterParams } from 'src/hooks/router-params';
-import { useVehicleListGrid } from 'react-query/hooks/api/vehicle-list-grid';
-import { useVehicleListTabular } from 'react-query/hooks/api/vehicle-list-tabular';
+import { useVehicleList } from 'react-query/hooks/api/vehicle-list';
+import { reactQuery } from 'src/common/constants';
 import { listingViews } from 'src/common/listing-views';
+import { siteSettings } from 'utils/siteSetting';
+import { ICountry } from 'src/interfaces/country.interface';
 
 const CountryDialog = ({
   isShowDialog,
   hideDialog,
 }: ICountryDialog): JSX.Element => {
   const router: NextRouter = useRouter();
+  const params = useRouterParams(router.query);
   const { data, isLoading, isError, isSuccess } = useCountry();
   const view = useVehicleListView();
+  const { defaultCountryShown, specificCountriesShown, countryList } =
+    siteSettings;
 
-  const countries = data?.data?.map((item) => ({
+  let countries = data?.data?.map((item) => ({
     ...item,
     icon: getCountryIcon(item.cssClass),
   }));
 
-  const params = useRouterParams(router.query);
+  const countriesList = countryList?.find(
+    (x) => x.countryId === params.countryId
+  )?.countriesToBeShown;
 
-  const { isPreviousData: gridPrevious } = useVehicleListGrid(params);
-  const { isPreviousData: tabularPrevious } = useVehicleListTabular(params);
+  if (!defaultCountryShown && specificCountriesShown && countriesList) {
+    countries = countries?.filter((item) => countriesList.includes(item.id));
+  }
 
-  const isPreviousData =
-    view === listingViews.tabular ? tabularPrevious : gridPrevious;
+  let viewParam = reactQuery.vehicleList.tabular;
+  if (view === listingViews.grid) {
+    params.perPage = params.page * params.perPage;
+    params.page = 1;
+    viewParam = reactQuery.vehicleList.grid;
+  }
+  const { isPreviousData } = useVehicleList(viewParam, params);
+
+  const globalContactsData: ICountry = {
+    id: 0,
+    countryName: null,
+    countryCode: null,
+    cssClass: null,
+    FBPageName: null,
+    FBAppId: null,
+    countryCount: data?.totalStock || null,
+    is_count: true,
+    auctionDisplay: null,
+    auctionId: null,
+    auctionShortName: null,
+    auctionName: null,
+    specialOffer: null,
+    specialOfferTotal: null,
+    showReservedTag: 0,
+    isAuctionSheetDisplay: 0,
+  };
 
   return (
     <Transition.Root show={isShowDialog === 'country'} as={Fragment}>
@@ -74,11 +106,11 @@ const CountryDialog = ({
                         {(data?.data?.length === 0 || isError) &&
                           !isLoading && <Error />}
                         {isSuccess && data.data.length !== 0 && (
-                          <div className="container-fluid mx-auto grid sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-6 pt-2 gap-4">
+                          <div className="container-fluid mx-auto grid sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5 pt-2 gap-4">
                             <CountryItem
                               hideDialog={hideDialog}
                               isPreviousData={isPreviousData}
-                              item={null}
+                              item={globalContactsData}
                               icon={
                                 <GlobeAltIcon className="h-6 w-6 items-center flex" />
                               }

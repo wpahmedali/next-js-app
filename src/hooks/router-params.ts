@@ -4,19 +4,23 @@ import {
   vehiclePerPageList,
 } from 'src/common/constants';
 import { ParsedUrlQuery } from 'querystring';
-import { ICarListParams } from 'src/interfaces/car-list-param.interface';
+import {
+  ICarListParams,
+  IMakerModel,
+} from 'src/interfaces/car-list-param.interface';
 import { getIdFromParam } from 'utils/get-id-from-param';
-import { useCountry } from 'react-query/hooks/api/country';
 import { useCurrentLocation } from 'react-query/hooks/api/geo-location';
+import { siteSettings } from 'utils/siteSetting';
+import { useMakerModel } from 'react-query/hooks/api/marker-model';
 
 export const useRouterParams = ({
   country,
   auction,
   maker,
-  model,
-  bodyType,
   makers,
+  model,
   models,
+  bodyType,
   body_types,
   from_year,
   to_year,
@@ -24,28 +28,35 @@ export const useRouterParams = ({
   transmissions,
   fuels,
   chassis_no,
+  stock_no,
   carId,
   page,
 }: ParsedUrlQuery): ICarListParams => {
   const params = { ...emptyCarListParams };
 
-  const { data: countryData } = useCountry();
+  const { defaultCountryShown } = siteSettings;
   const { data: currentLocation } = useCurrentLocation();
 
+  // country section start
+  if (!country) {
+    params.countryId = 0;
+    params.isCountryFound = false;
+  }
+  if (currentLocation && currentLocation.data?.id) {
+    params.countryId = currentLocation.data.id;
+    params.isCountryFound = true;
+  } else if (params.countryId && !defaultCountryShown) {
+    params.isCountryFound = false;
+  }
+  if (country === 'all_stock') {
+    params.countryId = 0;
+    params.isCountryFound = false;
+  }
   if (country && !Array.isArray(country) && country !== 'all_stock') {
     params.countryId = getIdFromParam(country);
-  } else {
-    if (country === 'all_stock') {
-      params.countryId = 0;
-    } else if (currentLocation && countryData) {
-      const findCountry = countryData.data.find(
-        (country) =>
-          country.countryName.toLowerCase() ===
-          currentLocation.country_name.toLowerCase()
-      );
-      params.countryId = findCountry ? findCountry.id : 0;
-    }
+    params.isCountryFound = false;
   }
+  // country section end
 
   if (carId && !Array.isArray(carId)) {
     params.carId = getIdFromParam(carId);
@@ -61,26 +72,69 @@ export const useRouterParams = ({
     params.makerId = String(getIdFromParam(maker) ? getIdFromParam(maker) : '');
   }
 
-  if (model && !Array.isArray(model) && model !== allModelsStr) {
-    params.modelId = String(getIdFromParam(model) ? getIdFromParam(model) : '');
-  }
-
-  if (bodyType && !Array.isArray(bodyType)) {
-    params.bodyTypeId = String(getIdFromParam(bodyType));
-  }
-
   if (makers && !Array.isArray(makers)) {
     params.makerId = makers
       .split(',')
-      .map((x) => getIdFromParam(x))
-      .toString();
+      ?.map((item) => getIdFromParam(item))
+      .join(',');
+  }
+
+  if (model && !Array.isArray(model) && model !== allModelsStr) {
+    params.modelId = String(getIdFromParam(model) ? getIdFromParam(model) : '');
   }
 
   if (models && !Array.isArray(models)) {
     params.modelId = models
       .split(',')
-      .map((x) => getIdFromParam(x))
-      .toString();
+      ?.map((item) => getIdFromParam(item))
+      .join(',');
+  }
+
+  const { data } = useMakerModel(params.countryId, params.auctionId);
+
+  if (models && !Array.isArray(models) && data && data.data) {
+    const makerIdArr =
+      makers && !Array.isArray(makers) ? makers.split(',') : [];
+    const modelIdArr =
+      models && !Array.isArray(models) ? models.split(',') : [];
+
+    let makerModels: IMakerModel[] = [];
+
+    // Scenario: Single maker, multiple models
+    if (maker && !Array.isArray(maker)) {
+      const foundMaker = data.data.find(
+        (item) => item.makerId === +params.makerId
+      );
+      makerModels = foundMaker.models
+        .filter((item) =>
+          modelIdArr.includes(`${item.modelName.toLowerCase()}-${item.modelId}`)
+        )
+        .map((item) => ({ makerId: item.carMakerId, modelId: item.modelId }));
+    }
+
+    // Scenario: Multiple makers, multiple models
+    if (makers && !Array.isArray(makers)) {
+      makerModels = data.data
+        .filter((item) =>
+          makerIdArr.includes(`${item.makerName.toLowerCase()}-${item.makerId}`)
+        )
+        .flatMap((item) => item.models)
+        .filter((modelItem) =>
+          modelIdArr.includes(
+            `${modelItem.modelName.toLowerCase()}-${modelItem.modelId}`
+          )
+        )
+        .map((modelItem) => ({
+          makerId: modelItem.carMakerId,
+          modelId: modelItem.modelId,
+        }));
+    }
+
+    params.makerModel = makerModels;
+  }
+
+  if (bodyType && !Array.isArray(bodyType)) {
+    params.bodyTypeId = String(getIdFromParam(bodyType));
   }
 
   if (body_types && !Array.isArray(body_types)) {
@@ -117,6 +171,10 @@ export const useRouterParams = ({
       .split(',')
       .map((x) => getIdFromParam(x))
       .toString();
+  }
+
+  if (stock_no && !Array.isArray(stock_no)) {
+    params.stockNo = stock_no;
   }
 
   if (chassis_no && !Array.isArray(chassis_no)) {

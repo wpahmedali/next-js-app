@@ -13,27 +13,30 @@ export const callReactQueryForTyreApis = async (
   keyWord: string | null,
   perPage: number | null
 ) => {
-  await queryClient.prefetchQuery(['tyreCategory', countryId], () =>
-    getTyreCategory(countryId)
-  );
+  const promisesToFetch = [
+    queryClient.prefetchQuery(['tyreCategory', countryId], () =>
+      getTyreCategory(countryId)
+    ),
 
-  await queryClient.prefetchQuery(
-    ['tyreList', countryId, page, catId, tyreSizeId, keyWord],
-    () => getTyreList(countryId, page, catId, tyreSizeId, keyWord)
-  );
+    queryClient.prefetchQuery(
+      ['tyreList', countryId, page, catId, tyreSizeId, keyWord],
+      () => getTyreList(countryId, page, catId, tyreSizeId, keyWord)
+    ),
 
-  await queryClient.prefetchQuery(['tyreAddress', countryId], () =>
-    getTyreAddress(countryId)
-  );
+    queryClient.prefetchQuery(['tyreAddress', countryId], () =>
+      getTyreAddress(countryId)
+    ),
 
-  await queryClient.prefetchQuery(['tyreSize', countryId, catId], () =>
-    getTyreSize(countryId, catId)
-  );
+    queryClient.prefetchQuery(['tyreSize', countryId, catId], () =>
+      getTyreSize(countryId, catId)
+    ),
 
-  await queryClient.prefetchQuery(
-    ['customerReview', countryId, 1, perPage],
-    () => getCustomerReview(countryId, 1, perPage)
-  );
+    queryClient.prefetchQuery(['customerReview', countryId, 1, perPage], () =>
+      getCustomerReview(countryId, 1, perPage)
+    ),
+  ];
+
+  await Promise.all(promisesToFetch);
 
   return queryClient;
 };

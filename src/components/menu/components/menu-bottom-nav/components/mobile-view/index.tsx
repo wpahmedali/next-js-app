@@ -1,5 +1,5 @@
 import { Popover } from '@headlessui/react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { IMobileView } from '../../interfaces/mobile-view.interface';
 import AboutUs from './../web-view/components/AboutUs';
 import SupportFAQ from './../web-view/components/SupportFAQ';
@@ -11,14 +11,31 @@ const MobileView = ({
   mobileMenuOpen,
   setMobileMenuOpen,
 }: IMobileView): JSX.Element => {
+  const [mobileView, setMobileView] = useState(false);
+
   function handlemobileMenuOpen() {
     setMobileMenuOpen((prevValue) => !prevValue);
   }
 
+  useEffect(() => {
+    const handleResize = () => {
+      const isMobileView = window.innerWidth < 768;
+
+      setMobileView(isMobileView);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div className="w-full 2xl:hidden lg:hidden md:hidden sm:block xs:block xxs:block">
       <nav
-        className="mx-auto flex-col max-w-7xl items-center lg:justify-center 2xl:justify-center md:justify-center md:items-center lg:px-8 lg:py-0 md:py-2 sm:py-1 sm:items-end sm:justify-end xs:justify-end xs:items-end"
+        className="mx-auto flex-col max-w-7xl items-center relative lg:justify-center 2xl:justify-center md:justify-center md:items-center lg:px-8 lg:py-0 md:py-2 sm:py-1 sm:items-end sm:justify-end xs:justify-end xs:items-end"
         aria-label="Global"
       >
         <div className="flex lg:hidden">
@@ -46,7 +63,7 @@ const MobileView = ({
           </button>
         </div>
         {mobileMenuOpen ? (
-          <Popover.Group className="2xl:inline-flex lg:inline-flex md:inline-flex lg:gap-x-0 w-full">
+          <Popover.Group className="2xl:inline-flex lg:inline-flex md:inline-flex lg:gap-x-0 w-full absolute top-10 h-screen max-w-[250px] left-0 bg-primary z-50">
             <AboutUs />
 
             <SupportFAQ />
@@ -58,7 +75,7 @@ const MobileView = ({
         ) : null}
       </nav>
 
-      <MenuBottomBar />
+      {mobileView && <MenuBottomBar />}
     </div>
   );
 };

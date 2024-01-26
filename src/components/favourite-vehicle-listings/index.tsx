@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import TabularHeader from './components/TabularHeader';
-import VehicleItem from './components/vehicle-item';
+import React, { Fragment, useEffect, useState } from 'react';
+import TabularHeader from 'components/vehicle-listings/components/tabular-view-listings/components/TabularHeader';
+import UpperSection from 'components/vehicle-listings/components/tabular-view-listings/components/UpperSection';
+import LowerSection from 'components/vehicle-listings/components/tabular-view-listings/components/LowerSection';
 import { useFavoriteCars } from 'src/providers/FavouriteVehicleList';
 
 const FavouriteVehicleListings = () => {
@@ -29,11 +30,18 @@ const FavouriteVehicleListings = () => {
               <tbody>
                 {isfavorite &&
                   favoriteCars.map((item, index) => (
-                    <VehicleItem
-                      isEven={index % 2 !== 0}
-                      data={item}
-                      key={item.carId + index}
-                    />
+                    <Fragment key={index}>
+                      <UpperSection
+                        url="/home/compare_cars/1"
+                        isEven={index % 2 !== 0}
+                        data={item}
+                      />
+                      <LowerSection
+                        url="/home/compare_cars/1"
+                        isEven={index % 2 !== 0}
+                        data={item}
+                      />
+                    </Fragment>
                   ))}
               </tbody>
             </table>

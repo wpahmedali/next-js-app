@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { OrderListIcon } from 'icons';
 import ShippingAgents from './../shipping-agents/index';
 
-
 const SupportFaqs = () => {
   return (
     <Fragment>
@@ -18,7 +17,10 @@ const SupportFaqs = () => {
             whileTap={{ scale: 0.9 }}
             className="mb-1"
           >
-            <Link href="/general-faqs-about-used-japanese-cars" className="hover:underline flex items-center">
+            <Link
+              href="/general-faqs-about-used-japanese-cars"
+              className="hover:underline flex items-center"
+            >
               <OrderListIcon />
               General Questions{' '}
             </Link>
@@ -28,7 +30,10 @@ const SupportFaqs = () => {
             whileTap={{ scale: 0.9 }}
             className="mb-1"
           >
-            <Link href="/faqs-about-cars-inventory" className="hover:underline flex items-center">
+            <Link
+              href="/faqs-about-cars-inventory"
+              className="hover:underline flex items-center"
+            >
               <OrderListIcon />
               Inventory
             </Link>
@@ -38,7 +43,10 @@ const SupportFaqs = () => {
             whileTap={{ scale: 0.9 }}
             className="mb-1"
           >
-            <Link href="/faqs-about-car-buying-and-payment-procedures" className="hover:underline flex items-center">
+            <Link
+              href="/faqs-about-car-buying-and-payment-procedures"
+              className="hover:underline flex items-center"
+            >
               <OrderListIcon />
               Buying & Paying
             </Link>
@@ -48,7 +56,10 @@ const SupportFaqs = () => {
             whileTap={{ scale: 0.9 }}
             className="mb-1"
           >
-            <Link href="/faqs-about-car-booking-and-shipping" className="hover:underline flex items-center">
+            <Link
+              href="/faqs-about-car-booking-and-shipping"
+              className="hover:underline flex items-center"
+            >
               <OrderListIcon />
               Booking & Shipping
             </Link>
@@ -58,7 +69,10 @@ const SupportFaqs = () => {
             whileTap={{ scale: 0.9 }}
             className="mb-1"
           >
-            <Link href="/faqs-about-used-japanese-cars-documents" className="hover:underline flex items-center">
+            <Link
+              href="/faqs-about-used-japanese-cars-documents"
+              className="hover:underline flex items-center"
+            >
               <OrderListIcon />
               Documentation
             </Link>
@@ -68,7 +82,10 @@ const SupportFaqs = () => {
             whileTap={{ scale: 0.9 }}
             className="mb-1"
           >
-            <Link href="/faqs-about-shipment-and-receipt-of-your-car" className="hover:underline flex items-center">
+            <Link
+              href="/faqs-about-shipment-and-receipt-of-your-car"
+              className="hover:underline flex items-center"
+            >
               <OrderListIcon />
               Shipment Receipt{' '}
             </Link>
@@ -78,7 +95,10 @@ const SupportFaqs = () => {
             whileTap={{ scale: 0.9 }}
             className="mb-1"
           >
-            <Link href="/faqs-about-country-import-export-regulations" className="hover:underline flex items-center">
+            <Link
+              href="/faqs-about-country-import-export-regulations"
+              className="hover:underline flex items-center"
+            >
               <OrderListIcon />
               Country Regulations{' '}
             </Link>
@@ -88,7 +108,10 @@ const SupportFaqs = () => {
             whileTap={{ scale: 0.9 }}
             className="mb-1"
           >
-            <Link href="/faqs-about-glossary-of-terms-when-buying-used-japenes-cars" className="hover:underline flex items-center">
+            <Link
+              href="/faqs-about-glossary-of-terms-when-buying-used-japenes-cars"
+              className="hover:underline flex items-center"
+            >
               <OrderListIcon />
               Glossary Of Terms
             </Link>
@@ -97,7 +120,6 @@ const SupportFaqs = () => {
       </div>
       <div className="xl:basis-1/4 xxl:basis-1/4 lg:basis-1/4 md:basis-2/4 sm:basis-1/4 xs:basis-1/4 xxs:basis-1/4 border-e border-[#555555] lg:border-e md:border-e sm:border-e-0 xs:border-e-0 xxs:border-e-0 h-full">
         <ShippingAgents />
-
       </div>
     </Fragment>
   );

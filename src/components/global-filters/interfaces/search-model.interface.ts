@@ -4,4 +4,6 @@ export interface ISearchModel {
   updateFilters: (data: string[], key: string) => void;
   models: IDropdownData[];
   resetToggle: boolean;
+  dropdownState: string;
+  setDropdownState: any;
 }

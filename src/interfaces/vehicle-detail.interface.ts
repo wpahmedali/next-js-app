@@ -35,6 +35,7 @@ export interface IVehicleDetail {
   carAccessories: string;
   interiorColor?: string;
   isSale: number;
+  isDelivery?: number;
   promotionId: number;
   fuelId: number;
   fobPrice: number | string;

@@ -1,4 +1,4 @@
-import { IPaginationButton } from 'components/tabular-view-listings/interfaces/pagination-button.interface';
+import { IPaginationButton } from '../interfaces/pagination-button.interface';
 
 const PaginationButton = ({
   handleButtonClick,

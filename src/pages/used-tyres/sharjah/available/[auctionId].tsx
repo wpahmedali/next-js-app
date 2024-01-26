@@ -1,10 +1,12 @@
-import { QueryClient, dehydrate } from 'react-query';
+import { QueryClient } from 'react-query';
 import { withCSR } from 'react-query/hoc/with-CSR';
 import { sharjahCountry } from 'components/tyre-dashboard/common/constants';
 import SharjahTyresLayout from 'components/tyre-dashboard/sharjah/layout';
 import AvailableAuctions from 'components/tyre-dashboard/sharjah/components/available';
 import { getTyreSharjah } from 'react-query/api/tyres/sharjah/tyre';
 import { getAvailableTyreList } from 'react-query/api/tyres/sharjah/available-tyre-list';
+import { siteSettings } from 'utils/siteSetting';
+import { getDefaultProps, redirectToHome } from 'utils/return-functions';
 
 export const getServerSideProps = withCSR(async (ctx) => {
   let queryClient = new QueryClient();
@@ -35,11 +37,13 @@ export const getServerSideProps = withCSR(async (ctx) => {
     }
   }
 
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
+  const { defaultCountryShown } = siteSettings;
+
+  if (defaultCountryShown) {
+    return redirectToHome(queryClient);
+  } else {
+    return getDefaultProps(queryClient);
+  }
 });
 
 const Tyres = (): JSX.Element => {

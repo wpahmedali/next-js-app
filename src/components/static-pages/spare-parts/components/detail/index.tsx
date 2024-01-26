@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState } from 'react';
-import { Fragment } from 'react';
 import Engine from './components/Engine';
 import Bumper from './components/Bumper';
 import Lights from './components/Lights';
@@ -19,26 +18,24 @@ const SparePartsDetail = () => {
   };
 
   return (
-    <Fragment>
-      <div data-scroll-container>
-        {isOpenModal && (
-          <SparePartModal
-            setisOpenModal={setisOpenModal}
-            shareWhatsapp={shareWhatsapp}
-            imgName={imageName}
-          />
-        )}
-        <SparePartHeader />
-        <Engine
+    <div data-scroll-container>
+      {isOpenModal && (
+        <SparePartModal
           setisOpenModal={setisOpenModal}
-          setImageName={setImageName}
           shareWhatsapp={shareWhatsapp}
+          imgName={imageName}
         />
-        <Bumper setisOpenModal={setisOpenModal} setImageName={setImageName} />
-        <Lights setisOpenModal={setisOpenModal} setImageName={setImageName} />
-        <Doors setisOpenModal={setisOpenModal} setImageName={setImageName} />
-      </div>
-    </Fragment>
+      )}
+      <SparePartHeader />
+      <Engine
+        setisOpenModal={setisOpenModal}
+        setImageName={setImageName}
+        shareWhatsapp={shareWhatsapp}
+      />
+      <Bumper setisOpenModal={setisOpenModal} setImageName={setImageName} />
+      <Lights setisOpenModal={setisOpenModal} setImageName={setImageName} />
+      <Doors setisOpenModal={setisOpenModal} setImageName={setImageName} />
+    </div>
   );
 };
 

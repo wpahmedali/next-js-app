@@ -9,7 +9,10 @@ import { useRouterParams } from 'src/hooks/router-params';
 const SearchMaker = ({
   updateFilters,
   setModels,
+  models: oldModels,
   resetToggle,
+  dropdownState,
+  setDropdownState,
 }: ISearchMaker) => {
   const router = useRouter();
 
@@ -33,6 +36,7 @@ const SearchMaker = ({
     dropdownData = data.data.map((item) => ({
       id: item.makerId,
       name: item.makerName,
+      image: item.cssClass.toLowerCase(),
       isChecked: false,
     }));
   }
@@ -43,11 +47,19 @@ const SearchMaker = ({
         selectedData.includes(`${item.makerName.toLowerCase()}-${item.makerId}`)
       )
       .flatMap((item) => item.models)
-      .map((modelItem) => ({
-        id: modelItem.modelId,
-        name: modelItem.modelName,
-        isChecked: false,
-      }));
+      .map((modelItem) => {
+        const correspondingOldModel = oldModels.find(
+          (oldModelItem) => oldModelItem.id === modelItem.modelId
+        );
+
+        return {
+          id: modelItem.modelId,
+          name: modelItem.modelName,
+          isChecked: correspondingOldModel
+            ? correspondingOldModel.isChecked
+            : false,
+        };
+      });
 
     setModels(selectedModels);
     updateFilters([], 'models');
@@ -58,7 +70,7 @@ const SearchMaker = ({
     if (isSuccess && data) {
       let selectedModels = [];
 
-      if (params.makerId && model) {
+      if (makerIdArr.length === 0 && params.makerId && model) {
         const foundMaker = data.data.find(
           (item) => item.makerId === +params.makerId
         );
@@ -66,7 +78,13 @@ const SearchMaker = ({
           selectedModels = foundMaker.models.map((modelItem) => ({
             id: modelItem.modelId,
             name: modelItem.modelName,
-            isChecked: false,
+            isChecked:
+              modelIdArr.length === 0
+                ? modelItem.modelId === +params.modelId
+                : params.modelId
+                    .split(',')
+                    .map(Number)
+                    .includes(modelItem.modelId),
           }));
         }
       } else {
@@ -80,9 +98,12 @@ const SearchMaker = ({
           .map((modelItem) => ({
             id: modelItem.modelId,
             name: modelItem.modelName,
-            isChecked: modelIdArr.includes(
-              `${modelItem.modelName.toLowerCase()}-${modelItem.modelId}`
-            ),
+            isChecked:
+              modelIdArr.length === 0
+                ? +params.modelId === modelItem.modelId
+                : modelIdArr.includes(
+                    `${modelItem.modelName.toLowerCase()}-${modelItem.modelId}`
+                  ),
           }));
       }
 
@@ -101,6 +122,8 @@ const SearchMaker = ({
       isError={!data || isError}
       isLoading={isLoading}
       isSuccess={isSuccess}
+      dropdownState={dropdownState}
+      setDropdownState={setDropdownState}
     />
   );
 };

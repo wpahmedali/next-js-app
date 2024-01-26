@@ -1,8 +1,8 @@
 import CommonLayout from 'components/dashboard/CommonLayout';
-import OverView from 'components/static-pages/over-view';
+import PartnersView from 'components/static-pages/over-view/partnersview';
 
 const Page = () => {
-  return <OverView />;
+  return <PartnersView />;
 };
 export default Page;
 

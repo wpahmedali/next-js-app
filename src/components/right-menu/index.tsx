@@ -3,8 +3,15 @@ import { GlobeAltIcon } from '@heroicons/react/24/outline';
 import Ads from 'components/right-menu/components/ads';
 import CountryToggleMenu from 'components/right-menu/components/CountryToggleMenu';
 import TopShowedCountry from 'components/right-menu/components/TopShowedCountry';
+import { siteSettings } from 'utils/siteSetting';
+import { useRouter } from 'next/router';
+import { useRouterParams } from 'src/hooks/router-params';
 
 const RightMenu = (): JSX.Element => {
+  const { query } = useRouter();
+  const { isCountryFound } = useRouterParams(query);
+  const { defaultCountryShown } = siteSettings;
+
   return (
     <div className="xxs:w-full xs:w-full sm:w-full 2xl:w-[375px] xl:w-[375px] lg:w-[375px] md:w-[300px] flex-col">
       <div className="w-full">
@@ -14,7 +21,7 @@ const RightMenu = (): JSX.Element => {
         </h2>
         <ul className="w-full rounded-lg mb-1 text-blue-800">
           <TopShowedCountry />
-          <CountryToggleMenu />
+          {(!defaultCountryShown || !isCountryFound) && <CountryToggleMenu />}
         </ul>
         <Ads />
       </div>

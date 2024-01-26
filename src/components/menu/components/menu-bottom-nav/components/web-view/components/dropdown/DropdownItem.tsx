@@ -3,7 +3,13 @@ import Link from 'next/link';
 import { IDropdownItem } from '../../../../interfaces/dropdown-item.interface';
 import { useDispatchLoadingState } from 'src/providers/LoadingContext';
 
-const DropdownItem = ({ item }: { item: IDropdownItem }): JSX.Element => {
+const DropdownItem = ({
+  item,
+  handleIsPopOver,
+}: {
+  item: IDropdownItem;
+  handleIsPopOver: () => void;
+}): JSX.Element => {
   const setLoadingState = useDispatchLoadingState();
 
   return (
@@ -19,7 +25,10 @@ const DropdownItem = ({ item }: { item: IDropdownItem }): JSX.Element => {
       <div className="flex-auto hover:text-primaryDark">
         <Link
           href={item.href}
-          onClick={() => setLoadingState({ type: 'countryLoading' })}
+          onClick={() => {
+            setLoadingState({ type: 'countryLoading' });
+            handleIsPopOver();
+          }}
           className="block font-semibold text-white hover:text-primaryDark"
         >
           {item.name}

@@ -11,7 +11,7 @@ const Title = ({ data }: { data: IVehicleDetail }) => {
         </h2>
       </div>
       <div>
-        {data.fuelName.toLowerCase() === 'hybrid-gasoline' && (
+        {data?.fuelName?.toLowerCase() === 'hybrid-gasoline' && (
           <span>
             <Image
               alt=""
@@ -21,21 +21,21 @@ const Title = ({ data }: { data: IVehicleDetail }) => {
             ></Image>
           </span>
         )}
-        {data.driveName.toLowerCase() === '4wheel drive' && (
+        {data?.driveName?.toLowerCase() === '4wheel drive' && (
           <span>
             <Image
               alt=""
-              src={'/assets/4WD.png'}
+              src={'/assets/4wd.svg'}
               width={70}
               height={70}
             ></Image>
           </span>
         )}
-        {data.fuelName.toLowerCase() === 'diesel' && (
+        {data?.fuelName?.toLowerCase() === 'diesel' && (
           <span>
             <Image
               alt=""
-              src={'/assets/desel.png'}
+              src={'/assets/diesel.svg'}
               width={100}
               height={100}
             ></Image>

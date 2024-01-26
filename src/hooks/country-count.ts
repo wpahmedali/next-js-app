@@ -16,7 +16,7 @@ export const useCountryCount = (): boolean => {
         (country) => country.id === Number(params.countryId)
       );
       if (findCountry) {
-        setCountryCount(findCountry.is_count || true);
+        setCountryCount(findCountry.is_count);
       } else if (params.countryId === 0) {
         setCountryCount(true);
       }

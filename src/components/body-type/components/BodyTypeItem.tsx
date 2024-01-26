@@ -8,11 +8,11 @@ import {
   useDispatchLoadingState,
   useLoadingState,
 } from 'src/providers/LoadingContext';
-import { useVehicleListGrid } from 'react-query/hooks/api/vehicle-list-grid';
-import { useVehicleListTabular } from 'react-query/hooks/api/vehicle-list-tabular';
+import { useVehicleList } from 'react-query/hooks/api/vehicle-list';
+import { reactQuery } from 'src/common/constants';
 import { listingViews } from 'src/common/listing-views';
 import Loading from 'components/loading';
-import { useSelectedCountry } from 'src/hooks/selected-country';
+import { useCurrentCountryName } from 'src/hooks/current-country-name';
 import { useRouterParams } from 'src/hooks/router-params';
 import { useCountryCount } from 'src/hooks/country-count';
 
@@ -27,17 +27,19 @@ const BodyTypeItem = ({
   const router: NextRouter = useRouter();
   const { auction, country } = router.query;
   const setLoadingState = useDispatchLoadingState();
-  const selectedCountry = useSelectedCountry();
+  const selectedCountry = useCurrentCountryName();
   const countryCount = useCountryCount();
   const view = useVehicleListView();
   const loadingState = useLoadingState();
   const params = useRouterParams(router.query);
 
-  const { isPreviousData: gridPrevious } = useVehicleListGrid(params);
-  const { isPreviousData: tabularPrevious } = useVehicleListTabular(params);
-
-  const isPreviousData =
-    view === listingViews.tabular ? tabularPrevious : gridPrevious;
+  let viewParam = reactQuery.vehicleList.tabular;
+  if (view === listingViews.grid) {
+    params.perPage = params.page * params.perPage;
+    params.page = 1;
+    viewParam = reactQuery.vehicleList.grid;
+  }
+  const { isPreviousData } = useVehicleList(viewParam, params);
 
   const auctions = () =>
     auction

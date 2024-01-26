@@ -21,7 +21,7 @@ const MobileFilterView = ({ isShowDialog, hideDialog }) => {
               >
                 <Dialog.Panel className="pointer-events-auto relative w-screen max-w-screen-2xl">
                   <CloseIcon hideDialog={hideDialog} />
-                  <div className="flex h-3/3 flex-col overflow-auto max-h-screen bg-white py-6 shadow-xl 2xl:mt-36 2xl:mr-64 xl:mt-32 xl:mr-48 lg:mt-32 lg:mr-8">
+                  <div className="flex h-3/3 flex-col overflow-auto max-h-screen bg-white py-6 shadow-xl 2xl:mt-36 2xl:mr-64 xl:mt-32 xl:mr-48 lg:mt-32 lg:mr-8 h-screen">
                     <div className="px-4 sm:px-6">
                       <div className="text-base font-semibold leading-6 text-gray-900">
                         <Dialog.Title>Search Vehicles</Dialog.Title>

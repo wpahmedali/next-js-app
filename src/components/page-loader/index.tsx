@@ -30,7 +30,7 @@ const PageLoader = ({ isLoading: initialLoading }: { isLoading: boolean }) => {
         isLoading ? '' : 'hidden'
       }`}
     >
-      <SpinnerIcon className="w-14 h-14 animate-spin text-primary" />
+      <SpinnerIcon className="w-14 h-14 animate-spin" />
     </div>
   );
 };

@@ -1,9 +1,11 @@
-import { QueryClient, dehydrate } from 'react-query';
+import { QueryClient } from 'react-query';
 import { withCSR } from 'react-query/hoc/with-CSR';
 import { callReactQueryForTyreApis } from 'utils/call-react-query-apis-tyre';
 import TyreListing from 'components/tyre-dashboard/zambia/listings';
 import TyresLayout from 'components/tyre-dashboard/zambia/tyre-layout';
 import { zambiaCountry } from 'components/tyre-dashboard/common/constants';
+import { siteSettings } from 'utils/siteSetting';
+import { getDefaultProps, redirectToHome } from 'utils/return-functions';
 
 export const getServerSideProps = withCSR(async (ctx: any) => {
   let queryClient = new QueryClient();
@@ -28,12 +30,15 @@ export const getServerSideProps = withCSR(async (ctx: any) => {
     perpage
   );
 
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
+  const { defaultCountryShown } = siteSettings;
+
+  if (defaultCountryShown) {
+    return redirectToHome(queryClient);
+  } else {
+    return getDefaultProps(queryClient);
+  }
 });
+
 const Tyres = (): JSX.Element => {
   return <TyreListing />;
 };

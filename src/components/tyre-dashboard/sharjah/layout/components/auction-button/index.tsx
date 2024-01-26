@@ -18,7 +18,7 @@ const AuctionButton = ({
       <div
         className={`bg-black overflow-hidden content-center text-primary justify-left text-left w-full md:my-2 sm:my-2 xs:my-2 xxs:my-2`}
       >
-        <div className="flex bg-primaryDark text-white my-4 font-bold items-center justify-left gap-x-3 px-6">
+        <div className="flex bg-primaryDark text-white my-4 font-bold items-center justify-center gap-x-3 px-6">
           <UaeFlagIcon />
           {name}
           <br></br>

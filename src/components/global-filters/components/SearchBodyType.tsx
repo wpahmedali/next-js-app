@@ -4,7 +4,12 @@ import { IDropdownData } from '../interfaces/dropdown-data.interface';
 import SearchItem from './search-item';
 import { useRouterParams } from 'src/hooks/router-params';
 
-const SearchBodyType = ({ updateFilters, resetToggle }): JSX.Element => {
+const SearchBodyType = ({
+  updateFilters,
+  resetToggle,
+  dropdownState,
+  setDropdownState,
+}): JSX.Element => {
   const router = useRouter();
   const params = useRouterParams(router.query);
 
@@ -44,6 +49,8 @@ const SearchBodyType = ({ updateFilters, resetToggle }): JSX.Element => {
       isError={!data || isError}
       isLoading={isLoading}
       isSuccess={isSuccess}
+      dropdownState={dropdownState}
+      setDropdownState={setDropdownState}
     />
   );
 };

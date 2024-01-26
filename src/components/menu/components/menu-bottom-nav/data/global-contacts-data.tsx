@@ -4,11 +4,18 @@ import { getCountryIcon } from 'utils/get-country-icon';
 import { GlobeAltIcon } from '@heroicons/react/24/outline';
 import { IDropdownData } from '../interfaces/dropdown-data.interface';
 import { ROUTES } from 'src/common/routes';
+import { siteSettings } from 'utils/siteSetting';
+import { useRouter } from 'next/router';
+import { useRouterParams } from 'src/hooks/router-params';
 
 const GetGlobalContactsData = (): IDropdownData => {
+  const { query } = useRouter();
+  const { countryId, isCountryFound } = useRouterParams(query);
   const { data, isLoading, isError, isSuccess } = useCountry();
+  const { defaultCountryShown, specificCountriesShown, countryList } =
+    siteSettings;
 
-  if (isLoading || isError || data?.data?.length === 0) {
+  if (isLoading || isError || !data?.data || data.data.length === 0) {
     return {
       data: [],
       isLoading,
@@ -17,7 +24,8 @@ const GetGlobalContactsData = (): IDropdownData => {
     };
   }
 
-  const countries: IDropdownItem[] = data?.data?.map((item) => ({
+  let countries: IDropdownItem[] = data.data.map((item) => ({
+    id: item.id,
     name: item.countryName,
     description: '',
     href: `${ROUTES.COUNTRY_CAR_LIST}/${item.countryName.toLowerCase()}-${
@@ -26,15 +34,27 @@ const GetGlobalContactsData = (): IDropdownData => {
     icon: getCountryIcon(item.cssClass),
   }));
 
-  const countriesData = [
-    {
-      name: 'Global',
-      description: '',
-      href: ROUTES.ALL_STOCK + '?contact=true',
-      icon: <GlobeAltIcon className="w-6 h-6" />,
-    },
-    ...countries,
-  ];
+  if (defaultCountryShown && isCountryFound) {
+    countries = countries.filter((item) => item.id === countryId);
+  }
+
+  const countriesList = countryList?.find(
+    (x) => x.countryId === countryId
+  )?.countriesToBeShown;
+
+  if (!defaultCountryShown && specificCountriesShown && countriesList) {
+    countries = countries.filter((item) => countriesList.includes(item.id));
+  }
+
+  const globalContact = (!defaultCountryShown || !isCountryFound) && {
+    id: 0,
+    name: 'Global',
+    description: '',
+    href: `${ROUTES.ALL_STOCK}?contact=true`,
+    icon: <GlobeAltIcon className="w-6 h-6" />,
+  };
+
+  const countriesData = [globalContact, ...countries].filter(Boolean);
 
   return {
     data: countriesData,

@@ -55,21 +55,21 @@ const LoginForm = () => {
       aria-hidden="true"
       className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-end items-center w-full md:inset-0 h-[calc(100%-0rem)] max-h-full inset-0 bg-gray-500 bg-opacity-90 transition-opacity"
     >
-      <div className="p-4 max-w-5xl flex h-screen justify-end items-center right-0 absolute">
-        <div className="bg-white rounded-lg shadow dark:bg-gray-700 h-screen">
+      <div className="p-4 max-w-lg flex h-screen justify-end items-center right-0 absolute">
+        <div className="bg-white rounded-lg shadow h-screen">
           <ModelHeader
             setModelIsOpen={setContext}
             title="Sign in to our platform"
           />
 
           <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-4 p-4 md:p-5">
-            <div className="bg-white rounded-lg overflow-hidden shadow-lg transition-transform transform border">
-              <div className="p-1 bg-[#000]"></div>
+            <div className="bg-white overflow-hidden transition-transform transform">
+              <div className="p-1"></div>
               <div className="p-4 md:p-5">
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <FormInput
                     inputlable="Your email"
-                    placeholder="name@company.com"
+                    placeholder="email@company.com"
                     value={values.email}
                     type="email"
                     name="email"

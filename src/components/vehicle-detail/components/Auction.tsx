@@ -16,7 +16,7 @@ const Auction = ({
       <div className="flex bg-primary text-black justify-start items-center p-3 px-7 text-sm">
         <div className="font-bold uppercase text-lg">Auction Sheet</div>
       </div>
-      <div className="bg-gray-100 text-xs font-bold text-black p-3">
+      <div className="bg-gray-100 text-xs font-bold text-black p-3 3xl:h-[617px] 2xl:h-[617px] xl:h-[681px] lg:h-[761px]">
         <Image
           className="h-auto max-w-full rounded-lg hover:opacity-70 cursor-pointer focus:ring focus:ring-violet-300"
           src={vehicleImage}

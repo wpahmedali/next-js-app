@@ -8,14 +8,14 @@ import { useRouterParams } from './router-params';
 export const useIsAuctionCountry = (countryId?: number): boolean => {
   const [isAuctionCountry, setIsAuctionCountry] = useState(false);
 
-  const { query }: NextRouter = useRouter();
-  const params = useRouterParams(query);
+  const router: NextRouter = useRouter();
+  const params = useRouterParams(router.query);
 
   if (countryId) {
     params.countryId = countryId;
   }
 
-  const { data, isLoading, isSuccess } = useCountry();
+  const { data, isSuccess } = useCountry();
 
   const { data: philippineCountryData, isSuccess: philippineCountryIsSuccess } =
     usePhilippineCountryList(philippineCountry.id);
@@ -38,7 +38,7 @@ export const useIsAuctionCountry = (countryId?: number): boolean => {
         setIsAuctionCountry(false);
       }
     }
-  }, [isLoading, params.countryId, isSuccess, data]);
+  }, [params.countryId, philippineCountryIsSuccess, isSuccess, data, router]);
 
   return isAuctionCountry;
 };

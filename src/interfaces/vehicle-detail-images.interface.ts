@@ -4,4 +4,5 @@ export interface IVehicleDetailImage {
   directory: string;
   fileName: string;
   imagePath: string;
+  isAuctionSheet?: number;
 }

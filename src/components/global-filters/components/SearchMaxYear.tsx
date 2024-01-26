@@ -7,7 +7,13 @@ import { getIdFromParam } from 'utils/get-id-from-param';
 import ClearButton from './search-item/ClearButton';
 import { IDropdownData } from '../interfaces/dropdown-data.interface';
 
-const SearchMaxYear = ({ minYear, updateFilters, resetToggle }) => {
+const SearchMaxYear = ({
+  minYear,
+  updateFilters,
+  resetToggle,
+  dropdownState,
+  setDropdownState,
+}) => {
   const [clearToggle, setClearToggle] = useState(false);
   const [dropdownData, setDropdownData] = useState<IDropdownData[]>([]);
   const [allData, setAllData] = useState<IDropdownData[]>([]);
@@ -88,60 +94,64 @@ const SearchMaxYear = ({ minYear, updateFilters, resetToggle }) => {
     setAllData(newAllData);
   };
 
+  const handleToggleDropdown = () => {
+    if (dropdownState === 'MaxYearFilter') {
+      setDropdownState('');
+    } else {
+      setDropdownState('MaxYearFilter');
+    }
+  };
+
   const trueCount =
     Array.isArray(allData) && allData.length > 0
       ? allData.filter((item) => item.isChecked).length
       : 0;
 
   return (
-    <div className="2xl:w-1/5 lg:w-1/5 md:w-1/2 sm:w-full xs:w-full xxs:w-full px-2 2xl:mb-2 lg:mb-2 md:mb-2 sm:mb-2 xs:mb-2 xxs:mb-2">
+    <div className="2xl:w-1/6 lg:w-1/6 md:w-1/2 sm:w-full xs:w-full xxs:w-full px-2 2xl:mb-2 lg:mb-2 md:mb-2 sm:mb-2 xs:mb-2 xxs:mb-2">
       <div className="relative">
         <button
           id="MaxYearDropdownButton"
-          data-dropdown-toggle="MaxYeardropdownSearch"
-          data-dropdown-placement="bottom"
+          onClick={handleToggleDropdown}
           className={`w-full text-${
             trueCount > 0 ? 'red-500' : 'gray-700'
-          } bg-white 
-            focus:outline-none focus:ring-blue-300 font-medium text-xs px-4 py-2 
-            text-center inline-flex items-center md:p-1 lg:p-1 xl:p-2 2xl:p-2`}
+          } bg-white focus:outline-none focus:ring-blue-300 font-medium text-xs px-4 py-2 text-center inline-flex items-center md:p-1 lg:p-1 xl:p-2 2xl:p-2 border`}
           type="button"
         >
           {selectedYear || 'Max Year'}
           <DropDownIcon />
         </button>
 
-        <div
-          id="MaxYeardropdownSearch"
-          className="z-10 hidden bg-white rounded-lg shadow w-60 dark:bg-gray-700"
-        >
-          <SearchInput
-            name="Max Year"
-            allData={allData}
-            setDropdownData={setDropdownData}
-          />
+        {dropdownState === 'MaxYearFilter' && (
+          <div className="z-10 bg-white rounded-lg shadow 3xl:w-60 2xl:w-60 lg:w-60 md:w-60 sm:w-full xs:w-full xxs:w-full dark:bg-gray-700 absolute">
+            <SearchInput
+              name="Max Year"
+              allData={allData}
+              setDropdownData={setDropdownData}
+            />
 
-          <ClearButton
-            name="maxYear"
-            updateFilters={updateFilters}
-            setClearToggle={setClearToggle}
-          />
+            <ClearButton
+              name="maxYear"
+              updateFilters={updateFilters}
+              setClearToggle={setClearToggle}
+            />
 
-          <ul
-            className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
-            aria-labelledby="MaxYearDropdownButton"
-          >
-            {dropdownData.map((item) => (
-              <DropdownItem
-                key={item.id}
-                item={item}
-                yearType="max"
-                isYear={true}
-                handleCheck={handleCheck}
-              />
-            ))}
-          </ul>
-        </div>
+            <ul
+              className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
+              aria-labelledby="MaxYearDropdownButton"
+            >
+              {dropdownData.map((item) => (
+                <DropdownItem
+                  key={item.id}
+                  item={item}
+                  yearType="max"
+                  isYear={true}
+                  handleCheck={handleCheck}
+                />
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -13,4 +13,6 @@ export interface ISearchItem {
   isSuccess: boolean;
   updateFilters?: IFilters;
   setMinYear?: any;
+  dropdownState: string;
+  setDropdownState: any;
 }

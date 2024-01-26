@@ -11,21 +11,26 @@ export const callReactQueryCustomerReviewApis = async (
   params: ICarListParams
 ) => {
   await queryClient.prefetchQuery(['userLocation'], getLocation);
-  await queryClient.prefetchQuery(['country'], getCountry);
-  await queryClient.prefetchQuery(['tyreSharjah', params.countryId], () =>
-    getTyreSharjah(params.countryId)
-  );
-  await queryClient.prefetchQuery(
-    ['makerModel', params.countryId, params.auctionId],
-    () => getMakerModel(params.countryId, params.auctionId)
-  );
-  await queryClient.prefetchQuery(
-    ['bodyType', params.countryId, params.auctionId],
-    () => getBodyType(params.countryId, params.auctionId)
-  );
-  await queryClient.prefetchQuery(
-    ['customerReview', params.countryId, params.page, params.perPage],
-    () => getCustomerReview(params.countryId, params.page, params.perPage)
-  );
+
+  const promisesToFetch = [
+    queryClient.prefetchQuery(['country'], getCountry),
+    queryClient.prefetchQuery(['tyreSharjah', params.countryId], () =>
+      getTyreSharjah(params.countryId)
+    ),
+    queryClient.prefetchQuery(
+      ['makerModel', params.countryId, params.auctionId],
+      () => getMakerModel(params.countryId, params.auctionId)
+    ),
+    queryClient.prefetchQuery(
+      ['bodyType', params.countryId, params.auctionId],
+      () => getBodyType(params.countryId, params.auctionId)
+    ),
+    queryClient.prefetchQuery(
+      ['customerReview', params.countryId, params.page, params.perPage],
+      () => getCustomerReview(params.countryId, params.page, params.perPage)
+    ),
+  ];
+
+  await Promise.all(promisesToFetch);
   return queryClient;
 };

@@ -6,7 +6,7 @@ import { gotoNewPage } from 'utils/goto-new-page';
 import { GotoSecondPage } from 'utils/goto-second-page';
 import { useDispatchLoadingState } from 'src/providers/LoadingContext';
 import { ROUTES } from 'src/common/routes';
-import { useSelectedCountry } from 'src/hooks/selected-country';
+import { useCurrentCountryName } from 'src/hooks/current-country-name';
 import { useRouterParams } from 'src/hooks/router-params';
 
 const Pagination = ({
@@ -18,7 +18,7 @@ const Pagination = ({
 }) => {
   const setLoadingState = useDispatchLoadingState();
   const router: NextRouter = useRouter();
-  const selectedCountry = useSelectedCountry();
+  const selectedCountry = useCurrentCountryName();
   const params = useRouterParams(router.query);
   const { page } = router.query;
 

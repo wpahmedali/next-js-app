@@ -4,13 +4,13 @@ import { NextRouter, useRouter } from 'next/router';
 import { ROUTES } from 'src/common/routes';
 import Link from 'next/link';
 import { GetBacklistingUrl } from 'src/hooks/get-back-listing-url';
-import { useSelectedCountry } from 'src/hooks/selected-country';
+import { useCurrentCountryName } from 'src/hooks/current-country-name';
 import { useRouterParams } from 'src/hooks/router-params';
 import { useNextPreviousCarList } from 'react-query/hooks/api/next-previous-car';
 
 const Buttons = (): JSX.Element => {
   const router: NextRouter = useRouter();
-  const selectedCountry = useSelectedCountry();
+  const selectedCountry = useCurrentCountryName();
   const params = useRouterParams(router.query);
   const { country, maker, model, bodyType, auction } = router.query;
 
@@ -63,7 +63,7 @@ const Buttons = (): JSX.Element => {
       <div className="home-btn">
         <Link
           href={backBaseUrl}
-          className="rounded-r-lg rounded-l-lg bg-primary text-black px-6 py-3 flex gap-2 items-center hover:bg-gray-800 hover:text-white"
+          className="rounded-r-lg rounded-l-lg bg-primary text-black px-3 py-2 flex gap-2 items-center hover:bg-gray-800 hover:text-white"
         >
           <HomeIcon />
           Back
@@ -71,7 +71,7 @@ const Buttons = (): JSX.Element => {
       </div>
       <div className="next-pre-btn flex gap-2 items-center">
         <button
-          className={`rounded-r-lg rounded-l-lg bg-primary text-black px-6 py-3 flex gap-2 items-center ${
+          className={`rounded-r-lg rounded-l-lg bg-primary text-black px-3 py-2 flex gap-2 items-center ${
             currentIndex === null ||
             nextData?.data?.length === 0 ||
             currentIndex === 0
@@ -89,7 +89,7 @@ const Buttons = (): JSX.Element => {
           Previous
         </button>
         <button
-          className={`rounded-r-lg rounded-l-lg bg-primary text-black px-6 py-3 flex gap-2 items-center ${
+          className={`rounded-r-lg rounded-l-lg bg-primary text-black px-3 py-2 flex gap-2 items-center ${
             currentIndex === null || currentIndex === nextData?.data?.length - 1
               ? 'cursor-not-allowed'
               : 'hover:bg-gray-800 hover:text-white'

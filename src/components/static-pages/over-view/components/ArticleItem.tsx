@@ -24,7 +24,7 @@ const ArticleItem = () => {
       <div className="mt-1 p-2">
         <h2 className="text-black font-bold">2023 Fiscal Year</h2>
         <p className="mt-1 text-sm text-slate-500">
-          JU AICHI : HIGH NUMBER OF VEHICLE PURCHASE APPRECIATION
+          JU AICHI : HIGH NUMBER OF VEHICLE PURCHASE APPRECIATIONfgsdfsdf
         </p>
       </div>
     </article>

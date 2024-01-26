@@ -7,6 +7,8 @@ import { ISearchTransmission } from '../interfaces/search-transmission.interface
 const SearchTransmission = ({
   updateFilters,
   resetToggle,
+  dropdownState,
+  setDropdownState,
 }: ISearchTransmission) => {
   const {
     query: { transmissions },
@@ -41,6 +43,8 @@ const SearchTransmission = ({
       isError={!data || isError}
       isLoading={isLoading}
       isSuccess={isSuccess}
+      dropdownState={dropdownState}
+      setDropdownState={setDropdownState}
     />
   );
 };

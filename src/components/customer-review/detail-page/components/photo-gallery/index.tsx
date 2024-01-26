@@ -21,7 +21,6 @@ const PhotoGallery = () => {
   const router: NextRouter = useRouter();
   const params = useRouterParams(router.query);
 
-  params.page = 1;
   const { data, isLoading, isSuccess, isError } = useCustomerReview(
     params.countryId,
     params.page,

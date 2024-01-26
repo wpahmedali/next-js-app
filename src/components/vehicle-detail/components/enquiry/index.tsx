@@ -93,7 +93,7 @@ const Enquiry = ({
           onChangeHandler={onChangeHandler}
         />
 
-        <div className="text-md font-normal text-black mt-5 mb-24">
+        <div className="text-md font-normal text-black mt-5 mb-14">
           The enquiry system is capable of sending you instant information
           regarding the car you have just selected. Please provide the correct
           email address above and receive instant information regarding this

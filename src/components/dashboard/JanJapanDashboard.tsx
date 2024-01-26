@@ -2,10 +2,8 @@ import FullLayout from 'components/dashboard/FullLayout';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
-import { useVehicleDetail } from 'react-query/hooks/api/vehicle-detail';
 import { metaKeywords } from 'src/common/constants';
 import { useDynamicMetaData } from 'src/hooks/dynamic-meta-data';
-import { getIdFromParam } from 'utils/get-id-from-param';
 
 const JanJapanDashboard = ({ pageProps, Component }) => {
   const getLayout = Component.getLayout;
@@ -40,28 +38,17 @@ const JanJapanDashboard = ({ pageProps, Component }) => {
     };
   }, [router, scrollPositions]);
 
-  const { data } = useVehicleDetail(
-    router.query.country &&
-      !Array.isArray(router.query.country) &&
-      getIdFromParam(router.query.country),
-    +router.query.carId
-  );
-  const dynamicMetaData = useDynamicMetaData(router, data?.data);
+  const dynamicMetaData = useDynamicMetaData(router);
 
   return (
     <Fragment>
       <Head>
-        <title>{dynamicMetaData?.title || "Jan's Group"}</title>
+        <title>
+          {(!router.query.carId && dynamicMetaData?.title) || "Jan's Group"}
+        </title>
         {dynamicMetaData?.description && (
           <meta name="description" content={dynamicMetaData.description} />
         )}
-        {dynamicMetaData?.vehicleData?.map((item, i) => (
-          <meta
-            property={item.property}
-            content={item.content.toString()}
-            key={i}
-          />
-        ))}
         <meta name="keywords" content={metaKeywords} />
       </Head>
       {Component.getLayout ? (

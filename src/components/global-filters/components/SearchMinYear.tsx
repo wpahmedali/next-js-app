@@ -7,6 +7,8 @@ const SearchMinYear = ({
   updateFilters,
   resetToggle,
   setMinYear,
+  dropdownState,
+  setDropdownState,
 }) => {
   const router = useRouter();
 
@@ -42,6 +44,8 @@ const SearchMinYear = ({
       isSuccess={true}
       updateFilters={updateFilters}
       setMinYear={setMinYear}
+      dropdownState={dropdownState}
+      setDropdownState={setDropdownState}
     />
   );
 };
