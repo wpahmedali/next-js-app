@@ -15,7 +15,7 @@ import { siteSettings } from 'utils/siteSetting';
 
 export const useServerRouterParams = async (
   query,
-  ip
+  ip?: string
 ): Promise<ICarListParams> => {
   const {
     country,
