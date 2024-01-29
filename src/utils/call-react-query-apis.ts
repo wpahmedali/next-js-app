@@ -5,9 +5,14 @@ import { getCustomerReview } from 'react-query/api/customer-review';
 import { getDubaiSpecialVehicleList } from 'react-query/api/dubai-special-vehicle-list';
 import getLocation from 'react-query/api/geo-location';
 import { getMakerModel } from 'react-query/api/maker-model';
+import { getPhilippineCountryList } from 'react-query/api/philippine-country-list';
 import { getSteeringTransFuel } from 'react-query/api/steering-trans-fuel';
 import { getVehicleList } from 'react-query/api/vehicle-list';
-import { reactQuery, uaeCountry } from 'src/common/constants';
+import {
+  philippineCountry,
+  reactQuery,
+  uaeCountry,
+} from 'src/common/constants';
 import { ICarListParams } from 'src/interfaces/car-list-param.interface';
 
 export const callReactQueryApis = async (
@@ -28,10 +33,13 @@ export const callReactQueryApis = async (
   //     }
   //   }
   // }
-  await queryClient.prefetchQuery(['userLocation'], getLocation);
 
   const promisesToFetch = [
     queryClient.prefetchQuery(['country'], getCountry),
+    queryClient.prefetchQuery(
+      ['philippineCountryList', philippineCountry.id],
+      getPhilippineCountryList(philippineCountry.id)
+    ),
     queryClient.prefetchQuery(['steeringTransFuel'], getSteeringTransFuel),
     queryClient.prefetchQuery(
       ['makerModel', params.countryId, params.auctionId],

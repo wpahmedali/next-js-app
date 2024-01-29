@@ -45,12 +45,8 @@ const Specifications = ({ data }: { data: IVehicleDetail }): JSX.Element => {
           <div className="bg-gray-100 p-2">
             {data.registrationYear}/{data.registrationMonth}
           </div>
-          <div className="font-bold bg-gray-100 p-2">Grade/Class</div>
-          <div className="bg-gray-100 p-2">First</div>
-          <div className="font-bold bg-gray-100 p-2">Port</div>
-          <div className="bg-gray-100 p-2">Karachi</div>
-          <div className="font-bold bg-gray-100 p-2">Sale Location</div>
-          <div className="bg-gray-100 p-2">Jan Commercial Park</div>
+          
+          
         </div>
 
         <div className="flex bg-primary text-black justify-start items-center p-2 text-sm">

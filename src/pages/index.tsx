@@ -3,10 +3,12 @@ import { callReactQueryApis } from 'utils/call-react-query-apis';
 import Listings from 'components/vehicle-listings';
 import { withCSR } from 'react-query/hoc/with-CSR';
 import { useServerRouterParams } from 'src/hooks/server-router-params';
+import getLocation from 'react-query/api/geo-location';
 
 export const getServerSideProps = withCSR(async (ctx) => {
-  
   let queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery(['userLocation'], getLocation);
 
   const params = await useServerRouterParams(ctx.query);
 

@@ -35,7 +35,8 @@ export const useRouterParams = ({
   const params = { ...emptyCarListParams };
 
   const { defaultCountryShown } = siteSettings;
-  const { data: currentLocation } = useCurrentLocation();
+  const { data: currentLocation } = useCurrentLocation('');
+  // console.log('current ip address', currentLocation);
 
   // country section start
   if (!country) {

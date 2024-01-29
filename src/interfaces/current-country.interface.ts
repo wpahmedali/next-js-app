@@ -7,4 +7,5 @@ export interface ICurrentCountry {
   FBPageName?: string;
   FBAppId?: string;
   flagIcon: JSX.Element;
+  id?: number;
 }

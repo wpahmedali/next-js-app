@@ -20,26 +20,8 @@ const AboutUs = () => {
             Over View
           </Link>
         </motion.li>
-        <motion.li
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          className="mb-1"
-        >
-          <Link href="/japan-offices" className="hover:underline flex items-center">
-            <OrderListIcon />
-            Company Profile
-          </Link>
-        </motion.li>
-        <motion.li
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          className="mb-1"
-        >
-          <Link href="/why-choose-jan-japan-group" className="hover:underline flex items-center">
-            <OrderListIcon />
-            Why Jan's Group
-          </Link>
-        </motion.li>
+      
+       
         <motion.li
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
