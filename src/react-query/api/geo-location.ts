@@ -1,10 +1,13 @@
 import fetcher from 'react-query/lib/axios';
 import { IApiResponse } from 'src/interfaces/api-response.interface';
 
-const getLocation = async (): Promise<IApiResponse<{ id: number }>> => {
+const getLocation = async (
+  ip_address?: string
+): Promise<IApiResponse<{ id: number }>> => {
   try {
+    const url = `/geoLocation?ip_address=${ip_address}`;
     const { data }: { data: IApiResponse<{ id: number }> } = await fetcher({
-      url: '/geoLocation',
+      url,
       method: 'GET',
     });
 

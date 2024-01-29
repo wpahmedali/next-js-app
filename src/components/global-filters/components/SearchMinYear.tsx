@@ -20,7 +20,7 @@ const SearchMinYear = ({
 
   const dropdownData: IDropdownData[] = [];
 
-  for (let year = 1970; year <= new Date().getFullYear(); year++) {
+  for (let year = new Date().getFullYear(); year > 1970; year--) {
     dropdownData.push({ id: year, name: String(year), isChecked: false });
   }
 

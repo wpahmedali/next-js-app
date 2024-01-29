@@ -35,31 +35,28 @@ export const useRouterParams = ({
   const params = { ...emptyCarListParams };
 
   const { defaultCountryShown } = siteSettings;
-  const { data: currentLocation } = useCurrentLocation();
-
-  console.log('firstppppppp', currentLocation);
+  const { data: currentLocation } = useCurrentLocation('');
+  // console.log('current ip address', currentLocation);
 
   // country section start
-  // if (!country) {
-  //   params.countryId = 0;
-  //   params.isCountryFound = false;
-  // }
+  if (!country) {
+    params.countryId = 0;
+    params.isCountryFound = false;
+  }
   if (currentLocation && currentLocation.data?.id) {
     params.countryId = currentLocation.data.id;
     params.isCountryFound = true;
+  } else if (params.countryId && !defaultCountryShown) {
+    params.isCountryFound = false;
   }
-  console.log('firstllllllll', params.countryId);
-  // else if (params.countryId && !defaultCountryShown) {
-  //   params.isCountryFound = false;
-  // }
-  // if (country === 'all_stock') {
-  //   params.countryId = 0;
-  //   params.isCountryFound = false;
-  // }
-  // if (country && !Array.isArray(country) && country !== 'all_stock') {
-  //   params.countryId = getIdFromParam(country);
-  //   params.isCountryFound = false;
-  // }
+  if (country === 'all_stock') {
+    params.countryId = 0;
+    params.isCountryFound = false;
+  }
+  if (country && !Array.isArray(country) && country !== 'all_stock') {
+    params.countryId = getIdFromParam(country);
+    params.isCountryFound = false;
+  }
   // country section end
 
   if (carId && !Array.isArray(carId)) {
