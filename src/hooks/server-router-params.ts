@@ -35,7 +35,16 @@ export const useServerRouterParams = async ({
   const params = { ...emptyCarListParams };
 
   const { defaultCountryShown } = siteSettings;
-  const { data: currentLocation } = await getLocation();
+
+  let currentLocation;
+
+  // Wait until currentLocation is available
+  while (!currentLocation) {
+    // Fetch location
+    const locationResponse = await getLocation();
+    currentLocation = locationResponse.data;
+  }
+  // const { data: currentLocation } = await getLocation();
 
   console.log('first', currentLocation);
 
