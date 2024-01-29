@@ -44,7 +44,7 @@ const LowerSection = ({ isEven, data }: IVehicleTabular) => {
       className={`cursor-pointer ${isEven ? 'bg-[#FFFEEF]' : 'bg-[#E9FAFF]'}`}
     >
       <td className="border border-[#EDEDED] p-2  text-left" colSpan={3}>
-        <p style={{color:'#3A2BF7'}}>
+        <p className="italic text-green-600">
           {data.fuelName && data.fuelName + `, `}
           {data.driveName && data.driveName + `, `}
           {data.doors && data.doors + ` doors, `}
@@ -122,7 +122,7 @@ const LowerSection = ({ isEven, data }: IVehicleTabular) => {
               </td>
               <td className="content-end place-content-center flex gap-2 items-center">
                 <SteeringIcon />
-              {data.transmissionName} {data.steeringName}
+                AT {data.steeringName}
               </td>
             </tr>
           </tbody>

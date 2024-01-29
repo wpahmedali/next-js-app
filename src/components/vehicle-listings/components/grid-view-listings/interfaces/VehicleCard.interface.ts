@@ -4,7 +4,6 @@ export interface IEngineSpec {
   registrationMonth: number | string;
   mileage: number;
   steeringName: string;
-  transmissionName:string
 }
 
 export interface IBodySpec {

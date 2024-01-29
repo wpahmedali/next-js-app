@@ -185,7 +185,6 @@ const VehicleCard = ({ url, data }: IVehicleCard) => {
           registrationMonth={data.registrationMonth}
           mileage={data.mileage}
           steeringName={data.steeringName}
-          transmissionName={data.transmissionName}
         />
       </div>
     </motion.div>

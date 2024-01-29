@@ -53,8 +53,8 @@ const UpperSection = ({ url, isEven, data }: IVehicleTabular) => {
       <td className={`${classes} p-2 text-left`}>
         <h2 className="font-bold">{data.modelName}</h2>
       </td>
-      <td className={`${classes} p-2 text-xs text-center`} style={{color:'red'}}>
-        {data.registrationYear}/{data.registrationMonth} / {data.engineSize} CC
+      <td className={`${classes} p-2 text-xs text-center`}>
+        {data.engineSize} CC {data.registrationYear}/{data.registrationMonth}
       </td>
       <td className={`${classes} p-2 text-xs font-bold text-center`}>
         {data.colorName}
