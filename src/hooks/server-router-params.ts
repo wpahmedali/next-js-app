@@ -13,29 +13,33 @@ import { getMakerModel } from 'react-query/api/maker-model';
 import getLocation from 'react-query/api/geo-location';
 import { siteSettings } from 'utils/siteSetting';
 
-export const useServerRouterParams = async ({
-  country,
-  auction,
-  maker,
-  makers,
-  model,
-  models,
-  bodyType,
-  body_types,
-  from_year,
-  to_year,
-  steerings,
-  transmissions,
-  fuels,
-  stock_no,
-  chassis_no,
-  carId,
-  page,
-}: ParsedUrlQuery): Promise<ICarListParams> => {
+export const useServerRouterParams = async (
+  query,
+  ip
+): Promise<ICarListParams> => {
+  const {
+    country,
+    auction,
+    maker,
+    makers,
+    model,
+    models,
+    bodyType,
+    body_types,
+    from_year,
+    to_year,
+    steerings,
+    transmissions,
+    fuels,
+    stock_no,
+    chassis_no,
+    carId,
+    page,
+  }: ParsedUrlQuery = query;
   const params = { ...emptyCarListParams };
 
   const { defaultCountryShown } = siteSettings;
-  const { data: currentLocation } = await getLocation();
+  const { data: currentLocation } = await getLocation(ip);
 
   // country section start
   if (!country) {

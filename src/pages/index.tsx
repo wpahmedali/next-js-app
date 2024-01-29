@@ -8,9 +8,9 @@ import getLocation from 'react-query/api/geo-location';
 export const getServerSideProps = withCSR(async (ctx) => {
   let queryClient = new QueryClient();
 
-  const params = await useServerRouterParams(ctx.query);
-
   const ip = ctx.req.headers['x-real-ip'] || ctx.req.connection.remoteAddress;
+
+  const params = await useServerRouterParams(ctx.query, ip);
 
   await queryClient.prefetchQuery(['userLocation'], () =>
     getLocation(String(ip))
