@@ -10,7 +10,11 @@ export const getServerSideProps = withCSR(async (ctx) => {
 
   const params = await useServerRouterParams(ctx.query);
 
-  await queryClient.prefetchQuery(['userLocation'], () => getLocation());
+  const ip = ctx.req.headers['x-real-ip'] || ctx.req.connection.remoteAddress;
+
+  await queryClient.prefetchQuery(['userLocation'], () =>
+    getLocation(String(ip))
+  );
 
   queryClient = await callReactQueryApis(queryClient, params);
 
