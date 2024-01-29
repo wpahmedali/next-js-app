@@ -3,7 +3,6 @@ import { getBodyType } from 'react-query/api/body-type';
 import { getCountry } from 'react-query/api/country';
 import { getCustomerReview } from 'react-query/api/customer-review';
 import { getDubaiSpecialVehicleList } from 'react-query/api/dubai-special-vehicle-list';
-import getLocation from 'react-query/api/geo-location';
 import { getMakerModel } from 'react-query/api/maker-model';
 import { getPhilippineCountryList } from 'react-query/api/philippine-country-list';
 import { getSteeringTransFuel } from 'react-query/api/steering-trans-fuel';
@@ -38,7 +37,7 @@ export const callReactQueryApis = async (
     queryClient.prefetchQuery(['country'], getCountry),
     queryClient.prefetchQuery(
       ['philippineCountryList', philippineCountry.id],
-      () => getPhilippineCountryList(philippineCountry.id)
+      getPhilippineCountryList(philippineCountry.id)
     ),
     queryClient.prefetchQuery(['steeringTransFuel'], getSteeringTransFuel),
     queryClient.prefetchQuery(

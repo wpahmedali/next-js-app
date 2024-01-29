@@ -35,7 +35,9 @@ export const useRouterParams = ({
   const params = { ...emptyCarListParams };
 
   const { defaultCountryShown } = siteSettings;
-  const { data: currentLocation } = useCurrentLocation();
+  const { data: currentLocation } = useCurrentLocation('');
+  //console.log('current location',currentLocation);
+  // console.log('current ip address', currentLocation);
 
   // country section start
   if (!country) {
@@ -47,10 +49,12 @@ export const useRouterParams = ({
     params.isCountryFound = true;
   } else if (params.countryId && !defaultCountryShown) {
     params.isCountryFound = false;
-  } else if (country === 'all_stock') {
+  }
+  else if (country === 'all_stock') {
     params.countryId = 0;
     params.isCountryFound = false;
-  } else if (country && !Array.isArray(country) && country !== 'all_stock') {
+  }
+  else if (country && !Array.isArray(country) && country !== 'all_stock') {
     params.countryId = getIdFromParam(country);
     params.isCountryFound = false;
   }

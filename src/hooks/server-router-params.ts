@@ -36,6 +36,7 @@ export const useServerRouterParams = async (
     carId,
     page,
   }: ParsedUrlQuery = query;
+
   const params = { ...emptyCarListParams };
 
   const { defaultCountryShown } = siteSettings;
