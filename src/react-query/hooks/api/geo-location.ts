@@ -1,11 +1,5 @@
-import { useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
+import getLocation from 'react-query/api/geo-location';
 
-export const useCurrentLocation = (): any => {
-  const queryClient = useQueryClient();
-
-  const cachedData = queryClient.getQueryData(['userLocation']);
-
-  if (cachedData) {
-    return cachedData;
-  }
-};
+export const useCurrentLocation = () =>
+  useQuery(['userLocation'], () => getLocation());
