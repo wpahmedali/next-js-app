@@ -13,6 +13,8 @@ const RightMenu = (): JSX.Element => {
   const { isCountryFound } = useRouterParams(query);
   const { defaultCountryShown } = siteSettings;
 
+
+
   return (
     <div className="xxs:w-full xs:w-full sm:w-full 2xl:w-[375px] xl:w-[375px] lg:w-[375px] md:w-[300px] flex-col">
       <div className="w-full">

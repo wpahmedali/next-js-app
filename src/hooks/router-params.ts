@@ -34,31 +34,27 @@ export const useRouterParams = ({
 }: ParsedUrlQuery): ICarListParams => {
   const params = { ...emptyCarListParams };
 
-  const { defaultCountryShown } = siteSettings;
-  const { data: currentLocation } = useCurrentLocation();
-  console.log('current location', currentLocation);
-  // console.log('current ip address', currentLocation);
+  // const { defaultCountryShown } = siteSettings;
+  // const { data: currentLocation } = useCurrentLocation();
 
-  // country section start
-  if (!country) {
-    params.countryId = 0;
-    params.isCountryFound = false;
-  }
-  if (currentLocation && currentLocation.data?.id) {
-    params.countryId = currentLocation.data.id;
-    params.isCountryFound = true;
-  } else if (params.countryId && !defaultCountryShown) {
-    params.isCountryFound = false;
-  }
-  if (country === 'all_stock') {
-    params.countryId = 0;
-    params.isCountryFound = false;
-  }
-  if (country && !Array.isArray(country) && country !== 'all_stock') {
-    params.countryId = getIdFromParam(country);
-    params.isCountryFound = false;
-  }
-  // country section end
+  // // country section start
+  // if (!country) {
+  //   params.countryId = 0;
+  //   params.isCountryFound = false;
+  // }
+  // if (currentLocation && currentLocation.data?.id) {
+  //   params.countryId = currentLocation.data.id;
+  //   params.isCountryFound = true;
+  // } else if (params.countryId && !defaultCountryShown) {
+  //   params.isCountryFound = false;
+  // } else if (country === 'all_stock') {
+  //   params.countryId = 0;
+  //   params.isCountryFound = false;
+  // } else if (country && !Array.isArray(country) && country !== 'all_stock') {
+  //   params.countryId = getIdFromParam(country);
+  //   params.isCountryFound = false;
+  // }
+  // // country section end
 
   if (carId && !Array.isArray(carId)) {
     params.carId = getIdFromParam(carId);

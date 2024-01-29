@@ -2,7 +2,6 @@ import { QueryClient } from 'react-query';
 import { withCSR } from 'react-query/hoc/with-CSR';
 import { callReactQueryForVehicleDetailApis } from 'utils/call-react-query-apis-vehicle-detail';
 import VehicleDetail from 'components/vehicle-detail';
-import { useServerRouterParams } from 'src/hooks/server-router-params';
 import { siteSettings } from 'utils/siteSetting';
 import {
   getDefaultProps,
@@ -15,6 +14,7 @@ import { Fragment } from 'react';
 import { useVehicleDetailDynamicMetaData } from 'src/hooks/dynamic-meta-data';
 import { useRouter } from 'next/router';
 import { getCountry } from 'react-query/api/country';
+import { useRouterParams } from 'src/hooks/router-params';
 
 export const getServerSideProps = withCSR(async (ctx: any) => {
   let queryClient = new QueryClient();
@@ -28,7 +28,7 @@ export const getServerSideProps = withCSR(async (ctx: any) => {
     return redirectToCountry(queryClient, ctx.query);
   }
 
-  const params = await useServerRouterParams(ctx.query);
+  const params = useRouterParams(ctx.query);
 
   queryClient = await callReactQueryForVehicleDetailApis(queryClient, params);
 
