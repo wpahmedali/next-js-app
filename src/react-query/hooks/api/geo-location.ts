@@ -1,6 +1,6 @@
 import { useQueryClient } from 'react-query';
 
-export const useCurrentLocation = () => {
+export const useCurrentLocation = (): any => {
   const queryClient = useQueryClient();
 
   const cachedData = queryClient.getQueryData(['userLocation']);
