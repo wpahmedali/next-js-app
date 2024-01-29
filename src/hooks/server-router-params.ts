@@ -37,17 +37,16 @@ export const useServerRouterParams = async ({
   const { defaultCountryShown } = siteSettings;
   const { data: currentLocation } = await getLocation();
 
-  params.countryId = 282;
-
   // country section start
   // if (!country) {
   //   params.countryId = 0;
   //   params.isCountryFound = false;
   // }
-  // if (currentLocation && currentLocation?.id) {
-  //   params.countryId = currentLocation.id;
-  //   params.isCountryFound = true;
-  // } else if (params.countryId && !defaultCountryShown) {
+  if (currentLocation && currentLocation?.id) {
+    params.countryId = currentLocation.id;
+    params.isCountryFound = true;
+  }
+  // else if (params.countryId && !defaultCountryShown) {
   //   params.isCountryFound = false;
   // }
   // if (country === 'all_stock') {
