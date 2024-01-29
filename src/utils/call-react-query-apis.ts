@@ -33,7 +33,7 @@ export const callReactQueryApis = async (
   //     }
   //   }
   // }
-  await queryClient.prefetchQuery(['userLocation'], getLocation);
+  await queryClient.prefetchQuery('userLocation', getLocation);
 
   const promisesToFetch = [
     queryClient.prefetchQuery(['country'], getCountry),
