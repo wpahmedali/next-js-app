@@ -42,8 +42,8 @@ export const useRouterParams = ({
     params.countryId = 0;
     params.isCountryFound = false;
   }
-  if (currentLocation && currentLocation?.id) {
-    params.countryId = currentLocation.id;
+  if (currentLocation && currentLocation.data?.id) {
+    params.countryId = currentLocation.data.id;
     params.isCountryFound = true;
   } else if (params.countryId && !defaultCountryShown) {
     params.isCountryFound = false;
