@@ -18,7 +18,8 @@ import { ICarListParams } from 'src/interfaces/car-list-param.interface';
 export const callReactQueryApis = async (
   queryClient: any,
   params: ICarListParams,
-  isContact?: boolean
+  isContact?: boolean,
+  ip_address?: string
 ) => {
   // if (countrys) {
   //   const countries: ICountryApiRes = await getCountry();
@@ -33,7 +34,7 @@ export const callReactQueryApis = async (
   //     }
   //   }
   // }
-  await queryClient.prefetchQuery(['userLocation'], getLocation);
+  await queryClient.prefetchQuery('userLocation', getLocation(ip_address));
 
   const promisesToFetch = [
     queryClient.prefetchQuery(['country'], getCountry),
