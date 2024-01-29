@@ -2,15 +2,15 @@ import { QueryClient } from 'react-query';
 import { withCSR } from 'react-query/hoc/with-CSR';
 import FavouriteVehicleListings from 'components/favourite-vehicle-listings';
 import { callReactQueryApisFavourite } from 'utils/call-react-query-apis-favourite';
+import { useServerRouterParams } from 'src/hooks/server-router-params';
 import { siteSettings } from 'utils/siteSetting';
 import { getDefaultProps, redirectToHome } from 'utils/return-functions';
 import { getIdFromParam } from 'utils/get-id-from-param';
-import { useRouterParams } from 'src/hooks/router-params';
 
 export const getServerSideProps = withCSR(async (ctx) => {
   let queryClient = new QueryClient();
 
-  const params = useRouterParams(ctx.query);
+  const params = await useServerRouterParams(ctx.query);
 
   queryClient = await callReactQueryApisFavourite(queryClient, params);
 

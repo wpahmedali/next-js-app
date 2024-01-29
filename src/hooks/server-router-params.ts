@@ -37,8 +37,6 @@ export const useServerRouterParams = async ({
   const { defaultCountryShown } = siteSettings;
   const { data: currentLocation } = await getLocation();
 
-  console.log('first------------->', currentLocation);
-
   // country section start
   if (!country) {
     params.countryId = 0;
