@@ -37,25 +37,27 @@ export const useServerRouterParams = async ({
   const { defaultCountryShown } = siteSettings;
   const { data: currentLocation } = await getLocation();
 
+  params.countryId = 282;
+
   // country section start
-  if (!country) {
-    params.countryId = 0;
-    params.isCountryFound = false;
-  }
-  if (currentLocation && currentLocation?.id) {
-    params.countryId = currentLocation.id;
-    params.isCountryFound = true;
-  } else if (params.countryId && !defaultCountryShown) {
-    params.isCountryFound = false;
-  }
-  if (country === 'all_stock') {
-    params.countryId = 0;
-    params.isCountryFound = false;
-  }
-  if (country && !Array.isArray(country) && country !== 'all_stock') {
-    params.countryId = getIdFromParam(country);
-    params.isCountryFound = false;
-  }
+  // if (!country) {
+  //   params.countryId = 0;
+  //   params.isCountryFound = false;
+  // }
+  // if (currentLocation && currentLocation?.id) {
+  //   params.countryId = currentLocation.id;
+  //   params.isCountryFound = true;
+  // } else if (params.countryId && !defaultCountryShown) {
+  //   params.isCountryFound = false;
+  // }
+  // if (country === 'all_stock') {
+  //   params.countryId = 0;
+  //   params.isCountryFound = false;
+  // }
+  // if (country && !Array.isArray(country) && country !== 'all_stock') {
+  //   params.countryId = getIdFromParam(country);
+  //   params.isCountryFound = false;
+  // }
   // country section end
 
   if (carId && !Array.isArray(carId)) {
