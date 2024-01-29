@@ -12,6 +12,8 @@ export const getServerSideProps = withCSR(async (ctx) => {
 
   const params = await useServerRouterParams(ctx.query);
 
+  console.log('first======>', params.countryId);
+
   queryClient = await callReactQueryApis(queryClient, params);
 
   return {

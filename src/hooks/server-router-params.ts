@@ -37,6 +37,8 @@ export const useServerRouterParams = async ({
   const { defaultCountryShown } = siteSettings;
   const { data: currentLocation } = await getLocation();
 
+  console.log('first', currentLocation);
+
   // country section start
   // if (!country) {
   //   params.countryId = 0;
@@ -46,6 +48,8 @@ export const useServerRouterParams = async ({
     params.countryId = currentLocation.id;
     params.isCountryFound = true;
   }
+
+  console.log('first--------->', params.countryId);
   // else if (params.countryId && !defaultCountryShown) {
   //   params.isCountryFound = false;
   // }
