@@ -37,7 +37,7 @@ export const callReactQueryApis = async (
     queryClient.prefetchQuery(['country'], getCountry),
     queryClient.prefetchQuery(
       ['philippineCountryList', philippineCountry.id],
-      getPhilippineCountryList(philippineCountry.id)
+      () => getPhilippineCountryList(philippineCountry.id)
     ),
     queryClient.prefetchQuery(['steeringTransFuel'], getSteeringTransFuel),
     queryClient.prefetchQuery(

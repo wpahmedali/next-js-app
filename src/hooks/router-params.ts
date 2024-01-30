@@ -40,19 +40,18 @@ export const useRouterParams = ({
   // country section start
   if (!country) {
     params.countryId = 0;
-    params.isCountryFound = false;
   }
-  if (currentLocation && currentLocation.data?.id) {
+  if (currentLocation && currentLocation?.data?.id) {
     params.countryId = currentLocation.data.id;
     params.isCountryFound = true;
   } else if (params.countryId && !defaultCountryShown) {
-    params.isCountryFound = false;
-  } else if (country === 'all_stock') {
+    params.countryId = params.countryId;
+  }
+  if (country === 'all_stock') {
     params.countryId = 0;
-    params.isCountryFound = false;
-  } else if (country && !Array.isArray(country) && country !== 'all_stock') {
+  }
+  if (country && !Array.isArray(country) && country !== 'all_stock') {
     params.countryId = getIdFromParam(country);
-    params.isCountryFound = false;
   }
   // country section end
 

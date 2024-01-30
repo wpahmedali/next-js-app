@@ -18,11 +18,11 @@ const UpperSection = ({ url, isEven, data }: IVehicleTabular) => {
 
   return (
     <tr className="cursor-pointer">
-      <td className={`${classes} bg-cover bg-center`} rowSpan={2}>
+      <td className={`${classes} bg-cover bg-center relative w-[200px]`} rowSpan={2}>
         {data.isDelivery === 1 && currentCountry.isDelivered === 1 && (
           <Image
             alt=""
-            className="top-0 left-0"
+            className="top-0 left-0 absolute Z-50"
             src={'/assets/reserved.png'}
             width={90}
             height={100}

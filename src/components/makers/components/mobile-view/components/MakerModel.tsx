@@ -52,7 +52,7 @@ const MobileMakerModel = ({
           ) : (
             <Image
               className="flex-none w-8 h-full"
-              src={`/assets/makers/isekii.png`}
+              src={`/assets/makers/${image}.png`}
               alt={image}
               width={50}
               height={50}

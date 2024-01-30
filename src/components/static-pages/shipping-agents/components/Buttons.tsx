@@ -79,7 +79,7 @@ const Buttons = () => {
             <li className="bg-black text-white hover:bg-primary hover:text-black">
               <a
                 className="inline-block text-lg font-medium px-4 py-2 border-4 border-transparent focus:border-black rounded-md transition"
-                href="#"
+                href="#southamption"
                 data-scroll-to
               >
                 SOUTHAMPTON

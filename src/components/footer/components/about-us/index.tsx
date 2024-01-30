@@ -6,7 +6,7 @@ import { OrderListIcon } from 'icons';
 const AboutUs = () => {
   return (
     <Fragment>
-      <h2 className="mb-4 text-sm font-semibold uppercase text-primary">
+      <h2 className="mb-4 text-sm font-semibold text-primary">
         ABOUT US
       </h2>
       <ul className="text-xs list-inside list-disc-black">
@@ -15,9 +15,9 @@ const AboutUs = () => {
           whileTap={{ scale: 0.9 }}
           className="mb-1 flex items-center"
         >
-          <Link href="/company-overview-of-jans-group#overview" className="hover:underline flex items-center ">
+          <Link href="/company-overview-of-jans-group#overview" className="hover:underline flex items-center">
             <OrderListIcon />
-            Over View
+            Overview
           </Link>
         </motion.li>
       

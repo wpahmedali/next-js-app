@@ -57,7 +57,7 @@ const CountryDialog = ({
     FBPageName: null,
     FBAppId: null,
     countryCount: data?.totalStock || null,
-    is_count: true,
+    is_count: false,
     auctionDisplay: null,
     auctionId: null,
     auctionShortName: null,

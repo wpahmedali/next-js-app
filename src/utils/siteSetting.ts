@@ -3,6 +3,6 @@ const data = require('../../public/special-country-list.json');
 
 export const siteSettings: ISiteSetting = {
   defaultCountryShown: false,
-  specificCountriesShown:false,
+  specificCountriesShown: false,
   countryList: data,
 };

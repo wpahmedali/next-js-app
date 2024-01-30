@@ -41,7 +41,7 @@ const LowerSection = ({ isEven, data }: IVehicleTabular) => {
 
   return (
     <tr
-      className={`cursor-pointer ${isEven ? 'bg-[#FFFEEF]' : 'bg-[#E9FAFF]'}`}
+      className={`cursor-pointer ${isEven ? 'bg-[#FFFEEF]' : 'bg-[#fff]'}`}
     >
       <td className="border border-[#EDEDED] p-2  text-left" colSpan={3}>
         <p style={{color:'#3A2BF7'}}>

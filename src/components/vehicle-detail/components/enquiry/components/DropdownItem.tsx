@@ -9,6 +9,7 @@ const DropdownItem = ({
   name,
   value,
   onChangeHandler,
+  error,
 }: IInputField): JSX.Element => {
   const { data, isLoading, isError, isSuccess } = useCountry();
 
@@ -21,7 +22,7 @@ const DropdownItem = ({
           placeholder={placeholder}
           onChange={onChangeHandler}
           autoComplete={name}
-          className="block w-full rounded-md border-0 py-3 px-3 text-gray-300 bg-white shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 placeholder:text-gray-200 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          className="block w-full rounded-md border-0 py-3 px-3 text-gray-400 bg-white shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 placeholder:text-gray-400 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
         >
           <option className="text-gray-800">Select Country</option>
           {isLoading && <Loading />}
@@ -37,6 +38,7 @@ const DropdownItem = ({
               </option>
             ))}
         </select>
+        {error && <p className="text-red-500">{error}</p>}
       </div>
     </div>
   );

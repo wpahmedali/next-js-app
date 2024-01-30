@@ -11,7 +11,7 @@ const EngineSpec = ({
   transmissionName
 }: IEngineSpec) => {
   return (
-    <div className="flex items-center justify-between bg-[#E9FAFF] rounded-b p-2">
+    <div className="flex items-center justify-between bg-[#FFFEEF] rounded-b p-2">
       <div className="items-center justify-items-center grid">
         <CcIcon />
         <span className="text-[10px] font-medium text-black leading-4 py-2">

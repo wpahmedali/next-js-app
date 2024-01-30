@@ -14,13 +14,11 @@ export const callReactQueryApisFavourite = async (
   queryClient: any,
   params: ICarListParams
 ) => {
-  await queryClient.prefetchQuery(['userLocation'], getLocation);
-
   const promisesToFetch = [
     queryClient.prefetchQuery(['country'], getCountry),
     queryClient.prefetchQuery(
       ['philippineCountryList', philippineCountry.id],
-      getPhilippineCountryList(philippineCountry.id)
+      () => getPhilippineCountryList(philippineCountry.id)
     ),
     queryClient.prefetchQuery(['steeringTransFuel'], getSteeringTransFuel),
     queryClient.prefetchQuery(

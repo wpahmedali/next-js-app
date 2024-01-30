@@ -2,17 +2,17 @@ const LeftReceipt = () => {
   return (
     <div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
           Where can I get the actual arrival date of the shipping vessel?
         </h3>
-        <p className="text-gray-500 dark:text-gray-400 text-sm">
+        <p className="text-black text-sm">
           You can get the actual arrival date of the shipping vessel from either
           the Notify Party whom you provided on the B/L documents or the
           shipping agent on your end. The actual arrival date of the shipping
           vessel will be available about one week prior to the ETA of the
           shipping vessel.
         </p>
-        <p className="text-gray-500 dark:text-gray-400 text-sm">
+        <p className="text-black text-sm">
           To find out your shipping agent, please follow the below instructions:
         </p>
         <ul className="list-disc px-6 text-sm">
@@ -37,7 +37,7 @@ const LeftReceipt = () => {
             found in step 4.
           </li>
         </ul>
-        <p className="text-gray-500 dark:text-gray-400 text-sm">
+        <p className="text-black text-sm">
           Please kindly wait about one week prior to the ETA of your shipping
           vessel before contacting your shipping agent; otherwise, they will not
           be able to answer you as the requested information will not be
@@ -45,10 +45,10 @@ const LeftReceipt = () => {
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
           Can the vehicle be delivered to my city?
         </h3>
-        <p className="text-gray-500 dark:text-gray-400 text-sm">
+        <p className="text-black text-sm">
           Yes. Besides the sources of this service available on the internet,
           please be informed that JAN JAPAN has the knowledgeable forwarding
           agent staffs that can deliver the vehicle from the port of discharge

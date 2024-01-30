@@ -39,7 +39,7 @@ const Awards = () => {
         </div>
         
         </div>
-        <div className="flex flex-col items-center justify-center"><button className="bg-primary text-sm text-black hover:bg-blue-400 font-bold py-2 px-32 xxs:px-10 mb-4 flex items-center hover:shadow-lg hover:shadow-blue-500/50 hover:text-white "><span className="pr-2"></span><span>See More!</span></button></div>
+        
       </section>
       <div id="more-awards" className="">
         <section className="bg-[#706F6F]">

@@ -18,27 +18,22 @@ const SocialIcons = () => {
       <div className="flex items-center justify-between">
         <nav className="flex items-center justify-between gap-2 md:flex-wrap">
           <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
-            <Link href="https://www.linkedin.com/company/jan-japan/">
+            <Link href="https://www.linkedin.com/company/jan-japan/" target='blank'>
               <LinkedInSocialIcon />{' '}
             </Link>
           </motion.div>
           <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
-            <Link href="https://wwww.facebook.com/janjapanglobal/">
+            <Link href="https://wwww.facebook.com/janjapanglobal/" target='blank'>
               <FacebookSocialIcon />{' '}
             </Link>
           </motion.div>
           <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
-            <Link href="https://www.twitter.com/janjapanglobal/">
+            <Link href="https://www.twitter.com/janjapanglobal/" target='blank'>
               <TwitterSocialIcon />{' '}
             </Link>
           </motion.div>
           <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
-            <Link href="https://plus.google.com/+JanJapanKobe">
-              <GooglePlusSocialIcon />{' '}
-            </Link>
-          </motion.div>
-          <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
-            <Link href="https://www.youtube.com/channel/UCqetrY6YMjUrP-elm13thUg?sub_confirmation=1">
+            <Link href="https://www.youtube.com/channel/UCqetrY6YMjUrP-elm13thUg?sub_confirmation=1" target='blank'>
               <YoutubeSocialIcon />{' '}
             </Link>
           </motion.div>

@@ -14,7 +14,7 @@ import Head from 'next/head';
 import { Fragment } from 'react';
 import { useVehicleDetailDynamicMetaData } from 'src/hooks/dynamic-meta-data';
 import { useRouter } from 'next/router';
-import { getCountry } from 'react-query/api/country';
+import getLocation from 'react-query/api/geo-location';
 
 export const getServerSideProps = withCSR(async (ctx: any) => {
   let queryClient = new QueryClient();
@@ -28,7 +28,13 @@ export const getServerSideProps = withCSR(async (ctx: any) => {
     return redirectToCountry(queryClient, ctx.query);
   }
 
-  const params = await useServerRouterParams(ctx.query);
+  const ip = ctx.req.headers['x-real-ip'] || ctx.req.connection.remoteAddress;
+
+  const params = await useServerRouterParams(ctx.query, String(ip));
+
+  await queryClient.prefetchQuery(['userLocation'], () =>
+    getLocation(String(ip))
+  );
 
   queryClient = await callReactQueryForVehicleDetailApis(queryClient, params);
 
