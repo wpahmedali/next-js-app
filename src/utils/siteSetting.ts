@@ -2,7 +2,7 @@ import { ISiteSetting } from 'src/interfaces/site-setting.interface';
 const data = require('../../public/special-country-list.json');
 
 export const siteSettings: ISiteSetting = {
-  defaultCountryShown: false,
-  specificCountriesShown: false,
+  defaultCountryShown: true,
+  specificCountriesShown: true,
   countryList: data,
 };

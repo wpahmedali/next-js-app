@@ -18,7 +18,7 @@ const SharjahBanners = (): JSX.Element => {
       >
         <Image
           className="sm:w-full"
-          src="/asset/images/ads/tyre-pro-ad.jpg"
+          src="/asset/images/ads/sharjah-tyre.png"
           width={400}
           height={101}
           alt="tyre-pro-ad"

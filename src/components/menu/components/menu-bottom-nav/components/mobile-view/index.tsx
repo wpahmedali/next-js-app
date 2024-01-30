@@ -14,7 +14,7 @@ const MobileView = (): JSX.Element => {
   const modelState = useModelState();
 
   function handlemobileMenuOpen() {
-    if (modelState !== 'about-nav') {
+    if (modelState != 'about-nav') {
       setContext('about-nav');
     } else {
       setContext('');
