@@ -20,10 +20,9 @@ const formatCountryItem = (item) => ({
 
 const GetGlobalStockData = (): IDropdownData => {
   const { query } = useRouter();
-  const { countryId, isCountryFound } = useRouterParams(query);
+  const { countryId } = useRouterParams(query);
   const { data, isLoading, isError, isSuccess } = useCountry();
-  const { defaultCountryShown, specificCountriesShown, countryList } =
-    siteSettings;
+  const { defaultCountryShown, countryList } = siteSettings;
 
   if (isLoading || isError || !data?.data?.length) {
     return { data: [], isLoading, isError: true, isSuccess };
@@ -31,19 +30,24 @@ const GetGlobalStockData = (): IDropdownData => {
 
   let countries: IDropdownItem[] = data.data.map(formatCountryItem);
 
-  if (defaultCountryShown && isCountryFound) {
-    countries = countries.filter((item) => item.id === countryId);
-  }
-
   const countriesList = countryList?.find(
     (x) => x.countryId === countryId
   )?.countriesToBeShown;
 
-  if (!defaultCountryShown && specificCountriesShown && countriesList) {
+  if (defaultCountryShown && countriesList?.length > 0) {
     countries = countries.filter((item) => countriesList.includes(item.id));
   }
 
-  const globalContact = (!defaultCountryShown || !isCountryFound) && {
+  if (defaultCountryShown && !(countriesList?.length > 0) && countryId) {
+    countries = countries.filter((item) => item.id === countryId);
+  }
+
+  const isGlobalShow =
+    (defaultCountryShown && !countryId) ||
+    (!defaultCountryShown && !(countriesList?.length > 0)) ||
+    (!defaultCountryShown && countriesList?.length > 0);
+
+  const globalContact = isGlobalShow && {
     id: 0,
     name: 'Global',
     description: '',

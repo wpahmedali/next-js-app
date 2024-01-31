@@ -41,7 +41,7 @@ export const useRouterParams = ({
   if (!country) {
     params.countryId = 0;
   }
-  if (currentLocation && currentLocation?.data?.id) {
+  if (currentLocation && currentLocation?.data?.id && defaultCountryShown) {
     params.countryId = currentLocation.data.id;
     params.isCountryFound = true;
   } else if (params.countryId && !defaultCountryShown) {
@@ -53,6 +53,7 @@ export const useRouterParams = ({
   if (country && !Array.isArray(country) && country !== 'all_stock') {
     params.countryId = getIdFromParam(country);
   }
+  // params.countryId = 14;
   // country section end
 
   if (carId && !Array.isArray(carId)) {

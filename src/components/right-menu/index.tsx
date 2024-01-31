@@ -10,8 +10,18 @@ import EmbeddedFB from './components/EmbeddedFB';
 
 const RightMenu = (): JSX.Element => {
   const { query } = useRouter();
-  const { isCountryFound } = useRouterParams(query);
-  const { defaultCountryShown } = siteSettings;
+  const { countryId } = useRouterParams(query);
+  const { defaultCountryShown, countryList } = siteSettings;
+
+  const countriesList = countryList?.find(
+    (x) => x.countryId === countryId
+  )?.countriesToBeShown;
+
+  const showSwitchButton =
+    (defaultCountryShown && !countryId) ||
+    (!defaultCountryShown && countriesList?.length > 0) ||
+    (!defaultCountryShown && !(countriesList?.length > 0)) ||
+    (defaultCountryShown && countriesList?.length > 0);
 
   return (
     <div className="xxs:w-full xs:w-full sm:w-full 2xl:w-[375px] xl:w-[375px] lg:w-[375px] md:w-[300px] flex-col">
@@ -22,10 +32,10 @@ const RightMenu = (): JSX.Element => {
         </h2> */}
         <ul className="w-full rounded-lg mb-1 text-blue-800">
           <TopShowedCountry />
-          {(!defaultCountryShown || !isCountryFound) && <CountryToggleMenu />}
+          {showSwitchButton && <CountryToggleMenu />}
         </ul>
         <Ads />
-        <EmbeddedFB />
+        {/* <EmbeddedFB /> */}
       </div>
     </div>
   );

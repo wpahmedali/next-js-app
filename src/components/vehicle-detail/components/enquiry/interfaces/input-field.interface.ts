@@ -3,4 +3,5 @@ export interface IInputField {
   name: string;
   value: string;
   onChangeHandler: (e: any) => void;
+  error?: string;
 }

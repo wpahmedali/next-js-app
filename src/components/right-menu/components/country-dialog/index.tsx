@@ -25,8 +25,7 @@ const CountryDialog = ({
   const params = useRouterParams(router.query);
   const { data, isLoading, isError, isSuccess } = useCountry();
   const view = useVehicleListView();
-  const { defaultCountryShown, specificCountriesShown, countryList } =
-    siteSettings;
+  const { defaultCountryShown, countryList } = siteSettings;
 
   let countries = data?.data?.map((item) => ({
     ...item,
@@ -37,7 +36,7 @@ const CountryDialog = ({
     (x) => x.countryId === params.countryId
   )?.countriesToBeShown;
 
-  if (!defaultCountryShown && specificCountriesShown && countriesList) {
+  if (defaultCountryShown && countriesList?.length > 0) {
     countries = countries?.filter((item) => countriesList.includes(item.id));
   }
 
@@ -107,15 +106,18 @@ const CountryDialog = ({
                           !isLoading && <Error />}
                         {isSuccess && data.data.length !== 0 && (
                           <div className="container-fluid mx-auto grid sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5 pt-2 gap-4">
-                            <CountryItem
-                              hideDialog={hideDialog}
-                              isPreviousData={isPreviousData}
-                              item={globalContactsData}
-                              icon={
-                                <GlobeAltIcon className="h-6 w-6 items-center flex" />
-                              }
-                              name="Global"
-                            />
+                            {(!defaultCountryShown ||
+                              !(countriesList?.length > 0)) && (
+                              <CountryItem
+                                hideDialog={hideDialog}
+                                isPreviousData={isPreviousData}
+                                item={globalContactsData}
+                                icon={
+                                  <GlobeAltIcon className="h-6 w-6 items-center flex" />
+                                }
+                                name="Global"
+                              />
+                            )}
 
                             {countries.map((item) => (
                               <CountryItem

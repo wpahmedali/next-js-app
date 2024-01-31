@@ -9,6 +9,7 @@ const DropdownItem = ({
   name,
   value,
   onChangeHandler,
+  error,
 }: IInputField): JSX.Element => {
   const { data, isLoading, isError, isSuccess } = useCountry();
 
@@ -37,6 +38,7 @@ const DropdownItem = ({
               </option>
             ))}
         </select>
+        {error && <p className="text-red-500">{error}</p>}
       </div>
     </div>
   );

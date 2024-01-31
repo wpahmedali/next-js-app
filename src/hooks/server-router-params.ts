@@ -46,7 +46,7 @@ export const useServerRouterParams = async (
   if (!country) {
     params.countryId = 0;
   }
-  if (currentLocation && currentLocation?.id) {
+  if (currentLocation && currentLocation?.id && defaultCountryShown) {
     params.countryId = currentLocation.id;
     params.isCountryFound = true;
   } else if (params.countryId && !defaultCountryShown) {
@@ -58,6 +58,7 @@ export const useServerRouterParams = async (
   if (country && !Array.isArray(country) && country !== 'all_stock') {
     params.countryId = getIdFromParam(country);
   }
+  // params.countryId = 14;
   // country section end
 
   if (carId && !Array.isArray(carId)) {

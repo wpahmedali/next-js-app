@@ -9,13 +9,9 @@ const EmbeddedFB = (): JSX.Element => {
     <div className="w-full 2xl:block lg:block md:block sm:hidden xs:hidden xxs:hidden">
       <iframe
         src={`https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F${
-          currentCountry?.FBPageName && currentCountry?.FBPageName !== undefined
-            ? currentCountry?.FBPageName
-            : FBPageName
+          currentCountry?.FBPageName || FBPageName
         }&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=${
-          currentCountry?.FBAppId && currentCountry?.FBAppId !== undefined
-            ? currentCountry?.FBAppId
-            : FBAppId
+          currentCountry?.FBAppId || FBAppId
         }`}
         width="100%"
         height="900"

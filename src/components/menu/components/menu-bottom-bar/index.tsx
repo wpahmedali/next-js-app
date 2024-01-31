@@ -24,7 +24,7 @@ const MenuBottomBar = (): JSX.Element => {
   const view = useVehicleListView();
   const countryIcon = useSelectedCountryIcon();
   const params = useRouterParams(query);
-  const { defaultCountryShown } = siteSettings;
+  const { defaultCountryShown, countryList } = siteSettings;
 
   let viewParam = reactQuery.vehicleList.tabular;
   if (view === listingViews.grid) {
@@ -33,6 +33,16 @@ const MenuBottomBar = (): JSX.Element => {
     viewParam = reactQuery.vehicleList.grid;
   }
   const { isPreviousData } = useVehicleList(viewParam, params);
+
+  const countriesList = countryList?.find(
+    (x) => x.countryId === params.countryId
+  )?.countriesToBeShown;
+
+  const showSwitchButton =
+    (defaultCountryShown && !params.countryId) ||
+    (!defaultCountryShown && countriesList?.length > 0) ||
+    (!defaultCountryShown && !(countriesList?.length > 0)) ||
+    (defaultCountryShown && countriesList?.length > 0);
 
   return (
     <section
@@ -93,7 +103,7 @@ const MenuBottomBar = (): JSX.Element => {
             </div>
           </div>
         </button>
-        {(!defaultCountryShown || !params.isCountryFound) && (
+        {showSwitchButton && (
           <button
             onClick={() => setContext('country')}
             className="w-full focus:fill-black text-white hover:fill-black grid justify-center hover:bg-primary text-center pt-5 pb-1 justify-items-center"

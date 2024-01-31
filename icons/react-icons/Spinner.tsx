@@ -20,7 +20,7 @@ export function SpinnerIcon(props: SVGProps<SVGSVGElement>) {
       C78.5,18.7,61.3,1.5,40,1.5z"
         fill="#FFFFFF"
         stroke="#A30D23"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <path
         className="st1"

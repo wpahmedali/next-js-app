@@ -10,10 +10,9 @@ import { useRouterParams } from 'src/hooks/router-params';
 
 const GetGlobalContactsData = (): IDropdownData => {
   const { query } = useRouter();
-  const { countryId, isCountryFound } = useRouterParams(query);
+  const { countryId } = useRouterParams(query);
   const { data, isLoading, isError, isSuccess } = useCountry();
-  const { defaultCountryShown, specificCountriesShown, countryList } =
-    siteSettings;
+  const { defaultCountryShown, countryList } = siteSettings;
 
   if (isLoading || isError || !data?.data || data.data.length === 0) {
     return {
@@ -34,19 +33,24 @@ const GetGlobalContactsData = (): IDropdownData => {
     icon: getCountryIcon(item.cssClass),
   }));
 
-  if (defaultCountryShown && isCountryFound) {
-    countries = countries.filter((item) => item.id === countryId);
-  }
-
   const countriesList = countryList?.find(
     (x) => x.countryId === countryId
   )?.countriesToBeShown;
 
-  if (!defaultCountryShown && specificCountriesShown && countriesList) {
+  if (defaultCountryShown && countriesList?.length > 0) {
     countries = countries.filter((item) => countriesList.includes(item.id));
   }
 
-  const globalContact = (!defaultCountryShown || !isCountryFound) && {
+  if (defaultCountryShown && !(countriesList?.length > 0) && countryId) {
+    countries = countries.filter((item) => item.id === countryId);
+  }
+
+  const isGlobalShow =
+    (defaultCountryShown && !countryId) ||
+    (!defaultCountryShown && !(countriesList?.length > 0)) ||
+    (!defaultCountryShown && countriesList?.length > 0);
+
+  const globalContact = isGlobalShow && {
     id: 0,
     name: 'Global',
     description: '',
