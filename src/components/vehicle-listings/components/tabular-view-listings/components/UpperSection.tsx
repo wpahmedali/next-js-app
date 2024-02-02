@@ -18,7 +18,10 @@ const UpperSection = ({ url, isEven, data }: IVehicleTabular) => {
 
   return (
     <tr className="cursor-pointer">
-      <td className={`${classes} bg-cover bg-center relative w-[200px]`} rowSpan={2}>
+      <td
+        className={`${classes} bg-cover bg-center relative w-[200px]`}
+        rowSpan={2}
+      >
         {data.isDelivery === 1 && currentCountry.isDelivered === 1 && (
           <Image
             alt=""
@@ -53,20 +56,23 @@ const UpperSection = ({ url, isEven, data }: IVehicleTabular) => {
       <td className={`${classes} p-2 text-left`}>
         <h2 className="font-bold">{data.modelName}</h2>
       </td>
-      <td className={`${classes} p-2 text-xs text-center`} style={{color:'red'}}>
-        {data.registrationYear}/{data.registrationMonth} / {data.engineSize} CC
+      <td
+        className={`${classes} p-2 text-xs text-center`}
+        style={{ color: 'red' }}
+      >
+        {data.registrationYear}/{data.registrationMonth} <br></br> {data.engineSize} CC
       </td>
       <td className={`${classes} p-2 text-xs font-bold text-center`}>
         {data.colorName}
       </td>
       <td className={`${classes} p-2 text-xs font-bold text-center`}>
         <div className="items-center justify-items-center grid">
-          <span className="pb-1">{data.carId}</span>
           {auction && data.lotNo && (
-            <span className="border-t border-zinc-300 pt-1">
+            <span className="border-b-2 text-red-500 font-extrabold border-zinc-300 pt-1">
               Lot No: {data.lotNo}
             </span>
           )}
+          <span className="pb-1">{data.carId}</span>
         </div>
       </td>
       <td className={`${classes} p-2 text-xs font-bold text-center`}>

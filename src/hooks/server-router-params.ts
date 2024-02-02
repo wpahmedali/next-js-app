@@ -58,7 +58,6 @@ export const useServerRouterParams = async (
   if (country && !Array.isArray(country) && country !== 'all_stock') {
     params.countryId = getIdFromParam(country);
   }
-  // params.countryId = 14;
   // country section end
 
   if (carId && !Array.isArray(carId)) {
