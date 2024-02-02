@@ -29,7 +29,7 @@ const GalleryModel = ({
           aria-hidden="true"
           className="overflow-y-auto overflow-x-hidden fixed inset-0 flex items-center z-50 bg-black/60"
         >
-          <div className="relative p-4 w-full 3xl:max-w-4xl 2xl:max-w-4xl lg:max-w-3xl max-h-full m-auto ">
+          <div className="relative p-4 w-full max-w-7xl max-h-full m-auto ">
             <div className="relative bg-white rounded-lg shadow p-4">
               <ModelHeader
                 setIsOpenImage={setIsOpenImage}
@@ -64,7 +64,7 @@ const GalleryModel = ({
 
               <div className="grid grid-cols-1 2xl:grid-cols-6 lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-4 xs:grid-cols-4 xxs:grid-cols-4 gap-2 pt-2">
                 {data?.carImages.map((item, index) => (
-                  <div key={index} className="bg-white 3xl:h-[115px] 2xl:h-[115px] lg:h-[100px] md:h-[147px] sm:h-[auto] overflow-hidden">
+                  <div key={index} className="bg-white 2xl:h-[147px] lg:h-[147px] md:h-[147px] sm:h-[auto] overflow-hidden">
                     <Image
                       onMouseOver={() =>
                         setActiveImage(

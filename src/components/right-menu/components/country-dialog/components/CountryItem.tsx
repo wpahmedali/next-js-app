@@ -53,7 +53,7 @@ const CountryItem = ({
     ) {
       return <Loading height="h-5" width="w-5" />;
     } else {
-      return <span className="flex items-center border">{icon}</span>;
+      return <span className="flex items-center">{icon}</span>;
     }
   };
 

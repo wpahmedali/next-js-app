@@ -59,7 +59,7 @@ const LoginForm = () => {
         <div className="bg-white rounded-lg shadow h-screen">
           <ModelHeader
             setModelIsOpen={setContext}
-            title="Sign In"
+            title="Sign in to our platform"
           />
 
           <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-4 p-4 md:p-5">

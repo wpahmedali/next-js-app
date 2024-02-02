@@ -2,10 +2,10 @@ const LeftGlossary = () => {
   return (
     <div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           Bill of Entry
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           A list of goods received at a customhouse for export or import,
           detailing the merchant, precise quantity and value of goods that have
           landed or are being shipped out, and place of origin or destination.
@@ -15,10 +15,10 @@ const LeftGlossary = () => {
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           B/L
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           Bill of Lading, sometimes abbreviated as B/L or BOL, is one of the
           most important documents in the shipping process. To ship any goods, a
           B/L is required and will be issued by the freight carrier or their
@@ -35,10 +35,10 @@ const LeftGlossary = () => {
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           C&F
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           Cost and Freight, a term of sale signifying that the price invoiced or
           quoted by a seller for a shipment does not include the insurance
           costs, but include the cost of goods and all other costs relating to
@@ -47,10 +47,10 @@ const LeftGlossary = () => {
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           Cancellation of Registration Form
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           The certificate of temporally registration cancellation for export.
           This document shows that the vehicle can genuinely be exported from
           Japan. It includes technical details and specifications of the car.
@@ -58,10 +58,10 @@ const LeftGlossary = () => {
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           VAP
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           Vehicle-at-Progress, the personal web page on JAN JAPAN website for
           the buyer to track the progress of the shipment. The link of the
           personal VAP page will be sent once our staff acknowledged the payment
@@ -70,10 +70,10 @@ const LeftGlossary = () => {
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           CIF
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           Cost, Insurance, and Freight, a term of sale signifying that the price
           invoiced or quoted by a seller for a shipment includes the cost of
           goods, the insurance costs, and all other costs relating to all the
@@ -86,10 +86,10 @@ const LeftGlossary = () => {
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           Clearing Agent
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           A person or a company authorized by the international customs
           authorities to certify and manage consignments between countries. They
           essentially take care of the customs clearance aspect of the goods
@@ -99,75 +99,75 @@ const LeftGlossary = () => {
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           Commercial Invoice
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           A document required by customs to determine the true value of the
           imported goods for assessment of duties and taxes.
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           Consignee
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           A person who will be the “owner” of the car after it is registered in
           the destination country.
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           Deregistration Certificate
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           An Ownership/De-Registration Document. All vehicles that are bought
           and owned legally in Japan must have this document. Please also see
           "Export Certificate".
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           DHL Delivery Address
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           Delivery address for the shipping documents (not the vehicle) to be
           used by JAN JAPAN to dispatch documents to the vehicle’s buyer.
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           EAA
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           East Africa Automobile Services; a pre-export inspection company
           authorized by the Tanzania Standard Bureau (TBS) and Ugandan National
           Standard Bureau (UNBS).
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           ETA
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           Estimated Time of Arrival; the date and time in which an air or ship
           journey is expected to arrive at a named city or port.
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           ETD
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           Estimated Time of Departure; the date and time in which an air or ship
           journey is expected to depart from a named city or port.
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           Export Certificate
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           A document that confirms the noted items are being legally exported
           from their country of origin. The Export Certificate is obtained by
           the export company just before exporting from Japan. If the exporter
@@ -177,10 +177,10 @@ const LeftGlossary = () => {
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           Export Permit
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           A document issued by the Japanese Customs Office that ensures the
           shipment is in compliance with all of the applicable export control
           measures. Exporters must declare to the Customs the nature of the
@@ -190,10 +190,10 @@ const LeftGlossary = () => {
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           FOB
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           Free on Board, a term of sale under which the price invoiced or quoted
           by a seller includes all charges up to placing the goods on board a
           ship at the port of departure. The term “FOB Price”, as seen on JAN

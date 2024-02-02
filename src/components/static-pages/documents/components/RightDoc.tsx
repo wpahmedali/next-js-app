@@ -2,10 +2,10 @@ const RightDocuments = () => {
   return (
     <div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           Why must I provide the full name and address of the consignee?
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           Because the B/L is a very important official document which will be
           used to identify/prove the ownership of the cargo; therefore, the
           shipping companies require the full name and complete address of the
@@ -28,11 +28,11 @@ const RightDocuments = () => {
         </ul>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           My country’s customs office is asking for a packing list. Can you
           provide this document?
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           Even though we do not provide a packing list , our Commercial Invoice
           can be used instead. All of the relevant information found on the
           packing list is already included on the commercial invoice. If you are
@@ -43,10 +43,10 @@ const RightDocuments = () => {
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           What is the Notify Party?
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           Notify Party is the person whom the shipping agent will contact in
           order to notify the confirmed arrival date of your vessel. If you have
           a private clearing agent, you may list them here although it is not
@@ -55,10 +55,10 @@ const RightDocuments = () => {
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           Can I track the documents that you will send me?
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           Yes, you can. Once your documents are processed for dispatch, the DHL
           tracking number will be listed on your VAP page. If you click on this
           tracking number on your VAP page, it will change to a DHL tracking
@@ -66,11 +66,11 @@ const RightDocuments = () => {
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           My DHL tracking log is not showing that my documents are being
           shipped. Is there something wrong?
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           The tracking log will begin providing the information once the package
           has been physically picked up and scanned into the DHL system by the
           their representative. On each business day, since our staff is

@@ -2,19 +2,19 @@ const LeftCountryRegulations = () => {
   return (
     <div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           Tanzania & Uganda
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           Please refer to EAA and each country's respective Revenue Authority
           (Tanzania and Uganda).
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           Caribbean Countries
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           When a shipping vessel travels through areas in the Caribbean that are
           controlled by the countries in the European Union, it requires that
           the postal code of the consignee to be provided on the B/L. Any
@@ -27,10 +27,10 @@ const LeftCountryRegulations = () => {
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           Kenya
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           Please refer to JEVIC, the Kenya Bureau of Standards, and the Kenya
           Revenue Authority.
         </p>

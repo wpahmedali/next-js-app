@@ -12,40 +12,53 @@ export const useCurrentCountryName = () => {
 
   const params = useRouterParams(query);
 
-  const { data: auctionData } = useAuction(params.countryId);
-  const { data: countryData } = useCountry();
-  const { data: philippineCountryData } = usePhilippineCountryList(
-    philippineCountry.id
+  const { data: auctionData, isSuccess: auctionIsSuccess } = useAuction(
+    params.countryId
   );
+  const { data: countryData, isSuccess: countryIsSuccess } = useCountry();
+  const { data: philippineCountryData, isSuccess: philippineCountryIsSuccess } =
+    usePhilippineCountryList(philippineCountry.id);
 
   useEffect(() => {
-    if (params.auctionId && !Array.isArray(params.auctionId) && auctionData) {
+    if (
+      params.auctionId &&
+      !Array.isArray(params.auctionId) &&
+      auctionIsSuccess &&
+      auctionData
+    ) {
       const findAuction = auctionData.data.find(
         (auction) => auction.auctionId === params.auctionId
       );
       const auctionCountry = `${findAuction?.auctionShortName}(${findAuction?.auctionDate})`;
       setSelectedCountry(auctionCountry);
-    } else if (params.countryId && countryData) {
-      const findCountry = countryData.data.find(
-        (x) => x.id === Number(params.countryId)
-      );
-
-      if (findCountry) {
-        setSelectedCountry(findCountry.countryName);
-      } else {
-        const findPCountry = philippineCountryData?.data?.find(
+    } else if (
+      params.countryId &&
+      countryIsSuccess &&
+      philippineCountryIsSuccess
+    ) {
+      if (countryIsSuccess) {
+        const findCountry = countryData.data.find(
           (x) => x.id === Number(params.countryId)
         );
 
-        if (findPCountry) {
-          setSelectedCountry(findPCountry.countryName);
+        if (findCountry) {
+          setSelectedCountry(findCountry.countryName);
+        } else {
+          const findPCountry = philippineCountryData?.data?.find(
+            (x) => x.id === Number(params.countryId)
+          );
+
+          if (findPCountry) {
+            setSelectedCountry(findPCountry.countryName);
+          }
         }
       }
     } else {
       setSelectedCountry('Global');
     }
   }, [
-    philippineCountryData,
+    auctionIsSuccess,
+    countryIsSuccess,
     params.countryId,
     params.auctionId,
     auctionData,

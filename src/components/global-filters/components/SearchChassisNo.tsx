@@ -48,7 +48,7 @@ const SearchChassisNo = ({
           value={searchChassis}
           onFocus={handleSearchFocus}
           onChange={handleSearchText}
-          onKeyDown={(e) => e.keyCode === 13 && handleOnKeyDown()}
+          onKeyDown={() => handleOnKeyDown()}
           placeholder="Chassis No"
         />
       </div>

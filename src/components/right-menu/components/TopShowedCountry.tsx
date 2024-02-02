@@ -13,7 +13,7 @@ const TopShowedCountry = (): JSX.Element => {
 
   const countryData: { name: string; icon: JSX.Element } = {
     name: 'Global',
-    icon: <GlobeAltIcon className="h-6 w-6 text-white" />,
+    icon: <GlobeAltIcon className="h-6 w-6 text-gray-700" />,
   };
 
   const params = useRouterParams(query);
@@ -35,9 +35,9 @@ const TopShowedCountry = (): JSX.Element => {
 
   return (
     <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-      <li className="w-fill flex p-3 pl-3 bg-primaryDark  hover:bg-[#fccf3a]">
+      <li className="w-fill flex p-3 pl-3 bg-[#CECECE] hover:bg-[#fccf3a]">
         <span className="flex items-center">{countryData.icon}</span>
-        <span className="ml-2 flex text-xs font-normal text-white items-center">
+        <span className="ml-2 flex text-xs font-normal text-black items-center">
           {countryData.name}
         </span>
       </li>

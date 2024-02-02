@@ -9,7 +9,7 @@ const Durban = () => {
             <span> By Carrier (Shipping Company)</span>
           </h2>
           <div className="col-span-12 rounded-lg border sm:col-span-8">
-            <div className="overflow-x-scroll">
+            <div className="overflow-hidden">
               <table className="min-w-full text-left">
                 <thead>
                   <tr className="bg-black text-white">

@@ -1,13 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { motion } from 'framer-motion';
 import InputField from './components/InputField';
 import DropdownItem from './components/DropdownItem';
+import { IEnquriryParamData } from './interfaces/enquiry-param-data.interface';
 import { createEnquery } from 'react-query/api/enquery';
-import { NextRouter, useRouter } from 'next/router';
-import { useMutation } from 'react-query';
-import Loading from 'components/loading';
-import * as Yup from 'yup';
-import { useFormik } from 'formik';
 
 const Enquiry = ({
   currencySymbol,
@@ -18,48 +14,29 @@ const Enquiry = ({
   fobPrice: string | number;
   carId: number;
 }): JSX.Element => {
-  const router: NextRouter = useRouter();
-  const mutation = useMutation(createEnquery);
-
-  const validationSchema = Yup.object().shape({
-    name: Yup.string().required('Name is required').min(3),
-    countryName: Yup.string().required('Country name is required').min(3),
-    city: Yup.string().required('City name is required').min(3),
-    email: Yup.string().required('Email is required').email('Invalid email'),
-    phone: Yup.string().required('Phone is required'),
+  const [formData, setFormData] = useState<IEnquriryParamData>({
+    car_id: carId,
+    subject: 'Enquiry',
+    name: '',
+    countryName: '',
+    city: '',
+    email: 'test@gmail.com',
+    phone: '',
+    whatsapp_phone: '',
+    remarks: '',
+    action: 'single',
   });
 
-  const handleFormSubmit = async (values) => {
-    await mutation.mutateAsync(values);
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = await createEnquery(formData);
   };
 
-  useEffect(() => {
-    if (mutation.data) {
-      router.push('/car_detail/thank_you');
-    }
-  }, [mutation.data]);
-
-  const formik = useFormik({
-    initialValues: {
-      car_id: carId,
-      subject: 'Enquiry',
-      name: '',
-      countryName: '',
-      city: '',
-      email: '',
-      phone: '',
-      whatsapp_phone: '',
-      remarks: '',
-      action: 'single',
-    },
-    validationSchema,
-
-    onSubmit: async (values) => {
-      handleFormSubmit(values);
-    },
-  });
-
-  const { errors, touched, values, handleChange, handleSubmit } = formik;
+  const onChangeHandler = (e: FormEvent<HTMLInputElement>) => {
+    const name = e.currentTarget.name;
+    const value = e.currentTarget.value;
+    setFormData((values) => ({ ...values, [name]: value }));
+  };
 
   return (
     <div className="main">
@@ -74,46 +51,33 @@ const Enquiry = ({
       >
         <InputField
           name="name"
-          value={values.name}
+          value={formData.name}
           placeholder="Name"
-          onChangeHandler={handleChange}
-          error={errors.name && touched.name ? errors.name : ''}
+          onChangeHandler={onChangeHandler}
         />
         <DropdownItem
           name="countryName"
-          value={values.countryName}
+          value={formData.countryName}
           placeholder="Select Country"
-          onChangeHandler={handleChange}
-          error={
-            errors.countryName && touched.countryName ? errors.countryName : ''
-          }
+          onChangeHandler={onChangeHandler}
         />
         <InputField
           name="city"
-          value={values.city}
+          value={formData.city}
           placeholder="City"
-          onChangeHandler={handleChange}
-          error={errors.city && touched.city ? errors.city : ''}
+          onChangeHandler={onChangeHandler}
         />
         <InputField
           name="phone"
-          value={values.phone}
+          value={formData.phone}
           placeholder="Phone"
-          onChangeHandler={handleChange}
-          error={errors.phone && touched.phone ? errors.phone : ''}
-        />
-        <InputField
-          name="email"
-          value={values.email}
-          placeholder="Email"
-          onChangeHandler={handleChange}
-          error={errors.email && touched.email ? errors.email : ''}
+          onChangeHandler={onChangeHandler}
         />
         <InputField
           name="whatsapp_phone"
-          value={values.whatsapp_phone}
+          value={formData.whatsapp_phone}
           placeholder="Whatsapp Phone No."
-          onChangeHandler={handleChange}
+          onChangeHandler={onChangeHandler}
         />
 
         <div className="text-md font-bold text-black my-2">Remarks</div>
@@ -124,9 +88,9 @@ const Enquiry = ({
 
         <InputField
           name="remarks"
-          value={values.remarks}
+          value={formData.remarks}
           placeholder="Write remark here"
-          onChangeHandler={handleChange}
+          onChangeHandler={onChangeHandler}
         />
 
         <div className="text-md font-normal text-black mt-5 mb-14">
@@ -144,11 +108,8 @@ const Enquiry = ({
           type="submit"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className="rounded-none bg-black text-primary items-center font-normal justify-center text-lg w-full px-7 py-3 flex"
+          className="rounded-none bg-black text-primary items-center font-normal justify-center text-lg w-full px-7 py-3"
         >
-          <span className="pr-2">
-            {mutation.isLoading && <Loading height="h-6" width="w-6" />}
-          </span>
           Submit Enquiry
         </motion.button>
       </form>

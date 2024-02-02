@@ -33,9 +33,7 @@ export const useCurrentCountry = (
       currentCountry
         ? setCurrentCountry({
             isSuccess: true,
-            id: currentCountry.id,
             isDelivered: currentCountry.showReservedTag,
-            isCount: currentCountry.is_count,
             isAuctionSheetDisplay: currentCountry.isAuctionSheetDisplay,
             countryName: currentCountry.countryName,
             FBPageName: currentCountry.FBPageName,

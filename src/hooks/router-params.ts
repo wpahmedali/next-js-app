@@ -9,6 +9,7 @@ import {
   IMakerModel,
 } from 'src/interfaces/car-list-param.interface';
 import { getIdFromParam } from 'utils/get-id-from-param';
+import { useCountry } from 'react-query/hooks/api/country';
 import { useCurrentLocation } from 'react-query/hooks/api/geo-location';
 import { siteSettings } from 'utils/siteSetting';
 import { useMakerModel } from 'react-query/hooks/api/marker-model';
@@ -35,25 +36,47 @@ export const useRouterParams = ({
   const params = { ...emptyCarListParams };
 
   const { defaultCountryShown } = siteSettings;
+
+  const { data: countryData } = useCountry();
   const { data: currentLocation } = useCurrentLocation();
 
-  // country section start
+  if (country && !Array.isArray(country) && country !== 'all_stock') {
+    params.countryId = getIdFromParam(country);
+    params.isCountryFound = false;
+  }
+  if (currentLocation && countryData) {
+    const findCountry = countryData.data.find(
+      (country) =>
+        country.countryCode.toLowerCase() ===
+        currentLocation?.geoplugin_countryCode?.toLowerCase()
+    );
+    if (findCountry) {
+      params.countryId = findCountry.id;
+      params.isCountryFound = true;
+    } else if (params.countryId) {
+      params.countryId = params.countryId;
+      params.isCountryFound = false;
+    } else {
+      params.countryId = 0;
+      params.isCountryFound = false;
+    }
+  }
+  if (
+    country &&
+    !Array.isArray(country) &&
+    country !== 'all_stock' &&
+    !defaultCountryShown
+  ) {
+    params.countryId = getIdFromParam(country);
+    params.isCountryFound = false;
+  }
   if (!country) {
     params.countryId = 0;
   }
-  if (currentLocation && currentLocation?.data?.id && defaultCountryShown) {
-    params.countryId = currentLocation.data.id;
-    params.isCountryFound = true;
-  } else if (params.countryId && !defaultCountryShown) {
-    params.countryId = params.countryId;
-  }
   if (country === 'all_stock') {
     params.countryId = 0;
+    params.isCountryFound = false;
   }
-  if (country && !Array.isArray(country) && country !== 'all_stock') {
-    params.countryId = getIdFromParam(country);
-  }
-  // country section end
 
   if (carId && !Array.isArray(carId)) {
     params.carId = getIdFromParam(carId);

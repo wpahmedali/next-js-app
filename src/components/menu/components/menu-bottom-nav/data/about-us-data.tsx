@@ -8,8 +8,8 @@ import {
 
 const aboutUs: IDropdownItem[] = [
   {
-    name: 'Overview',
-    description: ' An Overview of Jans Group',
+    name: 'OverView',
+    description: 'OverView All our the Companies',
     href: '/company-overview-of-jans-group#overview',
     icon: (
       <DocumentMagnifyingGlassIcon

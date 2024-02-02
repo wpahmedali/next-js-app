@@ -48,7 +48,7 @@ const SearchStockNo = ({
           value={searchStock}
           onFocus={handleSearchFocus}
           onChange={handleSearchText}
-          onKeyDown={(e) => e.keyCode === 13 && handleOnKeyDown()}
+          onKeyDown={() => handleOnKeyDown()}
           placeholder="Stock No"
         />
       </div>

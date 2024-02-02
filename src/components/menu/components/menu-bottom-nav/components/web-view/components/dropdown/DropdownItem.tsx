@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { IDropdownItem } from '../../../../interfaces/dropdown-item.interface';
 import { useDispatchLoadingState } from 'src/providers/LoadingContext';
-import { useSetContext } from 'src/providers/ModelContext';
 
 const DropdownItem = ({
   item,
@@ -12,7 +11,6 @@ const DropdownItem = ({
   handleIsPopOver: () => void;
 }): JSX.Element => {
   const setLoadingState = useDispatchLoadingState();
-  const setContext = useSetContext();
 
   return (
     <motion.div
@@ -28,7 +26,6 @@ const DropdownItem = ({
         <Link
           href={item.href}
           onClick={() => {
-            setContext('');
             setLoadingState({ type: 'countryLoading' });
             handleIsPopOver();
           }}

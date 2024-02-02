@@ -109,11 +109,11 @@ const VehicleCard = ({ url, data }: IVehicleCard) => {
 
         <div className="flex items-center justify-between border-b border-zinc-300 bg-[#dfdfdf] p-1">
           <div className="flex items-center justify-between">
-            {data?.whatsappNumber && (
+            {data?.contactInformation?.[0]?.phone && (
               <button className="mr-1" onClick={() => redirectToWhatsApp(data)}>
                 <WhatsappIcon />
                 <span className="text-[10px] font-medium text-black leading-4 py-2">
-                  
+                  Whatsapp
                 </span>{' '}
               </button>
             )}
@@ -185,7 +185,6 @@ const VehicleCard = ({ url, data }: IVehicleCard) => {
           registrationMonth={data.registrationMonth}
           mileage={data.mileage}
           steeringName={data.steeringName}
-          transmissionName={data.transmissionName}
         />
       </div>
     </motion.div>

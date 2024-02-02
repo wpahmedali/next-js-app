@@ -55,10 +55,10 @@ const Gallery = ({ data }: { data: IVehicleDetail }): JSX.Element => {
               setIsOpenImage(true);
               setActiveImageIndex(0);
             }}
-            className="inline-block bg-cover 3xl:h-[463px] 2xl:h-[382px] xl:h-[325px] lg:h-[252px] md:h-[342px] sm:h-[342px] overflow-hidden z-10"
+            className="inline-block bg-cover 3xl:h-[463px] 2xl:h-[382px] xl:h-[325px] lg:h-[252px] md:h-[342px] sm:h-[342px] overflow-hidden"
           >
             <Image
-              className="max-w-full cursor-pointer focus:ring focus:ring-violet-300"
+              className="max-w-full cursor-pointer focus:ring focus:ring-violet-300 absolute top-0 left-0 z-40"
               src={activeimage}
               width={1920}
               height={452}

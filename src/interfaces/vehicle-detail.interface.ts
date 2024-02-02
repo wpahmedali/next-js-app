@@ -53,5 +53,4 @@ export interface IVehicleDetail {
   totalViews: number;
   staffMembers?: IVehicleDetailStaffMember[];
   imageUrl: string;
-  whatsappNumber:string
 }

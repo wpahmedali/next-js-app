@@ -5,13 +5,12 @@ import Link from 'next/link';
 import { ROUTES } from 'src/common/routes';
 import { useSelectedCountryIcon } from 'src/hooks/selected-country-icon';
 import { useRouterParams } from 'src/hooks/router-params';
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion"
 
 const AuctionButtons = () => {
   const router: NextRouter = useRouter();
   const params = useRouterParams(router.query);
   const countryIcon = useSelectedCountryIcon();
-  console.log('first');
 
   const { data, isSuccess } = useAuction(params.countryId);
 
@@ -26,30 +25,28 @@ const AuctionButtons = () => {
             }/${params.countryId}/1`}
           >
             <motion.div
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
               className={`${
-                params.auctionId === item.auctionId
-                  ? 'bg-gradient-to-r from-orange-300 to-primary hover:from-pink-500 hover:to-yellow-500'
-                  : 'bg-gradient-to-r  from-emerald-500 from-10% via-black-500 via-30% to-red-500 to-90%'
-              }  overflow-hidden content-center justify-left text-white text-left w-full md:my-2 sm:my-2 xs:my-2 xxs:my-2 rounded-r-full hover:bg-primary hover:text-black  relative button-aye button--aylen focus:ring-offset-2 focus:ring-2 hover:ring-offset-2 hover:ring-2`}
+                params.auctionId === item.auctionId ? 'bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500' : 'bg-gradient-to-r from-emerald-500 from-10% via-black-500 via-30% to-red-500 to-90%'
+              }  overflow-hidden content-center text-primary justify-left text-left w-full md:my-2 sm:my-2 xs:my-2 xxs:my-2 rounded-r-xl hover:bg-primary hover:text-black relative button-aye button--aylen focus:ring-offset-2 focus:ring-4 hover:ring-offset-2 hover:ring-4`}
             >
               <div
                 className={`${
                   params.auctionId === item.auctionId
                     ? 'bg-primary'
                     : 'bg-primaryDark'
-                }bg-primaryDark my-1 items-center justify-left gap-x-3 px-1 flex text-black`}
+                }bg-primaryDark text-white my-3 font-bold items-center justify-left gap-x-3 px-4 flex`}
               >
                 <div>{countryIcon} </div>
                 <div>
-                  <div className="font-bold">{item.auctionShortName}</div>
+                  <div>{item.auctionShortName}</div>
                   <div>
                     {item.auctionDate}{' '}
-                    <small className="font-bold">{`( ${item.carsCount}-Units)`}</small>{' '}
-                    <div>
-                      <small>Time: 08:30 AM</small>
-                    </div>
+                    <small>{`( ${item.carsCount}-Units)`}</small>{' '}
+                   
+                    <div>Time: 08:30:00 AM</div>
+      
                   </div>
                 </div>
                 {/* Time: 08:30:00 AM */}

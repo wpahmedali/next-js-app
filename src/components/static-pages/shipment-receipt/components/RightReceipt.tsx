@@ -2,10 +2,10 @@ const RightReceipt = () => {
   return (
     <div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           Is it possible to clear the customs using the B/L from the PDF file?
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           No, it is not possible to clear the entire customs clearing process
           using only the B/L from the PDF file. Although you can use the B/L
           from the PDF file to complete about the 60% of the entire customs
@@ -14,10 +14,10 @@ const RightReceipt = () => {
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           How do I find a clearing agent?
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           Besides the sources of this service available on the internet, please
           be informed that our trained and knowledgeable agents are also
           available to assist you as your clearing agents. For more information
@@ -39,11 +39,11 @@ const RightReceipt = () => {
         </ul>
       </div>
       <div className="mb-4">
-        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] hover:text-black cursor-pointer text-white py-2 px-3">
+        <h3 className="flex items-center mb-4 text-base font-medium dark:text-white shadow-lg bg-black hover:bg-[#fccf3a] text-white py-2 px-3">
           Can you send me two sets of the B/L documents, one for me and the
           other one for my clearing agent?
         </h3>
-        <p className="text-black text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           Unfortunately, we cannot. Regardless of any circumstances, the
           shipping companies can issue only one set of the B/L document per
           cargo.

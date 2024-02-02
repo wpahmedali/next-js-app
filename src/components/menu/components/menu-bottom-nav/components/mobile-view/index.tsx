@@ -6,19 +6,15 @@ import SupportFAQ from './../web-view/components/SupportFAQ';
 import GlobalStock from './../web-view/components/GlobalStock';
 import GlobalContact from './../web-view/components/GlobalContacts';
 import MenuBottomBar from 'components/menu/components/menu-bottom-bar';
-import { useModelState, useSetContext } from 'src/providers/ModelContext';
 
-const MobileView = (): JSX.Element => {
+const MobileView = ({
+  mobileMenuOpen,
+  setMobileMenuOpen,
+}: IMobileView): JSX.Element => {
   const [mobileView, setMobileView] = useState(false);
-  const setContext = useSetContext();
-  const modelState = useModelState();
 
   function handlemobileMenuOpen() {
-    if (modelState != 'about-nav') {
-      setContext('about-nav');
-    } else {
-      setContext('');
-    }
+    setMobileMenuOpen((prevValue) => !prevValue);
   }
 
   useEffect(() => {
@@ -66,7 +62,7 @@ const MobileView = (): JSX.Element => {
             <span className="sr-only">Open main menu</span>
           </button>
         </div>
-        {modelState == 'about-nav' ? (
+        {mobileMenuOpen ? (
           <Popover.Group className="2xl:inline-flex lg:inline-flex md:inline-flex lg:gap-x-0 w-full absolute top-10 h-screen max-w-[250px] left-0 bg-primary z-50">
             <AboutUs />
 
