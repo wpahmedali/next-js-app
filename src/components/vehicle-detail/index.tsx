@@ -82,9 +82,19 @@ const VehicleDetail = (): JSX.Element => {
                   <Title data={data.data} />
                   <VehicleInfo data={data.data} />
                   <ViewCountBar data={data.data} />
-                  <div className="text-white uppercase font-medium sm:font-normal sm:text-sm xs:text-xs xxs:text-xs p-2 mt-2 mb-2 bg-[#099731] 3xl:text-lg xl:text-lg lg:text-lg border w-full">
-                    Stock Available In {data.data.countryName},{' '}
-                    {data.data.cityName}
+
+                  <div className="flex justify-between items-center px-2 text-sm text-white uppercase font-medium sm:font-normal sm:text-sm xs:text-xs xxs:text-xs p-2 mt-2 mb-2 bg-[#099731] 3xl:text-lg xl:text-lg lg:text-lg border w-full">
+                    <span>
+                      Stock Available In {data.data.countryName},{' '}
+                      {data.data.cityName}
+                    </span>
+                    {data.data.fobPrice !== 0 &&
+                      data.data.currencySymbol &&
+                      currentCountry.isPriceDisplay === 1 && (
+                        <span>
+                          Price: {data.data.currencySymbol} {data.data.fobPrice}
+                        </span>
+                      )}
                   </div>
                   <div className="grid grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 xxs:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 gap-1">
                     {currentCountry?.isAuctionSheetDisplay === 1 &&
@@ -99,11 +109,7 @@ const VehicleDetail = (): JSX.Element => {
                             ?.imagePath.replace('/s_thumb', '/thumb')}
                         />
                       )}
-                    <Enquiry
-                      currencySymbol={data.data.currencySymbol}
-                      fobPrice={data.data.fobPrice}
-                      carId={data.data.carId}
-                    />
+                    <Enquiry carId={data.data.carId} />
                   </div>
                   {data.data.staffMembers?.length > 0 && (
                     <SalesTeam staffMembers={data.data.staffMembers} />

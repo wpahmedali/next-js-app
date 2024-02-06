@@ -8,9 +8,10 @@ const EngineSpec = ({
   registrationMonth,
   mileage,
   steeringName,
+  transmissionName
 }: IEngineSpec) => {
   return (
-    <div className="flex items-center justify-between bg-gray-100 rounded-b p-2">
+    <div className="flex items-center justify-between bg-[#FFFEEF] rounded-b p-2">
       <div className="items-center justify-items-center grid">
         <CcIcon />
         <span className="text-[10px] font-medium text-black leading-4 py-2">
@@ -26,7 +27,7 @@ const EngineSpec = ({
       <div className=" content-center justify-items-center grid">
         <SteeringIcon />
         <span className="text-[10px] font-medium text-black leading-4 py-2">
-          AT {steeringName}
+          {transmissionName} {steeringName}
         </span>
       </div>
     </div>

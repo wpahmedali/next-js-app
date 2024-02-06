@@ -5,6 +5,8 @@ import { getCountryIcon } from 'utils/get-country-icon';
 import { GlobeAltIcon } from '@heroicons/react/24/outline';
 import { ICurrentCountry } from 'src/interfaces/current-country.interface';
 import { useRouterParams } from './router-params';
+import { usePhilippineCountryList } from 'react-query/hooks/api/philippine-country-list';
+import { philippineCountry } from 'src/common/constants';
 
 export const useCurrentCountry = (
   specificCountryId?: number
@@ -22,22 +24,34 @@ export const useCurrentCountry = (
     countryId = specificCountryId;
   }
 
-  const { data, isLoading, isSuccess } = useCountry();
+  const { data, isSuccess } = useCountry();
+  const { data: pData, isSuccess: pIsSuccess } = usePhilippineCountryList(
+    philippineCountry.id
+  );
 
   useEffect(() => {
     if (isSuccess) {
-      const currentCountry = data.data.find(
+      let currentCountry = data.data.find(
         (country) => country.id === countryId
       );
+
+      if (!currentCountry && pIsSuccess) {
+        currentCountry = pData?.data.find(
+          (country) => country.id === countryId
+        );
+      }
 
       currentCountry
         ? setCurrentCountry({
             isSuccess: true,
+            id: currentCountry.id,
             isDelivered: currentCountry.showReservedTag,
+            isCount: currentCountry.is_count,
             isAuctionSheetDisplay: currentCountry.isAuctionSheetDisplay,
             countryName: currentCountry.countryName,
             FBPageName: currentCountry.FBPageName,
             FBAppId: currentCountry.FBAppId,
+            isPriceDisplay: currentCountry.isPriceDisplay,
             flagIcon: getCountryIcon(currentCountry.cssClass),
           })
         : setCurrentCountry({
@@ -46,7 +60,7 @@ export const useCurrentCountry = (
             flagIcon: <GlobeAltIcon className="w-6 h-6" />,
           });
     }
-  }, [isLoading, countryId, isSuccess, data]);
+  }, [pData, countryId, data]);
 
   return currentCountry;
 };

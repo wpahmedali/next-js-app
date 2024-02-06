@@ -20,7 +20,7 @@ const Listings = () => {
 
   return (
     <main className="bg-light w-full min-h-screen">
-      {philippineCountry && <PhilippineButtons />}
+      {countryId === philippineCountry.id && <PhilippineButtons />}
       {isAuctionCountry && <AuctionButtons />}
       {countryId === uaeCountry.id && <DubaiSpecialStockButton />}
       <Heading />

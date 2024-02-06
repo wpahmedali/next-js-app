@@ -15,6 +15,7 @@ export interface ICountry {
   auctionName: string;
   specialOffer: boolean;
   specialOfferTotal: number;
+  isPriceDisplay: number;
 }
 
 export interface ICountryApiRes {

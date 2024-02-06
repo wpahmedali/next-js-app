@@ -3,14 +3,7 @@ import Image from 'next/image';
 const TopImages = () => {
   return (
     
-<Image
-        alt="logo"
-        className="pl-4 items-center justify-between sm:translate-x-[-4px] sm:left-[-4px] xs:translate-x-[-4px] xs:left-[-4px] xxs:left-[-4px] xxs:translate-x-[-4px] lg:left-0 lg:translate-x-0 md:translate-x-0 md:left-0 2xl:w-auto lg:w-auto md:w-auto 2xl:mt-0 lg:mt-0 md:mt-0 sm:w-36 sm:mt-2 xs:w-36 xs:mt-2 xxs:w-36 xxs:mt-2"
-        src="/asset/images/logo/jans-logo.png"
-        width={227}
-        height={68}
-      />
-
+<Image className="" src="/asset/images/profile/about-banner.png" alt=".." width={1920} height={409}/>
   );
 };
 export default TopImages;

@@ -3,7 +3,9 @@ import { getCountry } from 'react-query/api/country';
 import { getCustomerReview } from 'react-query/api/customer-review';
 import getLocation from 'react-query/api/geo-location';
 import { getMakerModel } from 'react-query/api/maker-model';
+import { getPhilippineCountryList } from 'react-query/api/philippine-country-list';
 import { getTyreSharjah } from 'react-query/api/tyres/sharjah/tyre';
+import { philippineCountry } from 'src/common/constants';
 import { ICarListParams } from 'src/interfaces/car-list-param.interface';
 
 export const callReactQueryCustomerReviewApis = async (
@@ -11,8 +13,11 @@ export const callReactQueryCustomerReviewApis = async (
   params: ICarListParams
 ) => {
   const promisesToFetch = [
-    queryClient.prefetchQuery(['userLocation'], getLocation),
     queryClient.prefetchQuery(['country'], getCountry),
+    queryClient.prefetchQuery(
+      ['philippineCountryList', philippineCountry.id],
+      () => getPhilippineCountryList(philippineCountry.id)
+    ),
     queryClient.prefetchQuery(['tyreSharjah', params.countryId], () =>
       getTyreSharjah(params.countryId)
     ),

@@ -4,6 +4,7 @@ export interface IEngineSpec {
   registrationMonth: number | string;
   mileage: number;
   steeringName: string;
+  transmissionName: string;
 }
 
 export interface IBodySpec {
@@ -15,4 +16,8 @@ export interface IBodySpec {
   doors: number;
   lotNo: string;
   carId: number;
+  fobPrice: number;
+  currencySymbol: string;
+  url: string;
+  isPriceDisplay: number;
 }

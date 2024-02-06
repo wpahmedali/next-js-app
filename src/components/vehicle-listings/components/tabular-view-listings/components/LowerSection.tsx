@@ -40,11 +40,9 @@ const LowerSection = ({ isEven, data }: IVehicleTabular) => {
   };
 
   return (
-    <tr
-      className={`cursor-pointer ${isEven ? 'bg-[#FFFEEF]' : 'bg-[#E9FAFF]'}`}
-    >
+    <tr className={`cursor-pointer ${isEven ? 'bg-[#FFFEEF]' : 'bg-[#fff]'}`}>
       <td className="border border-[#EDEDED] p-2  text-left" colSpan={3}>
-        <p className="italic text-green-600">
+        <p style={{ color: '#3A2BF7' }}>
           {data.fuelName && data.fuelName + `, `}
           {data.driveName && data.driveName + `, `}
           {data.doors && data.doors + ` doors, `}
@@ -90,13 +88,13 @@ const LowerSection = ({ isEven, data }: IVehicleTabular) => {
       </td>
       <td
         className="border border-[#EDEDED] p-2  text-xs text-center"
-        colSpan={3}
+        colSpan={4}
       >
         <table className="w-full text-center">
           <tbody>
             <tr>
               <td className="place-content-center items-center">
-                {data?.contactInformation?.[0]?.phone && (
+                {data?.whatsappNumber && (
                   <button onClick={() => redirectToWhatsApp(data)}>
                     <WhatsappIcon />
                   </button>
@@ -122,7 +120,7 @@ const LowerSection = ({ isEven, data }: IVehicleTabular) => {
               </td>
               <td className="content-end place-content-center flex gap-2 items-center">
                 <SteeringIcon />
-                AT {data.steeringName}
+                {data.transmissionName} {data.steeringName}
               </td>
             </tr>
           </tbody>

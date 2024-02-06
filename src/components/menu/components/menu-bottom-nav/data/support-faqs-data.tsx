@@ -7,17 +7,6 @@ import { IDropdownData } from '../interfaces/dropdown-data.interface';
 
 const supportFaqs: IDropdownItem[] = [
   {
-    name: 'FAQS',
-    description: ' Frequently Asked Question',
-    href: '#',
-    icon: (
-      <ChatBubbleBottomCenterIcon
-        className="h-6 w-6 text-white-600 group-hover:text-primaryDark"
-        aria-hidden="true"
-      />
-    ),
-  },
-  {
     name: 'General Questions',
     description: 'General Questions about used Japanese',
     href: '/general-faqs-about-used-japanese-cars',

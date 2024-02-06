@@ -1,20 +1,17 @@
-import axios from 'axios';
-import { IGeoLocation } from 'src/interfaces/geo-location.interface';
+import fetcher from 'react-query/lib/axios';
+import { IApiResponse } from 'src/interfaces/api-response.interface';
 
-const getLocation = async (): Promise<IGeoLocation | null> => {
+const getLocation = async (
+  ip_address?: string
+): Promise<IApiResponse<{ id: number }>> => {
   try {
-    /*
-    const { data: ipData } = await axios.get(
-      'https://api64.ipify.org?format=json'
-    );
-
-    const { data } = await axios<IGeoLocation>(
-      `http://www.geoplugin.net/json.gp?ip=${ipData.ip}`
-    );
+    const url = `/geoLocation?ip_address=${ip_address}`;
+    const { data }: { data: IApiResponse<{ id: number }> } = await fetcher({
+      url,
+      method: 'GET',
+    });
 
     return data;
-    */
-   return null;
   } catch (error) {
     return null;
   }

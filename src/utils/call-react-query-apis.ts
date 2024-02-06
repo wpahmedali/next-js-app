@@ -1,34 +1,35 @@
+import { getAuction } from 'react-query/api/auctions/auction';
 import { getBanner } from 'react-query/api/banner';
 import { getBodyType } from 'react-query/api/body-type';
 import { getCountry } from 'react-query/api/country';
 import { getCustomerReview } from 'react-query/api/customer-review';
 import { getDubaiSpecialVehicleList } from 'react-query/api/dubai-special-vehicle-list';
 import { getMakerModel } from 'react-query/api/maker-model';
+import { getPhilippineCountryList } from 'react-query/api/philippine-country-list';
 import { getSteeringTransFuel } from 'react-query/api/steering-trans-fuel';
 import { getVehicleList } from 'react-query/api/vehicle-list';
-import { reactQuery, uaeCountry } from 'src/common/constants';
+import {
+  philippineCountry,
+  reactQuery,
+  uaeCountry,
+} from 'src/common/constants';
 import { ICarListParams } from 'src/interfaces/car-list-param.interface';
+import { ICountryApiRes } from 'src/interfaces/country.interface';
 
 export const callReactQueryApis = async (
   queryClient: any,
   params: ICarListParams,
   isContact?: boolean
 ) => {
-  // if (countrys) {
-  //   const countries: ICountryApiRes = await getCountry();
-  //   if (countries) {
-  //     const findAuctionCountry = countries.data.find(
-  //       (country) => country.auctionDisplay && country.id === params.countryId
-  //     );
-  //     if (findAuctionCountry) {
-  //       await queryClient.prefetchQuery(['auction', params.countryId], () =>
-  //         getAuction(params.countryId)
-  //       );
-  //     }
-  //   }
-  // }
   const promisesToFetch = [
     queryClient.prefetchQuery(['country'], getCountry),
+    queryClient.prefetchQuery(['auction', params.countryId], () =>
+      getAuction(params.countryId)
+    ),
+    queryClient.prefetchQuery(
+      ['philippineCountryList', philippineCountry.id],
+      () => getPhilippineCountryList(philippineCountry.id)
+    ),
     queryClient.prefetchQuery(['steeringTransFuel'], getSteeringTransFuel),
     queryClient.prefetchQuery(
       ['makerModel', params.countryId, params.auctionId],
@@ -47,7 +48,7 @@ export const callReactQueryApis = async (
     ),
   ];
 
-  if (!isContact && params.countryId !== uaeCountry.id) {
+  if (!isContact) {
     await queryClient.prefetchQuery(
       [reactQuery.vehicleList.tabular, params],
       () => getVehicleList(params)

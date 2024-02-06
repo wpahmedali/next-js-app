@@ -12,6 +12,7 @@ const TabularHeader = () => {
         <th className="border border-white p-2 text-xs">Stock no.</th>
         <th className="border border-white p-2 text-xs">chassis No.</th>
         <th className="border border-white p-2 text-xs">Mileage / Trans</th>
+        <th className="border border-white p-2 text-xs">Price</th>
       </tr>
     </thead>
   );

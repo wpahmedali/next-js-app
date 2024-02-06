@@ -38,7 +38,7 @@ export interface IVehicleDetail {
   isDelivery?: number;
   promotionId: number;
   fuelId: number;
-  fobPrice: number | string;
+  fobPrice: number;
   discountPercentage: number;
   discountedPrice: number;
   saveAmtount: number;
@@ -53,4 +53,5 @@ export interface IVehicleDetail {
   totalViews: number;
   staffMembers?: IVehicleDetailStaffMember[];
   imageUrl: string;
+  whatsappNumber: string;
 }
