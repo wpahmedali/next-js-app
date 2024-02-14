@@ -30,7 +30,7 @@ const SendWhatsapp = () => {
       }, 5000);
     }
     return () => clearTimeout(timer);
-  }, [buttonClicked, currentCountry.whatsappNumber, whatsappRedirectLink]);
+  }, [currentCountry]);
 
   const handleButtonClick = () => {
     setButtonClicked(true);
