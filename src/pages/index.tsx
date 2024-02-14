@@ -4,7 +4,6 @@ import Listings from 'components/vehicle-listings';
 import { withCSR } from 'react-query/hoc/with-CSR';
 import { useServerRouterParams } from 'src/hooks/server-router-params';
 import getLocation from 'react-query/api/geo-location';
-import { initGA } from 'utils/ga';
 
 export const getServerSideProps = withCSR(async (ctx) => {
   let queryClient = new QueryClient();
@@ -18,7 +17,7 @@ export const getServerSideProps = withCSR(async (ctx) => {
   );
 
   queryClient = await callReactQueryApis(queryClient, params);
-  initGA();
+
   return {
     props: {
       dehydratedState: dehydrate(queryClient),

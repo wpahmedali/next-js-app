@@ -36,7 +36,7 @@ const Banner = (): JSX.Element => {
         {isLoading && <Loading />}
         {(!data || isError) && !isLoading && <Error />}
         {isSuccess &&
-          data?.data?.map((item) => (
+          data?.data.map((item) => (
             <SwiperSlide key={item.bannerId}>
               <Image
                 alt={item.bannerName}

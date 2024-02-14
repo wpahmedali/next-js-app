@@ -66,7 +66,6 @@ const CountryDialog = ({
     showReservedTag: 0,
     isAuctionSheetDisplay: 0,
     isPriceDisplay: 0,
-    whatsappNumber: '',
   };
 
   return (
@@ -106,7 +105,7 @@ const CountryDialog = ({
                         {isLoading && <Loading />}
                         {(data?.data?.length === 0 || isError) &&
                           !isLoading && <Error />}
-                        {isSuccess && data.data?.length !== 0 && (
+                        {isSuccess && data.data.length !== 0 && (
                           <div className="container-fluid mx-auto grid sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5 pt-2 gap-4">
                             {(!defaultCountryShown ||
                               !(countriesList?.length > 0)) && (
@@ -121,7 +120,7 @@ const CountryDialog = ({
                               />
                             )}
 
-                            {countries?.map((item) => (
+                            {countries.map((item) => (
                               <CountryItem
                                 hideDialog={hideDialog}
                                 isPreviousData={isPreviousData}

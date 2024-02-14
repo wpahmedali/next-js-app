@@ -12,7 +12,7 @@ import { useFavoriteCars } from 'src/providers/FavouriteVehicleList';
 import 'react-toastify/dist/ReactToastify.css';
 import { notify } from 'utils/toast';
 import { useCurrentCountry } from 'src/hooks/current-country';
-import { useWhatsappRedirect } from 'src/hooks/whatsapp-redirect';
+import { redirectToWhatsApp } from 'utils/redirect-to-whatsapp';
 
 const variants = {
   hidden: { opacity: 0 },
@@ -47,8 +47,6 @@ const VehicleCard = ({ url, data }: IVehicleCard) => {
         : 'Add to Favourite'
     );
   };
-
-  const whatsappRedirectLink = useWhatsappRedirect('', data);
 
   return (
     <motion.div
@@ -115,10 +113,15 @@ const VehicleCard = ({ url, data }: IVehicleCard) => {
 
         <div className="flex items-center justify-between border-b border-zinc-300 bg-[#dfdfdf] p-1">
           <div className="flex items-center justify-between">
-            <Link href={whatsappRedirectLink} target="_blank" className="mr-1">
-              <WhatsappIcon />
-              <span className="text-[10px] font-medium text-black leading-4 py-2"></span>{' '}
-            </Link>
+            {data?.whatsappNumber && (
+              <button
+                className="mr-1"
+                onClick={() => redirectToWhatsApp('', data)}
+              >
+                <WhatsappIcon />
+                <span className="text-[10px] font-medium text-black leading-4 py-2"></span>{' '}
+              </button>
+            )}
           </div>
 
           <div className="flex items-center justify-center">

@@ -23,12 +23,12 @@ export const useIsAuctionCountry = (countryId?: number): boolean => {
   useEffect(() => {
     if (isSuccess && data && philippineCountryData) {
       let currentCountry = null;
-      currentCountry = data.data?.find(
+      currentCountry = data.data.find(
         (country) => country.id === params.countryId
       );
 
       if (!currentCountry && philippineCountryIsSuccess) {
-        currentCountry = philippineCountryData.data?.find(
+        currentCountry = philippineCountryData.data.find(
           (x) => x.id === Number(params.countryId)
         );
       }

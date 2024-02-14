@@ -1,15 +1,8 @@
 import React, { ChangeEvent, useState } from 'react';
 import Image from 'next/image';
 import { listingLoaderImage } from 'src/common/listing-loader-image';
-import { IInputField } from 'components/customer-review/detail-page/interfaces/input-field.interface';
 
-const InputFile = ({
-  title,
-  name,
-  setFormData,
-  error,
-  formData,
-}: IInputField): JSX.Element => {
+const InputFile = ({ title, name, setFormData, error }): JSX.Element => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -32,14 +25,13 @@ const InputFile = ({
       <h1 className="bg-black text-white w-full p-2 mb-2">{title}</h1>
       <form className="flex items-center space-x-6 ">
         <div className="shrink-0 rounded-full border border-gray-500">
+          
           <Image
-            width={100}
-            height={100}
+            width={20}
+            height={20}
             className="h-24 w-24 object-cover rounded-full"
             src={
-              formData?.system_car_img
-                ? formData.system_car_img.replace('/s_thumb', '/thumb')
-                : selectedFile
+              selectedFile
                 ? URL.createObjectURL(selectedFile)
                 : listingLoaderImage
             }

@@ -48,14 +48,8 @@ export const getServerSideProps = withCSR(async (ctx: any) => {
 });
 
 const Page = () => {
-  const scrollHieght = 270;
   const router = useRouter();
   const dynamicMetaData = useVehicleDetailDynamicMetaData(router);
-
-  router.events.on('routeChangeComplete', () =>
-    window.scrollTo(0, scrollHieght)
-  );
-
   return (
     <Fragment>
       <Head>
