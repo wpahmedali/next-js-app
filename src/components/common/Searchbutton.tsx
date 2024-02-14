@@ -11,14 +11,14 @@ import {
 } from 'src/providers/LoadingContext';
 import { useVehicleListView } from 'src/providers/VehicleListView';
 import Loading from 'components/loading';
-import { useCurrentCountryName } from 'src/hooks/current-country-name';
+import { IFilterSearchButton } from 'src/interfaces/filter-search-button.interface';
 
 const SearchButton = ({
   handleOnKeyDown,
   resetButtonClick,
   dropdownState,
   setDropdownState,
-}) => {
+}: IFilterSearchButton) => {
   const setLoadingState = useDispatchLoadingState();
   const router: NextRouter = useRouter();
   const view = useVehicleListView();
@@ -48,7 +48,11 @@ const SearchButton = ({
   const isLoadingSearch = isPreviousData && loadingState === 'searchLoader';
   const isLoadingReset = isPreviousData && loadingState === 'resetLoader';
 
-  const renderButton = (label, onClickHandler, isLoading) => (
+  const renderButton = (
+    label: string,
+    onClickHandler: () => void,
+    isLoading: boolean
+  ) => (
     <div className="2xl:w-1/6 lg:w-1/6 md:w-1/2 sm:w-full xs:w-full xxs:w-full px-2 2xl:mb-2 lg:mb-2 md:mb-2 sm:mb-2 xs:mb-2 xxs:mb-2">
       <motion.div
         whileHover={{ scale: 1.1 }}

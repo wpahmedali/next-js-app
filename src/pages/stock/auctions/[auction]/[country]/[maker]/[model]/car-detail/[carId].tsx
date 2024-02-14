@@ -42,6 +42,8 @@ export const getServerSideProps = withCSR(async (ctx: any) => {
 const Page = () => {
   const router = useRouter();
   const dynamicMetaData = useVehicleDetailDynamicMetaData(router);
+  window.scrollTo(0, 0);
+
   return (
     <Fragment>
       <Head>

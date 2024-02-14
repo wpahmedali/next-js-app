@@ -16,6 +16,7 @@ export interface ICountry {
   specialOffer: boolean;
   specialOfferTotal: number;
   isPriceDisplay: number;
+  whatsappNumber: string;
 }
 
 export interface ICountryApiRes {

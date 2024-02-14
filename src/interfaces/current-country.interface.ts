@@ -9,4 +9,5 @@ export interface ICurrentCountry {
   flagIcon: JSX.Element;
   id?: number;
   isPriceDisplay?: number;
+  whatsappNumber?: string;
 }

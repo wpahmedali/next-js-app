@@ -57,6 +57,7 @@ const Form = ({ allErrors, formData, setFormData }) => {
           name="car_image"
           setFormData={setFormData}
           error={allErrors?.car_image || ''}
+          formData={formData}
         />
         <InputFile
           title="Customer Video"

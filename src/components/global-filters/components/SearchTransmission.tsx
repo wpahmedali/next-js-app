@@ -23,7 +23,7 @@ const SearchTransmission = ({
   let dropdownData: IDropdownData[] = [];
 
   if (isSuccess && data) {
-    dropdownData = data.data.transmission.map((item) => ({
+    dropdownData = data.data?.transmission.map((item) => ({
       id: item.transmissionId,
       name: item.transmissionName,
       isChecked: false,

@@ -7,7 +7,7 @@ const httpsAgent = new https.Agent({
 
 const fetcher = axios.create({
   baseURL: 'https://jjbackend.com/api',
- httpsAgent,
+  httpsAgent,
   responseType: 'json',
   headers: {
     'Content-Type': 'multipart/form-data',

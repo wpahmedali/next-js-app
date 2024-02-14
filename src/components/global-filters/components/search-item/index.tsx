@@ -85,7 +85,7 @@ const SearchItem = ({
   };
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && data) {
       if (resetToggle) {
         setSelectedNames(null);
       }

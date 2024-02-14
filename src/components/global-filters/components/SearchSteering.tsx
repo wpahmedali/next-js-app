@@ -21,7 +21,7 @@ const SearchSteering = ({
   let dropdownData: IDropdownData[] = [];
 
   if (isSuccess && data) {
-    dropdownData = data.data.steering.map((item) => ({
+    dropdownData = data.data?.steering.map((item) => ({
       id: item.steeringId,
       name: item.steeringName,
       isChecked: false,

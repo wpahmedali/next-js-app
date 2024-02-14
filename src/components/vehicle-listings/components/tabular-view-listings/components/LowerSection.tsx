@@ -5,7 +5,8 @@ import { useFavoriteCars } from 'src/providers/FavouriteVehicleList';
 import { notify } from 'utils/toast';
 import Image from 'next/image';
 import { IVehicleTabular } from '../interfaces/VehicleItem.interface';
-import { redirectToWhatsApp } from 'utils/redirect-to-whatsapp';
+import { useWhatsappRedirect } from 'src/hooks/whatsapp-redirect';
+import Link from 'next/link';
 
 const LowerSection = ({ isEven, data }: IVehicleTabular) => {
   const countryIcon = getCountryIcon(data.cssClass);
@@ -38,6 +39,8 @@ const LowerSection = ({ isEven, data }: IVehicleTabular) => {
         : 'Add to Favourite'
     );
   };
+
+  const whatsappRedirectLink = useWhatsappRedirect('', data);
 
   return (
     <tr className={`cursor-pointer ${isEven ? 'bg-[#FFFEEF]' : 'bg-[#fff]'}`}>
@@ -94,10 +97,10 @@ const LowerSection = ({ isEven, data }: IVehicleTabular) => {
           <tbody>
             <tr>
               <td className="place-content-center items-center">
-                {data?.whatsappNumber && (
-                  <button onClick={() => redirectToWhatsApp(data)}>
+                {whatsappRedirectLink && (
+                  <Link href={whatsappRedirectLink} target="_blank">
                     <WhatsappIcon />
-                  </button>
+                  </Link>
                 )}
               </td>
               <td className="place-content-center items-center">

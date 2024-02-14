@@ -31,12 +31,12 @@ export const useCurrentCountry = (
 
   useEffect(() => {
     if (isSuccess) {
-      let currentCountry = data.data.find(
+      let currentCountry = data.data?.find(
         (country) => country.id === countryId
       );
 
       if (!currentCountry && pIsSuccess) {
-        currentCountry = pData?.data.find(
+        currentCountry = pData?.data?.find(
           (country) => country.id === countryId
         );
       }
@@ -53,6 +53,7 @@ export const useCurrentCountry = (
             FBAppId: currentCountry.FBAppId,
             isPriceDisplay: currentCountry.isPriceDisplay,
             flagIcon: getCountryIcon(currentCountry.cssClass),
+            whatsappNumber: currentCountry.whatsappNumber,
           })
         : setCurrentCountry({
             isSuccess: true,
