@@ -1,4 +1,4 @@
-import { FormEvent, Fragment, useRef, useState } from 'react';
+import { FormEvent, Fragment, useEffect, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { IWriteCustomerReview } from 'components/customer-review/detail-page/interfaces/write-customer-review.interface';
 import ChassisFilter from './components/ChassisFilter';
@@ -9,12 +9,14 @@ import Form from './components/FormData';
 import CloseIcon from 'components/common/CloseIcon';
 import { validationSchema } from './validations/WriteReview';
 import * as Yup from 'yup';
+import { useMutation } from 'react-query';
+import { notify } from 'utils/toast';
 
 export const defaultFormData = {
   country_id: null,
   car_id: null,
   title: '',
-  review_rating: '',
+  review_rating: 0,
   reviews: '',
   customer_name: '',
   email: '',
@@ -33,38 +35,38 @@ const CustomerWriteReview = ({ open, setOpen }) => {
   const [formData, setFormData] =
     useState<IWriteCustomerReview>(defaultFormData);
 
+  const mutation = useMutation(createCustomerReview);
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       await validationSchema.validate(formData, { abortEarly: false });
 
       const bodyFormData = new FormData();
-      bodyFormData.append('country_id', (formData.country_id || '').toString());
-      bodyFormData.append('car_id', (formData.car_id || '').toString());
-      bodyFormData.append('title', formData.title);
-      bodyFormData.append('review_rating', formData.review_rating);
-      bodyFormData.append('customer_name', formData.customer_name);
-      bodyFormData.append('email', formData.email);
-      bodyFormData.append('reviews', formData.reviews);
-      bodyFormData.append('maker_name', formData.maker_name);
-      bodyFormData.append('model_name', formData.model_name);
-      // bodyFormData.append('customer_image', formData.customer_image);
-      // bodyFormData.append('car_image', formData.car_image);
-      bodyFormData.append('system_car_img', formData.system_car_img);
-      // bodyFormData.append('customer_video', formData.customer_video);
+      for (const key in formData) {
+        if (formData.hasOwnProperty(key)) {
+          bodyFormData.append(key, formData[key]);
+        }
+      }
 
-      await createCustomerReview(bodyFormData);
-      setOpen('');
-      setFormData(defaultFormData);
-      setAllErrors(null);
+      const data = await mutation.mutateAsync(bodyFormData);
+
+      if (data && data.data) {
+        setOpen('');
+        setFormData(defaultFormData);
+        setAllErrors(null);
+        notify(data.message);
+      }
     } catch (error) {
       const validationErrors = {};
       if (error instanceof Yup.ValidationError) {
         error.inner.forEach((err) => {
           validationErrors[err.path] = err.message;
         });
+        setAllErrors(validationErrors);
+      } else {
+        notify('An error occurred while submitting the form.');
       }
-      setAllErrors(validationErrors);
     }
   };
 
@@ -123,7 +125,7 @@ const CustomerWriteReview = ({ open, setOpen }) => {
                         allErrors={allErrors}
                       />
                       <div className="w-full mt-2">
-                        <span className="text-red-500">*</span>Indicates a
+                        <span className="text-red-500">*</span> Indicates a
                         required field
                       </div>
                       <Rating allErrors={allErrors} setFormData={setFormData} />
@@ -136,6 +138,7 @@ const CustomerWriteReview = ({ open, setOpen }) => {
                   </div>
                 </div>
                 <SubmitBtn
+                  mutation={mutation}
                   handleSubmit={handleSubmit}
                   setOpen={setOpen}
                   setAllErrors={setAllErrors}
@@ -149,4 +152,5 @@ const CustomerWriteReview = ({ open, setOpen }) => {
     </Transition.Root>
   );
 };
+
 export default CustomerWriteReview;

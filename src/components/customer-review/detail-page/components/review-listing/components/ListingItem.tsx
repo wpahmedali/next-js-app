@@ -56,7 +56,8 @@ const ListingItem = ({ i, person, setLightBox, setLightboxIndex }) => {
         </p>
         {person.createdAt ? (
           <p className="mt-1 text-xs leading-5 text-gray-500">
-            Last seen <time dateTime={person.reviews}>{person.createdAt}</time>
+            Review Date{' '}
+            <time dateTime={person.reviews}>{person.createdAt}</time>
           </p>
         ) : (
           <div className="mt-1 flex items-center gap-x-1.5">

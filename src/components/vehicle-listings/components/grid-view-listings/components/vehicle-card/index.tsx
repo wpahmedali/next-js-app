@@ -12,7 +12,8 @@ import { useFavoriteCars } from 'src/providers/FavouriteVehicleList';
 import 'react-toastify/dist/ReactToastify.css';
 import { notify } from 'utils/toast';
 import { useCurrentCountry } from 'src/hooks/current-country';
-import { redirectToWhatsApp } from 'utils/redirect-to-whatsapp';
+import { useWhatsappRedirect } from 'src/hooks/whatsapp-redirect';
+import ReactGA from 'react-ga';
 
 const variants = {
   hidden: { opacity: 0 },
@@ -46,6 +47,16 @@ const VehicleCard = ({ url, data }: IVehicleCard) => {
         ? 'Remove From Favourite'
         : 'Add to Favourite'
     );
+  };
+
+  const whatsappRedirectLink = useWhatsappRedirect('', data);
+
+  const handleClick = () => {
+    ReactGA.event({
+      category: 'Button',
+      action: 'Click',
+      label: 'My Button',
+    });
   };
 
   return (
@@ -97,31 +108,22 @@ const VehicleCard = ({ url, data }: IVehicleCard) => {
 
       <div className="px-2 pb-2">
         <BodySpec
-          modelName={data.modelName}
-          colorName={data.colorName}
-          fuelName={data.fuelName}
-          driveName={data.driveName}
-          doors={data.doors}
-          seats={data.seats}
-          lotNo={data.lotNo}
-          carId={data.carId}
-          fobPrice={data.fobPrice}
-          currencySymbol={data.currencySymbol}
+          data={data}
           url={url}
           isPriceDisplay={currentCountry.isPriceDisplay}
         />
 
         <div className="flex items-center justify-between border-b border-zinc-300 bg-[#dfdfdf] p-1">
           <div className="flex items-center justify-between">
-            {data?.whatsappNumber && (
-              <button
-                className="mr-1"
-                onClick={() => redirectToWhatsApp('', data)}
-              >
-                <WhatsappIcon />
-                <span className="text-[10px] font-medium text-black leading-4 py-2"></span>{' '}
-              </button>
-            )}
+            <Link
+              href={whatsappRedirectLink}
+              target="_blank"
+              className="mr-1"
+              onClick={handleClick}
+            >
+              <WhatsappIcon />
+              <span className="text-[10px] font-medium text-black leading-4 py-2"></span>{' '}
+            </Link>
           </div>
 
           <div className="flex items-center justify-center">

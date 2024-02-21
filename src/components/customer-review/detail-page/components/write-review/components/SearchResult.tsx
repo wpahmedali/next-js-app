@@ -20,7 +20,7 @@ const SearchResult = ({
       ...values,
       title: `${item.makerName} ${item.modelName}`,
       system_car_img: item.imageUrl,
-      car_id: item.carId,
+      car_id: String(item.carId),
       country_id: countryId,
       maker_name: item.makerName,
       model_name: item.modelName,
@@ -31,7 +31,6 @@ const SearchResult = ({
   return (
     <li key={item.carId} onClick={handleSelectedItem}>
       <div className="flex items-center pl-2 rounded hover:bg-gray-100">
-
         <label className="ml-2 text-thin text-gray-500 cursor-pointer">
           {item.chassisNo}
         </label>

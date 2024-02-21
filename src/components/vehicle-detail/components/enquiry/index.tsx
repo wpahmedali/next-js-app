@@ -80,7 +80,7 @@ const Enquiry = ({ carId }: { carId: number }): JSX.Element => {
           name="countryName"
           value={values.countryName}
           placeholder="Select Country"
-          onChangeHandler={handleChange}
+          onChangeHandler={(e) => formik.setFieldValue('countryName', e)}
           error={
             errors.countryName && touched.countryName ? errors.countryName : ''
           }

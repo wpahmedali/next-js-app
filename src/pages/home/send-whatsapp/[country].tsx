@@ -1,8 +1,8 @@
 import SalesTeamLayout from 'components/dashboard/SalesTeamLayout';
-import SalesTeam from 'components/sales-team';
+import SendWhatsapp from 'components/send-whatsapp';
 
 const WhatsAppPage = () => {
-  return <SalesTeam />;
+  return <SendWhatsapp />;
 };
 
 export default WhatsAppPage;

@@ -40,7 +40,7 @@ const CustomerReview = () => {
       <h1 className="bg-primaryDark text-white w-full text-center p-2 font-bold text-3xl flex-none sm:mt-2 xs:mt-2 xxs:mt-2">
         Customer Reviews
       </h1>
-      {params.countryId && <WriteReviewButton setOpen={setContext} />}
+      {params.countryId !== 0 && <WriteReviewButton setOpen={setContext} />}
       <h2 className="mt-5 text-center w-full text-2xl bg-black text-white p-2">
         - User Photo Gallery -{' '}
       </h2>

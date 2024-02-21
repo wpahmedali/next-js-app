@@ -5,7 +5,9 @@ import { useFavoriteCars } from 'src/providers/FavouriteVehicleList';
 import { notify } from 'utils/toast';
 import Image from 'next/image';
 import { IVehicleTabular } from '../interfaces/VehicleItem.interface';
-import { redirectToWhatsApp } from 'utils/redirect-to-whatsapp';
+import { useWhatsappRedirect } from 'src/hooks/whatsapp-redirect';
+import Link from 'next/link';
+import { LocationIcon } from 'icons/react-icons/Location';
 
 const LowerSection = ({ isEven, data }: IVehicleTabular) => {
   const countryIcon = getCountryIcon(data.cssClass);
@@ -39,6 +41,8 @@ const LowerSection = ({ isEven, data }: IVehicleTabular) => {
     );
   };
 
+  const whatsappRedirectLink = useWhatsappRedirect('', data);
+
   return (
     <tr className={`cursor-pointer ${isEven ? 'bg-[#FFFEEF]' : 'bg-[#fff]'}`}>
       <td className="border border-[#EDEDED] p-2  text-left" colSpan={3}>
@@ -53,7 +57,7 @@ const LowerSection = ({ isEven, data }: IVehicleTabular) => {
             ? data.carAccessories.slice(0, textLimit) + '...'
             : data.carAccessories}
         </p>
-        <div className="flex items-center mt-2 gap-1">
+        <div className="flex items-center justify-between mt-2 gap-1">
           {data?.fuelName?.toLowerCase() === 'hybrid-gasoline' && (
             <span>
               <Image
@@ -84,6 +88,12 @@ const LowerSection = ({ isEven, data }: IVehicleTabular) => {
               ></Image>
             </span>
           )}
+          <div className="">
+            <h1 className="text-xs font-bold text-primaryDark leading-4 flex">
+              <LocationIcon />
+              {data?.cityName}
+            </h1>
+          </div>
         </div>
       </td>
       <td
@@ -94,10 +104,10 @@ const LowerSection = ({ isEven, data }: IVehicleTabular) => {
           <tbody>
             <tr>
               <td className="place-content-center items-center">
-                {data?.whatsappNumber && (
-                  <button onClick={() => redirectToWhatsApp(data)}>
+                {whatsappRedirectLink && (
+                  <Link href={whatsappRedirectLink} target="_blank">
                     <WhatsappIcon />
-                  </button>
+                  </Link>
                 )}
               </td>
               <td className="place-content-center items-center">

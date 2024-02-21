@@ -29,7 +29,7 @@ export const useSpecialOfferCountry = (): ISpecialOfferCountry => {
       const countryId =
         country && !Array.isArray(country) ? getIdFromParam(country) : 0;
 
-      const currentCountry = data.data.find(
+      const currentCountry = data.data?.find(
         (country) => country.id === countryId
       );
 

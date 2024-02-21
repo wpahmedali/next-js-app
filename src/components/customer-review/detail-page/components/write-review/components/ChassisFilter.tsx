@@ -65,7 +65,7 @@ const ChassisFilter = ({ setFormData, allErrors }): JSX.Element => {
           className=" bg-white p-4 h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
           aria-labelledby={`MaxYearDropdownButton`}
         >
-          {data.data.map((item, i) => (
+          {data?.data?.map((item, i) => (
             <SearchResult
               key={i}
               item={item}

@@ -1,3 +1,5 @@
+import { IVehicleDetail } from 'src/interfaces/vehicle-detail.interface';
+
 export interface IEngineSpec {
   engineSize: number;
   registrationYear: number | string;
@@ -8,16 +10,7 @@ export interface IEngineSpec {
 }
 
 export interface IBodySpec {
-  modelName: string;
-  colorName: string;
-  driveName: string;
-  fuelName: string;
-  seats: number;
-  doors: number;
-  lotNo: string;
-  carId: number;
-  fobPrice: number;
-  currencySymbol: string;
+  data: IVehicleDetail;
   url: string;
   isPriceDisplay: number;
 }

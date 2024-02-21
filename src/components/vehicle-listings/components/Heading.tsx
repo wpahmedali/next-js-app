@@ -2,9 +2,13 @@ import { GridCarIcon } from 'icons/react-icons/GridCar';
 import { ListViewIcon } from 'icons/react-icons/ListView';
 import { NextRouter, useRouter } from 'next/router';
 import React from 'react';
+import { useVehicleList } from 'react-query/hooks/api/vehicle-list';
+import { reactQuery, vehiclePerPageList } from 'src/common/constants';
 import { useCurrentCountryName } from 'src/hooks/current-country-name';
+import { useRouterParams } from 'src/hooks/router-params';
 import { useSelectedCountryIcon } from 'src/hooks/selected-country-icon';
 import { useDispatchLoadingState } from 'src/providers/LoadingContext';
+import { useTitleContext } from 'src/providers/TitleContext';
 import { useDispatchListView } from 'src/providers/VehicleListView';
 import { getNameFromParam } from 'utils/get-name-from-param';
 
@@ -23,6 +27,7 @@ const Heading = () => {
 
   const dispatch = useDispatchListView();
   const setLoadingState = useDispatchLoadingState();
+  const { title, updateTitle } = useTitleContext();
 
   const tabularView = () => {
     dispatch({ type: 'TABULAR' });
@@ -33,12 +38,35 @@ const Heading = () => {
     setLoadingState({ type: 'gridLoader' });
   };
 
+  const params = useRouterParams(router.query);
+  params.perPage = params.page * vehiclePerPageList;
+  params.page = 1;
+
+  const { isFetching, isFetched } = useVehicleList(
+    reactQuery.vehicleList.grid,
+    params
+  );
+
+  if (isFetched) {
+    updateTitle(
+      maker && model && !isFetching
+        ? `${makerName.toUpperCase()} > ${
+            model === 'all-models' ? 'All Models' : modelName.toUpperCase()
+          }`
+        : bodyType && !isFetching
+        ? bodyTypeName.toUpperCase()
+        : !isFetching && selectedCountry
+    );
+  }
+
   return (
     <div className="flex justify-between items-center">
       <h1 className="text-xl color-black font-semibold border-zinc-300 pb-2 mt-2 flex">
         <span className="flex items-center mr-2">{countryIcon}</span>
         <span className="flex items-center">
-          {maker && model
+          {isFetching
+            ? title
+            : maker && model
             ? `${makerName.toUpperCase()} > ${
                 model === 'all-models' ? 'All Models' : modelName.toUpperCase()
               }`

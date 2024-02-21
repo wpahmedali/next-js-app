@@ -6,7 +6,7 @@ export const validationSchema = Yup.object().shape({
   title: Yup.string().required('Title is required'),
   review_rating: Yup.string().required('Review Rating is required'),
   customer_name: Yup.string().required('Customer Name is required'),
-  email: Yup.string().email('Invalid email').required('Email is required'),
+  email: Yup.string().email('Invalid email'),
   reviews: Yup.string().required('Reviews are required'),
   maker_name: Yup.string().required('Maker Name is required'),
   model_name: Yup.string().required('Model Name is required'),

@@ -1,17 +1,8 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import React, { useRef } from 'react';
+import React from 'react';
 import { IVehicleDetail } from 'src/interfaces/vehicle-detail.interface';
 
 const Specifications = ({ data }: { data: IVehicleDetail }): JSX.Element => {
-  const specificationsRef = useRef<HTMLDivElement>(null);
-
-  if (specificationsRef && specificationsRef.current) {
-    window.scrollTo({
-      top: specificationsRef.current.offsetTop,
-      behavior: 'smooth',
-    });
-  }
-
   return (
     <AnimatePresence>
       <motion.div
@@ -23,10 +14,7 @@ const Specifications = ({ data }: { data: IVehicleDetail }): JSX.Element => {
         <div className="flex bg-primary text-black justify-start items-center p-2 text-sm">
           <div className="font-bold uppercase text-lg">Car Specifications</div>
         </div>
-        <div
-          className="grid grid-cols-4 sm:grid-cols-2 xs:grid-cols-2 xxs:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4 gap-1 text-xs"
-          ref={specificationsRef}
-        >
+        <div className="grid grid-cols-4 sm:grid-cols-2 xs:grid-cols-2 xxs:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4 gap-1 text-xs">
           <div className="font-bold bg-gray-100 p-2">Stock No:</div>
           <div className="font-bold bg-gray-100 p-2">{data.carId}</div>
           <div className="font-bold bg-gray-100 p-2">Chassis #</div>

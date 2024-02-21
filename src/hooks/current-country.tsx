@@ -31,12 +31,12 @@ export const useCurrentCountry = (
 
   useEffect(() => {
     if (isSuccess) {
-      let currentCountry = data.data.find(
+      let currentCountry = data.data?.find(
         (country) => country.id === countryId
       );
 
       if (!currentCountry && pIsSuccess) {
-        currentCountry = pData?.data.find(
+        currentCountry = pData?.data?.find(
           (country) => country.id === countryId
         );
       }

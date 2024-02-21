@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useCurrentCountry } from 'src/hooks/current-country';
 import { useWhatsappRedirect } from 'src/hooks/whatsapp-redirect';
 import { getIdFromParam } from 'utils/get-id-from-param';
+import ReactGA from 'react-ga';
 
 const SendWhatsapp = () => {
   const [buttonClicked, setButtonClicked] = useState<boolean>(false);
@@ -26,13 +27,23 @@ const SendWhatsapp = () => {
     let timer;
     if (!buttonClicked) {
       timer = setTimeout(() => {
+        ReactGA.event({
+          category: 'Button',
+          action: 'Click',
+          label: 'My Button',
+        });
         window.open(whatsappRedirectLink, '_blank');
       }, 5000);
     }
     return () => clearTimeout(timer);
-  }, [currentCountry]);
+  }, [buttonClicked, currentCountry.whatsappNumber, whatsappRedirectLink]);
 
   const handleButtonClick = () => {
+    ReactGA.event({
+      category: 'Button',
+      action: 'Click',
+      label: 'My Button',
+    });
     setButtonClicked(true);
     window.open(whatsappRedirectLink, '_blank');
   };
