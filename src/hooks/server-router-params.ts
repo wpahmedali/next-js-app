@@ -41,13 +41,14 @@ export const useServerRouterParams = async (
   const params = { ...emptyCarListParams };
 
   const { defaultCountryShown } = siteSettings;
-  const { data: currentLocation } = await getLocation(ip);
+  const { data: currentLocation } = await getLocation();
 
   // country section start
   if (!country) {
     params.countryId = 0;
   }
   if (currentLocation && currentLocation?.id && defaultCountryShown) {
+    console.log('first_------>', currentLocation);
     params.countryId = currentLocation.id;
     params.isCountryFound = true;
   } else if (params.countryId && !defaultCountryShown) {

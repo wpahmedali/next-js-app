@@ -6,7 +6,7 @@ const getLocation = async (
   ip_address?: string
 ): Promise<IApiResponse<IGeoLocation>> => {
   try {
-    const url = `/geoLocation${ip_address ? 'ip_address=' + ip_address : ''}`;
+    const url = `/geoLocation`;
     const { data }: { data: IApiResponse<IGeoLocation> } = await fetcher({
       url,
       method: 'GET',
