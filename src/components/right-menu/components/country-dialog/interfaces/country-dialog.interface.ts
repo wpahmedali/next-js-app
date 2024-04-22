@@ -1,4 +1,4 @@
 export interface ICountryDialog {
   isShowDialog: string;
-  hideDialog: (type: string) => void;
+  hideDialog: (type: string, value: string) => void;
 }

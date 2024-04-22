@@ -6,6 +6,7 @@ export const allModelsStr: string = 'all-models';
 
 export const vehicleListViews = Object.freeze({
   grid: 'grid',
+  s_grid: 's_grid',
   tabular: 'tabular',
 });
 
@@ -18,6 +19,7 @@ export const reactQuery = Object.freeze({
 
 export const emptyCarListParams: ICarListParams = {
   countryId: null,
+  pCountryId: null,
   isCountryFound: false,
   page: null,
   fixPage: 1,
@@ -35,11 +37,6 @@ export const emptyCarListParams: ICarListParams = {
   auctionId: null,
   carId: null,
 };
-
-export const philippineCountry = Object.freeze({
-  id: 20000,
-  name: 'philippine',
-});
 
 export const uaeCountry = Object.freeze({
   id: 17,

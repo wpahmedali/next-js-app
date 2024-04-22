@@ -5,5 +5,5 @@ export interface ICountryItem {
   item: ICountry;
   icon: JSX.Element;
   name: string;
-  hideDialog: (type: string) => void;
+  hideDialog: (type: string, value: string) => void;
 }

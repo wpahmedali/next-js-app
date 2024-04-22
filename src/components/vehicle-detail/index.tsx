@@ -90,7 +90,8 @@ const VehicleDetail = (): JSX.Element => {
                     </span>
                     {data.data.fobPrice !== 0 &&
                       data.data.currencySymbol &&
-                      currentCountry.isPriceDisplay === 1 && (
+                      currentCountry.isPriceDisplay === 1 &&
+                      data.data.priceAsk !== 1 && (
                         <span>
                           Price: {data.data.currencySymbol} {data.data.fobPrice}
                         </span>

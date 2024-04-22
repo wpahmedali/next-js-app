@@ -5,8 +5,7 @@ import { getCountryIcon } from 'utils/get-country-icon';
 import { GlobeAltIcon } from '@heroicons/react/24/outline';
 import { ICurrentCountry } from 'src/interfaces/current-country.interface';
 import { useRouterParams } from './router-params';
-import { usePhilippineCountryList } from 'react-query/hooks/api/philippine-country-list';
-import { philippineCountry } from 'src/common/constants';
+import { useSubCountryList } from 'react-query/hooks/api/sub-country-list';
 
 export const useCurrentCountry = (
   specificCountryId?: number
@@ -18,16 +17,15 @@ export const useCurrentCountry = (
     flagIcon: <></>,
   });
   const { query } = useRouter();
-  let { countryId } = useRouterParams(query);
+  let { countryId, pCountryId } = useRouterParams(query);
 
   if (specificCountryId) {
     countryId = specificCountryId;
   }
 
   const { data, isSuccess } = useCountry();
-  const { data: pData, isSuccess: pIsSuccess } = usePhilippineCountryList(
-    philippineCountry.id
-  );
+  const { data: subCountryData, isSuccess: subCountryIsSuccess } =
+    useSubCountryList(pCountryId || countryId);
 
   useEffect(() => {
     if (isSuccess) {
@@ -35,8 +33,13 @@ export const useCurrentCountry = (
         (country) => country.id === countryId
       );
 
-      if (!currentCountry && pIsSuccess) {
-        currentCountry = pData?.data?.find(
+      if (
+        (!currentCountry ||
+          (currentCountry && !currentCountry.auctionDisplay)) &&
+        pCountryId &&
+        subCountryIsSuccess
+      ) {
+        currentCountry = subCountryData?.data?.find(
           (country) => country.id === countryId
         );
       }
@@ -52,6 +55,7 @@ export const useCurrentCountry = (
             FBPageName: currentCountry.FBPageName,
             FBAppId: currentCountry.FBAppId,
             isPriceDisplay: currentCountry.isPriceDisplay,
+            subCountry: currentCountry.subCountry,
             flagIcon: getCountryIcon(currentCountry.cssClass),
             whatsappNumber: currentCountry.whatsappNumber,
           })
@@ -61,7 +65,7 @@ export const useCurrentCountry = (
             flagIcon: <GlobeAltIcon className="w-6 h-6" />,
           });
     }
-  }, [pData, countryId, data]);
+  }, [subCountryData, countryId, data]);
 
   return currentCountry;
 };

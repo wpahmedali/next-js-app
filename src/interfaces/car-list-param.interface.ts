@@ -5,6 +5,7 @@ export interface IMakerModel {
 
 export interface ICarListParams {
   countryId: number | null;
+  pCountryId: number | null;
   isCountryFound: boolean;
   fixPage: number;
   page: number | null;

@@ -3,18 +3,25 @@ import { ListViewIcon } from 'icons/react-icons/ListView';
 import { NextRouter, useRouter } from 'next/router';
 import React from 'react';
 import { useVehicleList } from 'react-query/hooks/api/vehicle-list';
-import { reactQuery, vehiclePerPageList } from 'src/common/constants';
+import {
+  reactQuery,
+  vehicleListViews,
+  vehiclePerPageList,
+} from 'src/common/constants';
 import { useCurrentCountryName } from 'src/hooks/current-country-name';
 import { useRouterParams } from 'src/hooks/router-params';
 import { useSelectedCountryIcon } from 'src/hooks/selected-country-icon';
 import { useDispatchLoadingState } from 'src/providers/LoadingContext';
 import { useTitleContext } from 'src/providers/TitleContext';
-import { useDispatchListView } from 'src/providers/VehicleListView';
+import {
+  useDispatchListView,
+  useVehicleListView,
+} from 'src/providers/VehicleListView';
 import { getNameFromParam } from 'utils/get-name-from-param';
 
 const Heading = () => {
   const router: NextRouter = useRouter();
-  const { maker, model, bodyType } = router.query;
+  const { maker, model, bodyType, page } = router.query;
   const makerName =
     maker && !Array.isArray(maker) ? getNameFromParam(maker) : '';
   const modelName =
@@ -24,6 +31,7 @@ const Heading = () => {
 
   const countryIcon = useSelectedCountryIcon();
   const selectedCountry = useCurrentCountryName();
+  const view = useVehicleListView();
 
   const dispatch = useDispatchListView();
   const setLoadingState = useDispatchLoadingState();
@@ -33,14 +41,18 @@ const Heading = () => {
     dispatch({ type: 'TABULAR' });
     setLoadingState({ type: 'tabularLoader' });
   };
-  const gridView = () => {
-    dispatch({ type: 'GRID' });
-    setLoadingState({ type: 'gridLoader' });
-  };
 
   const params = useRouterParams(router.query);
   params.perPage = params.page * vehiclePerPageList;
   params.page = 1;
+
+  const gridView = () => {
+    if (view === vehicleListViews.tabular) {
+      dispatch({ type: 'S_GRID' });
+    }
+    setLoadingState({ type: 'gridLoader' });
+    localStorage.setItem('pageNo', `${page}`);
+  };
 
   const { isFetching, isFetched } = useVehicleList(
     reactQuery.vehicleList.grid,

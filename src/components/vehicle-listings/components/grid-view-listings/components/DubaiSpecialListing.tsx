@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { NextRouter, useRouter } from 'next/router';
 import Error from 'components/error';
 import { ROUTES } from 'src/common/routes';
@@ -15,25 +15,49 @@ import {
   uaeCountry,
   reactQuery,
   vehiclePerPageList,
+  vehicleListViews,
 } from 'src/common/constants';
 import CountBar from './CountBar';
 import VehicleCard from './vehicle-card';
 import SeeMoreButton from './SeeMoreButton';
 import { useDubaiSpecialVehicleList } from 'react-query/hooks/api/dubai-special-vehicle-list';
+import { useVehicleListView } from 'src/providers/VehicleListView';
 
 const DubaiSpecialGridListing = () => {
   const setLoadingState = useDispatchLoadingState();
   const loadingState = useLoadingState();
   const selectedCountry = useCurrentCountryName();
+  const view = useVehicleListView();
   const router: NextRouter = useRouter();
 
   const {
     query: { page, country, auction, maker, model, bodyType },
   } = router;
 
+  const [isClient, setClient] = useState(false);
+
+  useEffect(() => {
+    setClient(true);
+  }, []);
+
   const params = useRouterParams(router.query);
-  params.perPage = params.page * vehiclePerPageList;
-  params.page = 1;
+
+  let pageNo: number;
+  let perPage: number;
+
+  if (view === vehicleListViews.s_grid && isClient) {
+    const pageDif =
+      params.page - JSON.parse(localStorage.getItem('pageNo')) + 1;
+
+    perPage = pageDif > 0 ? pageDif * vehiclePerPageList : vehiclePerPageList;
+    pageNo = params.page;
+  } else {
+    perPage = params.page * vehiclePerPageList;
+    pageNo = 1;
+  }
+
+  params.perPage = perPage;
+  params.page = pageNo;
 
   const { data, isLoading, isError, isFetching, isSuccess, isPreviousData } =
     useDubaiSpecialVehicleList(

@@ -61,7 +61,7 @@ const SparePartModal = ({ setisOpenModal, shareWhatsapp, imgName }) => {
               alt=""
               width={700}
               height={500}
-              src={`https://janjapan.com/resources/images/spare_parts/${imgName}.jpg`}
+              src={`/assets/spare-parts-images/${imgName}.jpg`}
             />
           </div>
         </div>

@@ -52,7 +52,7 @@ const CustomerWriteReview = ({ open, setOpen }) => {
       const data = await mutation.mutateAsync(bodyFormData);
 
       if (data && data.data) {
-        setOpen('');
+        setOpen('SET_VALUE', '');
         setFormData(defaultFormData);
         setAllErrors(null);
         notify(data.message);
@@ -77,7 +77,7 @@ const CustomerWriteReview = ({ open, setOpen }) => {
         className="relative z-50"
         initialFocus={cancelButtonRef}
         onClose={() => {
-          setOpen('');
+          setOpen('SET_VALUE', '');
           setFormData(defaultFormData);
           setAllErrors(null);
         }}

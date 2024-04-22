@@ -71,7 +71,11 @@ const CountryDialog = ({
 
   return (
     <Transition.Root show={isShowDialog === 'country'} as={Fragment}>
-      <Dialog as="div" className="relative z-40" onClose={() => hideDialog('')}>
+      <Dialog
+        as="div"
+        className="relative z-40"
+        onClose={() => hideDialog('SET_VALUE', '')}
+      >
         <Transition.Child
           as={Fragment}
           enter="ease-in-out duration-500"
@@ -137,7 +141,7 @@ const CountryDialog = ({
                         <div className="flex justify-end">
                           <button
                             className="rounded-lg bg-primaryDark text-white p-2 mt-3"
-                            onClick={() => hideDialog('')}
+                            onClick={() => hideDialog('SET_VALUE', '')}
                           >
                             Close
                           </button>

@@ -5,13 +5,13 @@ import { useModelState, useSetContext } from 'src/providers/ModelContext';
 
 const CountryToggleMenu = (): JSX.Element => {
   const setContext = useSetContext();
-  const modelState = useModelState();
+  const { value: modelState } = useModelState();
 
   return (
     <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
       <li>
         <a
-          onClick={() => setContext('country')}
+          onClick={() => setContext('SET_VALUE', 'country')}
           className="w-fill cursor-pointer flex p-3 pl-3 bg-[#E8E8E8] hover:bg-[#fccf3a]"
         >
           <span className="ml-3 text-xs font-normal text-black flex gap-2">

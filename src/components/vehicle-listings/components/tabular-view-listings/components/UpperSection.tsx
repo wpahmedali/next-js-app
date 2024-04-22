@@ -56,6 +56,20 @@ const UpperSection = ({ url, isEven, data }: IVehicleTabular) => {
       <td className={`${classes} p-2 text-left`}>
         <h2 className="font-bold">{data.modelName}</h2>
       </td>
+      <td className={`${classes} p-2 text-xs text-center`}>
+        {data.currencySymbol &&
+        data.fobPrice != 0 &&
+        currentCountry.isPriceDisplay === 1 &&
+        data.priceAsk !== 1 ? (
+          <span className="font-bold">
+            {data.currencySymbol} <br></br> {data.fobPrice}
+          </span>
+        ) : (
+          <Link href={url} className="text-blue-700 text-sm">
+            ASK
+          </Link>
+        )}
+      </td>
       <td
         className={`${classes} p-2 text-xs text-center`}
         style={{ color: 'red' }}
@@ -81,19 +95,6 @@ const UpperSection = ({ url, isEven, data }: IVehicleTabular) => {
       </td>
       <td className={`${classes} p-2 text-xs text-center`}>
         {data.mileage} KM
-      </td>
-      <td className={`${classes} p-2 text-xs text-center`}>
-        {data.currencySymbol &&
-        data.fobPrice !== 0 &&
-        currentCountry.isPriceDisplay === 1 ? (
-          <span>
-            {data.currencySymbol} <br></br> {data.fobPrice}
-          </span>
-        ) : (
-          <Link href={url} className="text-blue-700 text-sm">
-            ASK
-          </Link>
-        )}
       </td>
     </tr>
   );

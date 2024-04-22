@@ -18,7 +18,7 @@ const CustomerReview = () => {
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const { query } = useRouter();
   const setContext = useSetContext();
-  const modelState = useModelState();
+  const { value: modelState } = useModelState();
   const params = useRouterParams(query);
 
   params.page = 1;

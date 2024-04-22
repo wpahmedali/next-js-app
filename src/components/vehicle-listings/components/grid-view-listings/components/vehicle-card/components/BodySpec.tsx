@@ -41,9 +41,10 @@ const BodySpec = ({ data, url, isPriceDisplay }: IBodySpec) => {
       <div className="flex items-center justify-between border-b border-zinc-300 py-2">
         <h1 className="text-xs font-bold text-[#000cad] leading-4">
           Price:
-          {data?.fobPrice !== 0 &&
+          {data?.fobPrice != 0 &&
           data?.currencySymbol &&
-          isPriceDisplay === 1 ? (
+          isPriceDisplay === 1 &&
+          data.priceAsk !== 1 ? (
             <span className="text-xs font-bold text-black leading-4 ml-2">
               {data.currencySymbol} {data.fobPrice}
             </span>

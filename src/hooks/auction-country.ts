@@ -1,8 +1,7 @@
 import { NextRouter, useRouter } from 'next/router';
 import { useCountry } from '../react-query/hooks/api/country';
 import { useEffect, useState } from 'react';
-import { usePhilippineCountryList } from 'react-query/hooks/api/philippine-country-list';
-import { philippineCountry } from 'src/common/constants';
+import { useSubCountryList } from 'react-query/hooks/api/sub-country-list';
 import { useRouterParams } from './router-params';
 
 export const useIsAuctionCountry = (countryId?: number): boolean => {
@@ -11,34 +10,37 @@ export const useIsAuctionCountry = (countryId?: number): boolean => {
   const router: NextRouter = useRouter();
   const params = useRouterParams(router.query);
 
-  if (countryId) {
-    params.countryId = countryId;
-  }
-
   const { data, isSuccess } = useCountry();
 
-  const { data: philippineCountryData, isSuccess: philippineCountryIsSuccess } =
-    usePhilippineCountryList(philippineCountry.id);
+  const { data: subCountryData, isSuccess: subCountryIsSuccess } =
+    useSubCountryList(params.pCountryId || params.countryId);
 
   useEffect(() => {
-    if (isSuccess && data && philippineCountryData) {
+    if (isSuccess && data && subCountryData) {
       let currentCountry = null;
       currentCountry = data.data?.find(
-        (country) => country.id === params.countryId
+        (country) =>
+          country.id ===
+          (countryId !== undefined ? countryId : params.countryId)
       );
 
-      if (!currentCountry && philippineCountryIsSuccess) {
-        currentCountry = philippineCountryData.data?.find(
-          (x) => x.id === Number(params.countryId)
+      if (
+        (!currentCountry ||
+          (currentCountry && !currentCountry.auctionDisplay)) &&
+        subCountryIsSuccess
+      ) {
+        currentCountry = subCountryData.data?.find(
+          (x) => x.id === Number(countryId || params.countryId)
         );
       }
+
       if (currentCountry && currentCountry.auctionDisplay) {
         setIsAuctionCountry(true);
       } else {
         setIsAuctionCountry(false);
       }
     }
-  }, [params.countryId, philippineCountryIsSuccess, isSuccess, data, router]);
+  }, [params.countryId, subCountryIsSuccess, isSuccess, data, router]);
 
   return isAuctionCountry;
 };

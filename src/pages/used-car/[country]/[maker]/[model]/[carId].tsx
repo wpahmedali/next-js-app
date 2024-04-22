@@ -62,8 +62,8 @@ const Page = () => {
         <title>{dynamicMetaData?.title || "Jan's Group"}</title>
         {dynamicMetaData?.vehicleData?.map((item, i) => (
           <meta
-            property={item.property}
-            content={item.content.toString()}
+            property={item?.property}
+            content={item?.content?.toString()}
             key={i}
           />
         ))}

@@ -29,7 +29,7 @@ const LoginForm = () => {
     try {
       const data = await login(formValues);
       addAccessToken(data.data.token);
-      setContext('');
+      setContext('SET_VALUE', '');
       notify(data.message);
     } catch (error) {}
   };
@@ -57,10 +57,7 @@ const LoginForm = () => {
     >
       <div className="p-4 max-w-lg flex h-screen justify-end items-center right-0 absolute">
         <div className="bg-white rounded-lg shadow h-screen">
-          <ModelHeader
-            setModelIsOpen={setContext}
-            title="Sign In"
-          />
+          <ModelHeader setModelIsOpen={setContext} title="Sign In" />
 
           <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-4 p-4 md:p-5">
             <div className="bg-white overflow-hidden transition-transform transform">

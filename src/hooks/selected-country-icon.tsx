@@ -1,8 +1,7 @@
 import { NextRouter, useRouter } from 'next/router';
 import { useCountry } from 'react-query/hooks/api/country';
 import { getCountryIcon } from 'utils/get-country-icon';
-import { usePhilippineCountryList } from 'react-query/hooks/api/philippine-country-list';
-import { philippineCountry } from 'src/common/constants';
+import { useSubCountryList } from 'react-query/hooks/api/sub-country-list';
 import { useRouterParams } from './router-params';
 import { GlobeAltIcon } from '@heroicons/react/24/outline';
 
@@ -15,8 +14,8 @@ export const useSelectedCountryIcon = () => {
     isLoading: cisLoading,
     isError: cisError,
   } = useCountry();
-  const { data: philippineCountryData, isSuccess: philippineCountryIsSuccess } =
-    usePhilippineCountryList(philippineCountry.id);
+  const { data: subCountryData, isSuccess: subCountryIsSuccess } =
+    useSubCountryList(params.pCountryId || params.countryId);
 
   let countryIcon = <GlobeAltIcon className="w-6 h-6" />;
   if (!cisLoading && !cisError) {
@@ -25,8 +24,8 @@ export const useSelectedCountryIcon = () => {
       (x) => x.id === Number(params.countryId)
     );
 
-    if (!selectedCountryicon && philippineCountryIsSuccess) {
-      selectedCountryicon = philippineCountryData?.data?.find(
+    if (!selectedCountryicon && subCountryIsSuccess) {
+      selectedCountryicon = subCountryData?.data?.find(
         (x) => x.id === Number(params.countryId)
       );
     }

@@ -1,6 +1,5 @@
 import { Popover } from '@headlessui/react';
 import React, { useEffect, useState } from 'react';
-import { IMobileView } from '../../interfaces/mobile-view.interface';
 import AboutUs from './../web-view/components/AboutUs';
 import SupportFAQ from './../web-view/components/SupportFAQ';
 import GlobalStock from './../web-view/components/GlobalStock';
@@ -11,13 +10,13 @@ import { useModelState, useSetContext } from 'src/providers/ModelContext';
 const MobileView = (): JSX.Element => {
   const [mobileView, setMobileView] = useState(false);
   const setContext = useSetContext();
-  const modelState = useModelState();
+  const { value } = useModelState();
 
   function handlemobileMenuOpen() {
-    if (modelState != 'about-nav') {
-      setContext('about-nav');
+    if (value != 'about-nav') {
+      setContext('SET_VALUE', 'about-nav');
     } else {
-      setContext('');
+      setContext('SET_VALUE', '');
     }
   }
 
@@ -66,7 +65,7 @@ const MobileView = (): JSX.Element => {
             <span className="sr-only">Open main menu</span>
           </button>
         </div>
-        {modelState == 'about-nav' ? (
+        {value == 'about-nav' ? (
           <Popover.Group className="2xl:inline-flex lg:inline-flex md:inline-flex lg:gap-x-0 w-full absolute top-10 h-screen max-w-[250px] left-0 bg-primary z-50">
             <AboutUs />
 

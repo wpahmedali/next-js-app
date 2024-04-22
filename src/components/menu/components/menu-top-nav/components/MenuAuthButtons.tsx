@@ -12,7 +12,7 @@ import { useModelState, useSetContext } from 'src/providers/ModelContext';
 const MenuAuthButtons = () => {
   const [data, setData] = useState<number>();
   const setContext = useSetContext();
-  const modelState = useModelState();
+  const { value: modelState } = useModelState();
 
   const { authentication, removeAccessToken } = useAuthenticationContext();
   const { favoriteCars } = useFavoriteCars();
@@ -32,7 +32,7 @@ const MenuAuthButtons = () => {
         <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
           {!authentication ? (
             <button
-              onClick={() => setContext('login')}
+              onClick={() => setContext('SET_VALUE', 'login')}
               className="flex items-center relative hover:text-primary "
             >
               <div className="2xl:bg-transparent lg:bg-transparent md:bg-transparent 2xl:p-0 lg:p-0 md:p-0 sm:bg-primary sm:p-2 sm:rounded-full xs:bg-primary xs:p-2 xs:rounded-full xxs:bg-primary xxs:p-2 xxs:rounded-full sm:text-black">
@@ -67,7 +67,7 @@ const MenuAuthButtons = () => {
           {!authentication && (
             <div className="flex items-center relative hover:text-primary">
               <button
-                onClick={() => setContext('signUp')}
+                onClick={() => setContext('SET_VALUE', 'signUp')}
                 className="flex items-center relative hover:text-primary "
               >
                 <div className="2xl:bg-transparent lg:bg-transparent md:bg-transparent 2xl:p-0 lg:p-0 md:p-0 sm:bg-primary sm:p-2 sm:rounded-full xs:bg-primary xs:p-2 xs:rounded-full xxs:bg-primary xxs:p-2 xxs:rounded-full sm:text-black">

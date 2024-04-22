@@ -33,11 +33,13 @@ module.exports = {
       '3xl': '1920px',
     },
     extend: {
+      
       colors: {
         primary: '#fccf3a',
         primaryDark: '#000000',
         light: '#fff',
       },
+      
     },
   },
   plugins: [
