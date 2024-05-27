@@ -10,7 +10,7 @@ export async function middleware(request) {
   console.log('first', ip);
 
   if (ip === '154.192.179.249') {
-    return new NextResponse(null, { status: 200 });
+    return new NextResponse(`${ip}`, { status: 200 });
   }
 
   return NextResponse.next();
