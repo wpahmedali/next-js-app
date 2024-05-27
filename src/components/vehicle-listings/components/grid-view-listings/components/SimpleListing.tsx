@@ -44,7 +44,11 @@ const SimpleGridListing = () => {
   let pageNo: number;
   let perPage: number;
 
-  if (view === vehicleListViews.s_grid && isClient) {
+  if (
+    view === vehicleListViews.s_grid &&
+    isClient &&
+    localStorage.getItem('pageNo') !== 'undefined'
+  ) {
     const pageDif =
       params.page - JSON.parse(localStorage.getItem('pageNo')) + 1;
 

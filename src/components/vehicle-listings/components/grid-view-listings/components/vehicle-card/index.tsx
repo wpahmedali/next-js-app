@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FavIcon, WhatsappIcon } from 'icons';
 import Link from 'next/link';
@@ -26,11 +26,12 @@ const variants = {
 };
 
 interface IVehicleCard {
+  special?: boolean;
   data: IVehicleDetail;
   url: string;
 }
 
-const VehicleCard = ({ url, data }: IVehicleCard) => {
+const VehicleCard = ({ special, url, data }: IVehicleCard) => {
   const countryIcon = getCountryIcon(data.cssClass);
   const { favoriteCars, toggleFavorite } = useFavoriteCars();
   const [isfavorite, setIsFavorite] = useState(false);
@@ -71,6 +72,27 @@ const VehicleCard = ({ url, data }: IVehicleCard) => {
       // whileTap={{ scale: 0.6 }}
       className="w-full max-w-screen-lg bg-white border border-gray-200 rounded-lg shadow mt-3 hover:z-40 relative overflow-hidden"
     >
+      {!data?.auctionDate && data?.portArrivalDate && special && (
+        <Fragment>
+          <div className="bg-red-600 absolute top-0 left-0 p-1 text-white px-6 animate-pulse w-4/5">
+            Port Arrival Date
+          </div>
+          <span className="bg-red-600 text-white absolute p-1 w-full text-center rotate-45 3xl:top-6 3xl:-right-28 2xl:top-7 2xl:-right-20 xl:top-8 xl:-right-24 lg:top-9 lg:-right-28 md:top-8 md:-right-20 sm:top-8 sm:-right-36 xs:top-8 xs:-right-32 xxs:top-8 xxs:-right-24 text-sm font-bold animate-pulse">
+            {data.portArrivalDate}
+          </span>
+        </Fragment>
+      )}
+      {data?.auctionDate && special && (
+        <Fragment>
+          <div className="bg-red-600 absolute top-0 left-0 p-1 text-white px-6 animate-pulse w-4/5">
+            Auction Date
+          </div>
+          <span className="bg-red-600 text-white w-full absolute p-1 text-center rotate-45 3xl:top-6 3xl:-right-28 2xl:top-7 2xl:-right-20 xl:top-8 xl:-right-24 lg:top-9 lg:-right-28 md:top-8 md:-right-20 sm:top-8 sm:-right-36 xs:top-8 xs:-right-32 xxs:top-8 xxs:-right-24 text-sm font-bold animate-pulse">
+            {data.auctionDate}
+          </span>
+        </Fragment>
+      )}
+
       {data.isDelivery === 1 && currentCountry.isDelivered === 1 && (
         <Image
           alt=""

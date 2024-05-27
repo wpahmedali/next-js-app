@@ -74,6 +74,7 @@ const DubaiSpecialTabularListing = () => {
                       {data.data.carList.map((item, index) => (
                         <Fragment key={index}>
                           <UpperSection
+                            special={true}
                             url={`${baseUrl}/${
                               maker ? maker : item.makerName.toLowerCase()
                             }/${model ? model : item.modelName.toLowerCase()}${

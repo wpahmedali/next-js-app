@@ -38,6 +38,7 @@ const ReviewListing = ({ setLightBox, setLightboxIndex }) => {
           </ul>
         </div>
       )}
+      <Pagination isLoading={isPreviousData} data={data?.data.pagination} />
     </Fragment>
   );
 };

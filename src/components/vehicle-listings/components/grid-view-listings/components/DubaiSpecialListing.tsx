@@ -109,6 +109,7 @@ const DubaiSpecialGridListing = () => {
               <div className="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 xxs:grid-cols-1 gap-2 2xl:grid-cols-4 xl:grid-cols-3">
                 {data?.data?.carList.map((item, i) => (
                   <VehicleCard
+                    special={true}
                     url={`${baseUrl}/${
                       maker ? maker : item.makerName.toLowerCase()
                     }/${model ? model : item.modelName.toLowerCase()}${

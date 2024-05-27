@@ -48,7 +48,6 @@ export const useServerRouterParams = async (
     params.countryId = 0;
   }
   if (currentLocation && currentLocation?.id && defaultCountryShown) {
-    console.log('first_------>', currentLocation);
     params.countryId = currentLocation.id;
     params.isCountryFound = true;
   } else if (params.countryId && !defaultCountryShown) {
@@ -194,7 +193,7 @@ export const useServerRouterParams = async (
   }
 
   params.perPage = vehiclePerPageList;
-  params.customerReviewPerPage = 5;
+  params.customerReviewPerPage = 15;
 
   return params;
 };

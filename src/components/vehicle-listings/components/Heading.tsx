@@ -1,7 +1,7 @@
 import { GridCarIcon } from 'icons/react-icons/GridCar';
 import { ListViewIcon } from 'icons/react-icons/ListView';
 import { NextRouter, useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useVehicleList } from 'react-query/hooks/api/vehicle-list';
 import {
   reactQuery,
@@ -21,6 +21,7 @@ import { getNameFromParam } from 'utils/get-name-from-param';
 
 const Heading = () => {
   const router: NextRouter = useRouter();
+  const [isClient, setClient] = useState(false);
   const { maker, model, bodyType, page } = router.query;
   const makerName =
     maker && !Array.isArray(maker) ? getNameFromParam(maker) : '';
@@ -37,14 +38,33 @@ const Heading = () => {
   const setLoadingState = useDispatchLoadingState();
   const { title, updateTitle } = useTitleContext();
 
+  useEffect(() => {
+    setClient(true);
+  }, []);
+
+  let pageNo: number;
+  let perPage: number;
+
   const tabularView = () => {
     dispatch({ type: 'TABULAR' });
     setLoadingState({ type: 'tabularLoader' });
   };
 
   const params = useRouterParams(router.query);
-  params.perPage = params.page * vehiclePerPageList;
-  params.page = 1;
+  if (
+    view === vehicleListViews.s_grid &&
+    isClient &&
+    localStorage.getItem('pageNo') !== 'undefined'
+  ) {
+    const pageDif =
+      params.page - JSON.parse(localStorage.getItem('pageNo')) + 1;
+
+    perPage = pageDif > 0 ? pageDif * vehiclePerPageList : vehiclePerPageList;
+    pageNo = params.page;
+  } else {
+    perPage = params.page * vehiclePerPageList;
+    pageNo = 1;
+  }
 
   const gridView = () => {
     if (view === vehicleListViews.tabular) {

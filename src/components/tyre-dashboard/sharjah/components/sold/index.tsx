@@ -101,7 +101,9 @@ const SoldAuctionListing = () => {
                           <td className={`p-2 text-xs font-bold text-center`}>
                             {item.qty}
                           </td>
-                          <td className={`p-2 text-xs font-bold font-extrabold text-center`}>
+                          <td
+                            className={`p-2 text-xs font-extrabold text-center`}
+                          >
                             {item.price}
                           </td>
                         </tr>

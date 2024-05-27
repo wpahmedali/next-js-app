@@ -190,7 +190,7 @@ export const useRouterParams = ({
   }
 
   params.perPage = vehiclePerPageList;
-  params.customerReviewPerPage = 5;
+  params.customerReviewPerPage = 15;
 
   return params;
 };

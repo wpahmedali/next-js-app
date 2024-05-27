@@ -54,4 +54,6 @@ export interface IVehicleDetail {
   staffMembers?: IVehicleDetailStaffMember[];
   imageUrl: string;
   whatsappNumber: string;
+  auctionDate: string;
+  portArrivalDate: string;
 }
