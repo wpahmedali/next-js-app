@@ -1,16 +1,10 @@
 import { NextResponse } from 'next/server';
 
 export async function middleware(request) {
-  const response = await fetch(`https://api.ipify.org/?format=json`);
+  const ip = request.headers.get('x-forwarded-for') || request.ip;
 
-  console.log('first', response);
-
-  const { ip } = await response.json();
-
-  console.log('first', ip);
-
-  // if (ip === '154.192.179.249') {
-  return new NextResponse(`${ip}`, { status: 200 });
+  // if (ip === '39.61.41.233') {
+  return new NextResponse(ip, { status: 200 });
   // }
 
   return NextResponse.next();
