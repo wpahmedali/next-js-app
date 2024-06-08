@@ -1,14 +1,11 @@
 import React, { useEffect } from 'react';
 
-import Image from 'next/image';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 const ModelHeader = ({ setModelIsOpen, title }) => {
-  //-------------------------------------------------- Code for Escape Key Closing Modal
-
   const handleEscapeKey = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
-      setModelIsOpen(false);
+      setModelIsOpen('SET_VALUE', '');
     }
   };
 
@@ -19,7 +16,6 @@ const ModelHeader = ({ setModelIsOpen, title }) => {
       document.removeEventListener('keydown', handleEscapeKey);
     };
   }, []);
-  //-------------------------------------------------
 
   return (
     <div className="flex items-center justify-between p-2 md:p-2 border-b rounded-t  bg-primary">
@@ -43,7 +39,7 @@ const ModelHeader = ({ setModelIsOpen, title }) => {
         {title}
       </h3>
       <button
-        onClick={() => setModelIsOpen('')}
+        onClick={() => setModelIsOpen('SET_VALUE', '')}
         type="button"
         className="end-2.5 text-gray-400 bg-transparent hover:bg-gray-900 hover:text-white rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
         data-modal-hide="authentication-modal"

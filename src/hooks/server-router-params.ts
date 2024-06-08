@@ -19,6 +19,7 @@ export const useServerRouterParams = async (
 ): Promise<ICarListParams> => {
   const {
     country,
+    pCountry,
     auction,
     maker,
     makers,
@@ -59,6 +60,10 @@ export const useServerRouterParams = async (
     params.countryId = getIdFromParam(country);
   }
   // country section end
+
+  if (pCountry && !Array.isArray(pCountry)) {
+    params.pCountryId = getIdFromParam(pCountry);
+  }
 
   if (carId && !Array.isArray(carId)) {
     params.carId = getIdFromParam(carId);
@@ -188,7 +193,7 @@ export const useServerRouterParams = async (
   }
 
   params.perPage = vehiclePerPageList;
-  params.customerReviewPerPage = 5;
+  params.customerReviewPerPage = 15;
 
   return params;
 };

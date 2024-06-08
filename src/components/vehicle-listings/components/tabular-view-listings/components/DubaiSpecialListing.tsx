@@ -74,6 +74,7 @@ const DubaiSpecialTabularListing = () => {
                       {data.data.carList.map((item, index) => (
                         <Fragment key={index}>
                           <UpperSection
+                            special={true}
                             url={`${baseUrl}/${
                               maker ? maker : item.makerName.toLowerCase()
                             }/${model ? model : item.modelName.toLowerCase()}${
@@ -103,6 +104,12 @@ const DubaiSpecialTabularListing = () => {
               </div>
             </div>
           )}
+          <Pagination
+            isLoading={
+              (isPreviousData || isLoading) && loadingState === 'tyreLoader'
+            }
+            data={data?.data.pagination}
+          />
         </Fragment>
       )}
     </main>

@@ -38,7 +38,7 @@ const SignupForm = () => {
     try {
       const data = await signUp(formData);
       addAccessToken(data.data.token);
-      setContext('');
+      setContext('SET_VALUE', '');
       notify(data.message);
     } catch (error) {}
   };

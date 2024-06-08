@@ -37,7 +37,7 @@ const PhotoGallery = () => {
 
   const displayedData = data?.data.reviewList.slice(0, displayCount);
 
-  const slides = displayedData?.map((item) => ({
+  const slides = data?.data.reviewList?.map((item) => ({
     title: item.title,
     description: item.reviews,
     src: item.originalCustomerImage,

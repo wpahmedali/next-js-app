@@ -15,6 +15,7 @@ import { useMakerModel } from 'react-query/hooks/api/marker-model';
 
 export const useRouterParams = ({
   country,
+  pCountry,
   auction,
   maker,
   makers,
@@ -54,6 +55,10 @@ export const useRouterParams = ({
     params.countryId = getIdFromParam(country);
   }
   // country section end
+
+  if (pCountry && !Array.isArray(pCountry)) {
+    params.pCountryId = getIdFromParam(pCountry);
+  }
 
   if (carId && !Array.isArray(carId)) {
     params.carId = getIdFromParam(carId);
@@ -185,7 +190,7 @@ export const useRouterParams = ({
   }
 
   params.perPage = vehiclePerPageList;
-  params.customerReviewPerPage = 5;
+  params.customerReviewPerPage = 15;
 
   return params;
 };

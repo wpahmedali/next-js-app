@@ -2,6 +2,8 @@ import Image from 'next/image';
 import React from 'react';
 
 const Bumper = ({ setisOpenModal, setImageName }) => {
+  const bumperImages = ['bumper-1', 'bumper-2', 'bumper-3', 'bumper-4'];
+
   return (
     <section
       id="bumpers"
@@ -31,70 +33,25 @@ const Bumper = ({ setisOpenModal, setImageName }) => {
           </div>
         </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 pt-2">
-          <button
-            onClick={() => {
-              setisOpenModal(true);
-              setImageName('bumper-1');
-            }}
-          >
-            <div className="h-full shadow-2xl shadow-black-900 overflow-hidden group">
-              <Image
-                alt=""
-                width={500}
-                height={500}
-                src="https://janjapan.com/resources/images/spare_parts/bumper-1.jpg"
-                className="w-full z-0  h-full object-fill example "
-              />
-            </div>
-          </button>
-          <button
-            onClick={() => {
-              setisOpenModal(true);
-              setImageName('bumper-2');
-            }}
-          >
-            <div className="h-full shadow-2xl shadow-black-900 overflow-hidden group">
-              <Image
-                alt=""
-                width={500}
-                height={500}
-                src="https://janjapan.com/resources/images/spare_parts/bumper-2.jpg"
-                className="w-full z-0  h-full object-fill example "
-              />
-            </div>
-          </button>
-          <button
-            onClick={() => {
-              setisOpenModal(true);
-              setImageName('bumper-3');
-            }}
-          >
-            <div className="h-full shadow-2xl shadow-black-900 overflow-hidden group">
-              <Image
-                alt=""
-                width={500}
-                height={500}
-                src="https://janjapan.com/resources/images/spare_parts/bumper-3.jpg"
-                className="w-full z-0  h-full object-fill example "
-              />
-            </div>
-          </button>
-          <button
-            onClick={() => {
-              setisOpenModal(true);
-              setImageName('bumper-4');
-            }}
-          >
-            <div className="h-full shadow-2xl shadow-black-900 overflow-hidden group">
-              <Image
-                alt=""
-                width={500}
-                height={500}
-                src="https://janjapan.com/resources/images/spare_parts/bumper-4.jpg"
-                className="w-full z-0  h-full object-fill example "
-              />
-            </div>
-          </button>
+          {bumperImages.map((item) => (
+            <button
+              key={item}
+              onClick={() => {
+                setisOpenModal(true);
+                setImageName(item);
+              }}
+            >
+              <div className="h-full shadow-2xl shadow-black-900 overflow-hidden group">
+                <Image
+                  alt=""
+                  width={500}
+                  height={500}
+                  src={`/assets/spare-parts-images/${item}.jpg`}
+                  className="w-full z-0  h-full object-fill example "
+                />
+              </div>
+            </button>
+          ))}
         </div>
       </div>
     </section>

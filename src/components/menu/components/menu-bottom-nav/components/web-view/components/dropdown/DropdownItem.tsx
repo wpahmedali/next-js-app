@@ -28,7 +28,7 @@ const DropdownItem = ({
         <Link
           href={item.href}
           onClick={() => {
-            setContext('');
+            setContext('SET_VALUE', '');
             setLoadingState({ type: 'countryLoading' });
             handleIsPopOver();
           }}

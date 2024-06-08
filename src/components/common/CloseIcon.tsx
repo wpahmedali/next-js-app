@@ -23,7 +23,7 @@ const CloseIcon = ({
         type="button"
         className="rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
         onClick={() => {
-          hideDialog('');
+          hideDialog('SET_VALUE', '');
           setAllErrors && setAllErrors(null);
           setFormData && setFormData(defaultFormData);
         }}

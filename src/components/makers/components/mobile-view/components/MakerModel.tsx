@@ -27,7 +27,9 @@ const MobileMakerModel = ({
 
   const baseUrl = country
     ? auction
-      ? `${ROUTES.AUCTIONS}/${auction}/${country}`
+      ? `${ROUTES.AUCTIONS}/${auction}/${country}${
+          params.pCountryId ? `/parent/${params.pCountryId}` : ''
+        }`
       : `${ROUTES.USED_CARS}/${country}`
     : `${ROUTES.USED_CARS}${
         params.countryId

@@ -5,6 +5,7 @@ import { withCSR } from 'react-query/hoc/with-CSR';
 import { useServerRouterParams } from 'src/hooks/server-router-params';
 import getLocation from 'react-query/api/geo-location';
 import { initGA } from 'utils/ga';
+import { useModelState } from 'src/providers/ModelContext';
 
 export const getServerSideProps = withCSR(async (ctx) => {
   let queryClient = new QueryClient();
@@ -27,7 +28,9 @@ export const getServerSideProps = withCSR(async (ctx) => {
 });
 
 const Home = () => {
-  return <Listings />;
+  const { isFeature } = useModelState();
+
+  return !isFeature && <Listings />;
 };
 
 export default Home;

@@ -40,7 +40,7 @@ const CountryItem = ({
 
     if (url) {
       router.push(url);
-      hideDialog('');
+      hideDialog('SET_VALUE', '');
       setLoadingState({ type: 'countryLoading' });
     }
   };

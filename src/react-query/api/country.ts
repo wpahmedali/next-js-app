@@ -1,4 +1,3 @@
-import { AxiosError, AxiosHeaders } from 'axios';
 import fetcher from 'react-query/lib/axios';
 import { ICountryApiRes } from 'src/interfaces/country.interface';
 

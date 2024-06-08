@@ -128,7 +128,7 @@ const LowerSection = ({ isEven, data }: IVehicleTabular) => {
                   Favorites
                 </button>
               </td>
-              <td className="content-end place-content-center flex gap-2 items-center">
+              <td className="content-end place-content-center flex gap-2 items-center font-bold">
                 <SteeringIcon />
                 {data.transmissionName} {data.steeringName}
               </td>

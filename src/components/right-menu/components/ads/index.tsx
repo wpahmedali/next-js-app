@@ -6,24 +6,30 @@ import SharjahBanners from './components/Sharjahbanners';
 import SpecialOfferBanner from 'components/special-offers/banner';
 import { uaeCountry } from 'src/common/constants';
 import { useCurrentCountry } from 'src/hooks/current-country';
+import { IVehicleDetail } from 'src/interfaces/vehicle-detail.interface';
 
-const Ads = (): JSX.Element => {
+const Ads = ({ data }: { data: IVehicleDetail[] }): JSX.Element => {
   const setContext = useSetContext();
   const currentCountry = useCurrentCountry();
 
   return (
     <div className="ads">
-      <div className="max-w-full 2xl:block lg:block md:block sm:hidden xs:hidden xxs:hidden">
-        <button onClick={() => setContext('signUp')} className="w-full">
-          <Image
+      {data && data?.length < 1 && (
+        <div className="max-w-full 2xl:block lg:block md:block sm:hidden xs:hidden xxs:hidden">
+          <button
+            onClick={() => setContext('SET_VALUE', 'signUp')}
             className="w-full"
-            src="/asset/images/ads/create-account-ad.jpg"
-            width={400}
-            height={300}
-            alt="create-account-ad"
-          />
-        </button>
-      </div>
+          >
+            <Image
+              className="w-full"
+              src="/asset/images/ads/create-account-ad.jpg"
+              width={400}
+              height={300}
+              alt="create-account-ad"
+            />
+          </button>
+        </div>
+      )}
       <SpecialOfferBanner />
       <ZambiaBanners />
       {currentCountry?.id === uaeCountry.id && <SharjahBanners />}

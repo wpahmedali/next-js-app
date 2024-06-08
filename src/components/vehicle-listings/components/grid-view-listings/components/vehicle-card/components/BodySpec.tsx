@@ -6,7 +6,6 @@ import { LocationIcon } from 'icons/react-icons/Location';
 
 const BodySpec = ({ data, url, isPriceDisplay }: IBodySpec) => {
   const router: NextRouter = useRouter();
-  const { auction } = router.query;
   return (
     <Fragment>
       <div className="flex items-center justify-between">
@@ -14,7 +13,7 @@ const BodySpec = ({ data, url, isPriceDisplay }: IBodySpec) => {
           {data?.modelName}
         </span>
       </div>
-      {auction && data?.lotNo ? (
+      {data?.lotNo ? (
         <div className="flex items-center justify-between border-b border-zinc-300 pb-2">
           <h1 className="text-xs font-extrabold text-red-500 leading-4">
             Lot No:
@@ -41,9 +40,10 @@ const BodySpec = ({ data, url, isPriceDisplay }: IBodySpec) => {
       <div className="flex items-center justify-between border-b border-zinc-300 py-2">
         <h1 className="text-xs font-bold text-[#000cad] leading-4">
           Price:
-          {data?.fobPrice !== 0 &&
+          {data?.fobPrice != 0 &&
           data?.currencySymbol &&
-          isPriceDisplay === 1 ? (
+          isPriceDisplay === 1 &&
+          data.priceAsk !== 1 ? (
             <span className="text-xs font-bold text-black leading-4 ml-2">
               {data.currencySymbol} {data.fobPrice}
             </span>

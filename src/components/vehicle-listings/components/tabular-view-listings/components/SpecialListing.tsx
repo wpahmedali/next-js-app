@@ -102,6 +102,12 @@ const SpecialTabularListing = () => {
               </div>
             </div>
           )}
+          <Pagination
+            isLoading={
+              (isPreviousData || isLoading) && loadingState === 'tyreLoader'
+            }
+            data={data?.data.pagination}
+          />
         </Fragment>
       )}
     </main>

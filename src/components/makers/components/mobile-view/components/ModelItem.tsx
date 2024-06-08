@@ -14,7 +14,7 @@ const ModelItem = ({ url, model, modelCount, hideDialog }): JSX.Element => {
     router.push(url);
     setLoadingState({ type: 'makerLoader' });
     hideDialog();
-    setContext('');
+    setContext('SET_VALUE', '');
   };
 
   return (

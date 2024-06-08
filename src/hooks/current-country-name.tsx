@@ -2,8 +2,7 @@ import { NextRouter, useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useAuction } from 'react-query/hooks/api/auction';
 import { useCountry } from 'react-query/hooks/api/country';
-import { usePhilippineCountryList } from 'react-query/hooks/api/philippine-country-list';
-import { philippineCountry } from 'src/common/constants';
+import { useSubCountryList } from 'react-query/hooks/api/sub-country-list';
 import { useRouterParams } from './router-params';
 
 export const useCurrentCountryName = () => {
@@ -14,9 +13,7 @@ export const useCurrentCountryName = () => {
 
   const { data: auctionData } = useAuction(params.countryId);
   const { data: countryData } = useCountry();
-  const { data: philippineCountryData } = usePhilippineCountryList(
-    philippineCountry.id
-  );
+  const { data: subCountryData } = useSubCountryList(params.countryId);
 
   useEffect(() => {
     if (params.auctionId && !Array.isArray(params.auctionId) && auctionData) {
@@ -33,7 +30,7 @@ export const useCurrentCountryName = () => {
       if (findCountry) {
         setSelectedCountry(findCountry.countryName);
       } else {
-        const findPCountry = philippineCountryData?.data?.find(
+        const findPCountry = subCountryData?.data?.find(
           (x) => x.id === Number(params.countryId)
         );
 
@@ -45,7 +42,7 @@ export const useCurrentCountryName = () => {
       setSelectedCountry('Global');
     }
   }, [
-    philippineCountryData,
+    subCountryData,
     params.countryId,
     params.auctionId,
     auctionData,

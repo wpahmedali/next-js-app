@@ -43,7 +43,9 @@ const BodyTypeItem = ({
 
   const auctions = () =>
     auction
-      ? `${ROUTES.AUCTIONS}/${auction}/${country}${ROUTES.BODY_TYPE}`
+      ? `${ROUTES.AUCTIONS}/${auction}/${country}${
+          params.pCountryId ? `/parent/${params.pCountryId}` : ''
+        }${ROUTES.BODY_TYPE}`
       : `${ROUTES.USED_VEHICLES}/${country}`;
 
   const baseUrl = country
@@ -58,7 +60,7 @@ const BodyTypeItem = ({
     router.push(`${baseUrl}/${name.toLowerCase()}-${id}/1`);
     setLoadingState({ type: 'bodyTypeLoader' });
     if (hideDialog) {
-      hideDialog('');
+      hideDialog('SET_VALUE', '');
     }
   };
 

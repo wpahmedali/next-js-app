@@ -122,7 +122,7 @@ const FiltersSearch = () => {
             }/1` + query
       );
 
-      setContext('');
+      setContext('SET_VALUE', '');
       if (dropdownState) {
         setDropdownState('');
       }

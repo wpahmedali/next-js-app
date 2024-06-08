@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GlobeAltIcon } from '@heroicons/react/24/outline';
 import Ads from 'components/right-menu/components/ads';
 import CountryToggleMenu from 'components/right-menu/components/CountryToggleMenu';
@@ -7,21 +7,34 @@ import { siteSettings } from 'utils/siteSetting';
 import { useRouter } from 'next/router';
 import { useRouterParams } from 'src/hooks/router-params';
 import EmbeddedFB from './components/EmbeddedFB';
+import FeatureCars from 'components/feature-cars';
+import { reactQuery, vehiclePerPageList } from 'src/common/constants';
+import { useFeatureVehicleList } from 'react-query/hooks/api/feature-vehicle-list';
+import Loading from 'components/loading';
+import Error from 'components/error';
 
 const RightMenu = (): JSX.Element => {
   const { query } = useRouter();
-  const { countryId } = useRouterParams(query);
+  const params = useRouterParams(query);
   const { defaultCountryShown, countryList } = siteSettings;
 
+  const [page, setPage] = useState<number>(1);
+
   const countriesList = countryList?.find(
-    (x) => x.countryId === countryId
+    (x) => x.countryId === params.countryId
   )?.countriesToBeShown;
 
   const showSwitchButton =
-    (defaultCountryShown && !countryId) ||
+    (defaultCountryShown && !params.countryId) ||
     (!defaultCountryShown && countriesList?.length > 0) ||
     (!defaultCountryShown && !(countriesList?.length > 0)) ||
     (defaultCountryShown && countriesList?.length > 0);
+
+  params.perPage = params.page * vehiclePerPageList;
+  params.page = page;
+
+  const { data, isLoading, isError, isFetching, isPreviousData } =
+    useFeatureVehicleList(params.countryId, params.page, params.perPage);
 
   return (
     <div className="xxs:w-full xs:w-full sm:w-full 2xl:w-[375px] xl:w-[375px] lg:w-[375px] md:w-[300px] flex-col">
@@ -34,7 +47,21 @@ const RightMenu = (): JSX.Element => {
           <TopShowedCountry />
           {showSwitchButton && <CountryToggleMenu />}
         </ul>
-        <Ads />
+        <Ads data={data?.data?.carList} />
+        {isError && <Error />}
+        {isLoading && (
+          <div className="pt-3">
+            <Loading />
+          </div>
+        )}
+        {data?.data?.carList?.length > 0 && (
+          <FeatureCars
+            data={data?.data?.carList}
+            isFetching={isFetching}
+            isPreviousData={isPreviousData}
+            setPage={setPage}
+          />
+        )}
         {/* <EmbeddedFB /> */}
       </div>
     </div>

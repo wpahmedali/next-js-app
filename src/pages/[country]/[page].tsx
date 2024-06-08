@@ -7,6 +7,7 @@ import { siteSettings } from 'utils/siteSetting';
 import { getDefaultProps, redirectToHome } from 'utils/return-functions';
 import { getIdFromParam } from 'utils/get-id-from-param';
 import getLocation from 'react-query/api/geo-location';
+import { useModelState } from 'src/providers/ModelContext';
 
 export const getServerSideProps = withCSR(async (ctx) => {
   let queryClient = new QueryClient();
@@ -35,7 +36,9 @@ export const getServerSideProps = withCSR(async (ctx) => {
 });
 
 const Page = () => {
-  return <Listings />;
+  const { isFeature } = useModelState();
+
+  return !isFeature && <Listings />;
 };
 
 export default Page;

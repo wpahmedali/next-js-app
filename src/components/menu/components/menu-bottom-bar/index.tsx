@@ -19,7 +19,7 @@ import { siteSettings } from 'utils/siteSetting';
 const MenuBottomBar = (): JSX.Element => {
   const { query }: NextRouter = useRouter();
   const loadingState = useLoadingState();
-  const modelState = useModelState();
+  const { value: modelState } = useModelState();
   const setContext = useSetContext();
   const view = useVehicleListView();
   const countryIcon = useSelectedCountryIcon();
@@ -51,7 +51,7 @@ const MenuBottomBar = (): JSX.Element => {
     >
       <div id="tabs" className="flex justify-between">
         <button
-          onClick={() => setContext('makerModel')}
+          onClick={() => setContext('SET_VALUE', 'makerModel')}
           className="w-full focus:fill-black hover:fill-black grid justify-center hover:bg-primary text-center pt-2 pb-1"
         >
           <AboutUsIcon />
@@ -70,7 +70,7 @@ const MenuBottomBar = (): JSX.Element => {
           </div>
         </button>
         <button
-          onClick={() => setContext('bodyType')}
+          onClick={() => setContext('SET_VALUE', 'bodyType')}
           className="w-full focus:fill-black hover:fill-black grid justify-center hover:bg-primary text-center pt-2 pb-1"
         >
           <FAQIcon />
@@ -87,7 +87,7 @@ const MenuBottomBar = (): JSX.Element => {
           </div>
         </button>
         <button
-          onClick={() => setContext('filter')}
+          onClick={() => setContext('SET_VALUE', 'filter')}
           className="w-full focus:fill-black hover:fill-black grid justify-center hover:bg-primary text-center pt-2 pb-1"
         >
           <GlobalbtnIcon />
@@ -105,7 +105,7 @@ const MenuBottomBar = (): JSX.Element => {
         </button>
         {showSwitchButton && (
           <button
-            onClick={() => setContext('country')}
+            onClick={() => setContext('SET_VALUE', 'country')}
             className="w-full focus:fill-black text-white hover:fill-black grid justify-center hover:bg-primary text-center pt-5 pb-1 justify-items-center"
           >
             {countryIcon}
