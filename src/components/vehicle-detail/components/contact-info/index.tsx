@@ -19,7 +19,9 @@ const ContactInfo = ({
             className="justify-between grid grid-cols-2 2xl:grid-cols-2 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 xs:grid-cols-1 xxs:grid-cols-1 grid-rows-1 gap-2"
           >
             <div className="text-lg">
-              <p className="text-3xl font-bold">{data.companyName}</p>
+              <p className="text-3xl font-bold">
+                {data?.companyName?.replace(/<\/?b>/g, '')}
+              </p>
               <p className="font-bold my-2">Address:</p>
               <p>{data.address}</p>
               <div className="flex">
