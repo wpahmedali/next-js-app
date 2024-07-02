@@ -123,7 +123,7 @@ const SearchMaxYear = ({
         </button>
 
         {dropdownState === 'MaxYearFilter' && (
-          <div className="z-10 bg-white rounded-lg shadow 3xl:w-60 2xl:w-60 lg:w-60 md:w-60 sm:w-full xs:w-full xxs:w-full dark:bg-gray-700 absolute">
+          <div className="z-10 bg-white rounded-lg shadow 3xl:w-60 2xl:w-60 lg:w-60 md:w-60 sm:w-full xs:w-full xxs:w-full absolute">
             <SearchInput
               name="Max Year"
               allData={allData}
@@ -137,7 +137,7 @@ const SearchMaxYear = ({
             />
 
             <ul
-              className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
+              className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700"
               aria-labelledby="MaxYearDropdownButton"
             >
               {dropdownData.map((item) => (

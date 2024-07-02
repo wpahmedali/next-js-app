@@ -40,7 +40,7 @@ const AuctionButtons = () => {
                   params.auctionId === item.auctionId
                     ? 'bg-primary'
                     : 'bg-primaryDark'
-                }bg-primaryDark my-1 items-center justify-left gap-x-3 px-1 flex text-black`}
+                }bg-primaryDark my-1 items-center justify-left gap-x-3 px-3 flex text-black`}
               >
                 <div>{countryIcon} </div>
                 <div>
