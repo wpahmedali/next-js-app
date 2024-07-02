@@ -59,7 +59,7 @@ const Gallery = ({ data }: { data: IVehicleDetail }): JSX.Element => {
           >
             <Image
               className="max-w-full cursor-pointer focus:ring focus:ring-violet-300"
-              src={activeimage}
+              src={activeimage || '/assets/car-no-image.jpg'}
               width={1920}
               height={452}
               loading="lazy"

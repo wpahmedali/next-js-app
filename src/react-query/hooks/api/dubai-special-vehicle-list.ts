@@ -10,6 +10,6 @@ export const useDubaiSpecialVehicleList = (
   perPage: number
 ) =>
   useQuery<IApiResponse<IVehicleList>, Error>(
-    [view, countryId, pageNo, perPage],
+    ['special', view, countryId, pageNo, perPage],
     () => getDubaiSpecialVehicleList(countryId, pageNo, perPage)
   );

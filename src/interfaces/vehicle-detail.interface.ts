@@ -56,4 +56,5 @@ export interface IVehicleDetail {
   whatsappNumber: string;
   auctionDate: string;
   portArrivalDate: string;
+  webBannerCaption: string;
 }

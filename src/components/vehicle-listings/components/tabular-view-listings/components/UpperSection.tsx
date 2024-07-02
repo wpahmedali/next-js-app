@@ -39,7 +39,7 @@ const UpperSection = ({ special, url, isEven, data }: IVehicleTabular) => {
         )}
         <Link href={url}>
           <Image
-            src={data.imageUrl}
+            src={data.imageUrl || '/assets/car-no-image.jpg'}
             alt=""
             loading="lazy"
             width={200}
@@ -47,6 +47,11 @@ const UpperSection = ({ special, url, isEven, data }: IVehicleTabular) => {
             placeholder="blur"
             blurDataURL={listingLoaderImage}
           />
+          {data?.webBannerCaption && (
+            <div className="bg-red-600 absolute bottom-0 left-0 p-1 text-white px-6 animate-pulse w-4/5">
+              {data?.webBannerCaption}
+            </div>
+          )}
         </Link>
         {!data?.auctionDate && data?.portArrivalDate && special && (
           <Fragment>
