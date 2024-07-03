@@ -24,7 +24,7 @@ const MenuBottomBar = (): JSX.Element => {
   const view = useVehicleListView();
   const countryIcon = useSelectedCountryIcon();
   const params = useRouterParams(query);
-  const { defaultCountryShown, countryList } = siteSettings;
+  const { defaultCountryShown } = siteSettings;
 
   let viewParam = reactQuery.vehicleList.tabular;
   if (view === listingViews.grid) {
@@ -34,7 +34,7 @@ const MenuBottomBar = (): JSX.Element => {
   }
   const { isPreviousData } = useVehicleList(viewParam, params);
 
-  const countriesList = countryList?.find(
+  const countriesList = params.countryList?.find(
     (x) => x.countryId === params.countryId
   )?.countriesToBeShown;
 

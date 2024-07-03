@@ -1,3 +1,5 @@
+import { ICountryList } from './site-setting.interface';
+
 export interface IMakerModel {
   makerId: number;
   modelId: number;
@@ -25,4 +27,5 @@ export interface ICarListParams {
   auctionId: number | null;
   carId: number | null;
   currentCountryId?: number | null;
+  countryList?: ICountryList[];
 }

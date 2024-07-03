@@ -20,9 +20,9 @@ const formatCountryItem = (item) => ({
 
 const GetGlobalStockData = (): IDropdownData => {
   const { query } = useRouter();
-  const { countryId } = useRouterParams(query);
+  const { countryId, countryList } = useRouterParams(query);
   const { data, isLoading, isError, isSuccess } = useCountry();
-  const { defaultCountryShown, countryList } = siteSettings;
+  const { defaultCountryShown } = siteSettings;
 
   if (isLoading || isError || !data?.data?.length) {
     return { data: [], isLoading, isError: true, isSuccess };

@@ -12,6 +12,7 @@ import { getIdFromParam } from 'utils/get-id-from-param';
 import { getMakerModel } from 'react-query/api/maker-model';
 import getLocation from 'react-query/api/geo-location';
 import { siteSettings } from 'utils/siteSetting';
+import { getfetchSiteCountryShown } from 'react-query/api/fetch-site-country-shown';
 
 export const useServerRouterParams = async (
   query,
@@ -42,6 +43,11 @@ export const useServerRouterParams = async (
 
   const { defaultCountryShown } = siteSettings;
   const { data: currentLocation } = await getLocation(ip);
+  const { data: countryList } = await getfetchSiteCountryShown();
+
+  if (countryList) {
+    params.countryList = countryList;
+  }
 
   // country section start
   if (!country) {

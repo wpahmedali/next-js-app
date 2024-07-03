@@ -25,14 +25,14 @@ const CountryDialog = ({
   const params = useRouterParams(router.query);
   const { data, isLoading, isError, isSuccess } = useCountry();
   const view = useVehicleListView();
-  const { defaultCountryShown, countryList } = siteSettings;
+  const { defaultCountryShown } = siteSettings;
 
   let countries = data?.data?.map((item) => ({
     ...item,
     icon: getCountryIcon(item.cssClass),
   }));
 
-  const countriesList = countryList?.find(
+  const countriesList = params.countryList?.find(
     (x) => x.countryId === params.countryId
   )?.countriesToBeShown;
 

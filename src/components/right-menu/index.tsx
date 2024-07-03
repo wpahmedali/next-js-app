@@ -16,11 +16,11 @@ import Error from 'components/error';
 const RightMenu = (): JSX.Element => {
   const { query } = useRouter();
   const params = useRouterParams(query);
-  const { defaultCountryShown, countryList } = siteSettings;
+  const { defaultCountryShown } = siteSettings;
 
   const [page, setPage] = useState<number>(1);
 
-  const countriesList = countryList?.find(
+  const countriesList = params.countryList?.find(
     (x) => x.countryId === params.countryId
   )?.countriesToBeShown;
 

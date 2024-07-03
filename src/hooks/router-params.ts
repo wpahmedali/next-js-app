@@ -12,6 +12,7 @@ import { getIdFromParam } from 'utils/get-id-from-param';
 import { useCurrentLocation } from 'react-query/hooks/api/geo-location';
 import { siteSettings } from 'utils/siteSetting';
 import { useMakerModel } from 'react-query/hooks/api/marker-model';
+import { useSiteCountryShown } from 'react-query/hooks/api/site-country-shown';
 
 export const useRouterParams = ({
   country,
@@ -37,6 +38,11 @@ export const useRouterParams = ({
 
   const { defaultCountryShown } = siteSettings;
   const { data: currentLocation } = useCurrentLocation();
+  const { data: countryList } = useSiteCountryShown();
+
+  if (countryList?.data) {
+    params.countryList = countryList?.data;
+  }
 
   // country section start
   if (!country) {
