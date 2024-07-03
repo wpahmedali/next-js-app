@@ -8,13 +8,12 @@ import {
   useDispatchLoadingState,
   useLoadingState,
 } from 'src/providers/LoadingContext';
-import { useVehicleList } from 'react-query/hooks/api/vehicle-list';
+import { useVehicleList } from 'react-query/hooks/api/vehicle/vehicle-list';
 import { reactQuery } from 'src/common/constants';
 import { listingViews } from 'src/common/listing-views';
 import Loading from 'components/loading';
 import { useCurrentCountryName } from 'src/hooks/current-country-name';
 import { useRouterParams } from 'src/hooks/router-params';
-import { useCountryCount } from 'src/hooks/country-count';
 
 const BodyTypeItem = ({
   isEven,
@@ -25,10 +24,9 @@ const BodyTypeItem = ({
   hideDialog,
 }: IBodyType): JSX.Element => {
   const router: NextRouter = useRouter();
-  const { auction, country } = router.query;
+  const { country, yard } = router.query;
   const setLoadingState = useDispatchLoadingState();
   const selectedCountry = useCurrentCountryName();
-  const countryCount = useCountryCount();
   const view = useVehicleListView();
   const loadingState = useLoadingState();
   const params = useRouterParams(router.query);
@@ -41,15 +39,16 @@ const BodyTypeItem = ({
   }
   const { isPreviousData } = useVehicleList(viewParam, params);
 
-  const auctions = () =>
-    auction
-      ? `${ROUTES.AUCTIONS}/${auction}/${country}${
-          params.pCountryId ? `/parent/${params.pCountryId}` : ''
-        }${ROUTES.BODY_TYPE}`
-      : `${ROUTES.USED_VEHICLES}/${country}`;
-
   const baseUrl = country
-    ? auctions()
+    ? yard
+      ? `${ROUTES.USED_VEHICLES_YARDS}/${yard}/${country}`
+      : `${ROUTES.USED_VEHICLES}/${country}`
+    : yard
+    ? `${ROUTES.USED_VEHICLES_YARDS}${
+        params.countryId
+          ? `/${selectedCountry.toLowerCase()}-${params.countryId}`
+          : ROUTES.ALL_STOCK
+      }`
     : `${ROUTES.USED_VEHICLES}${
         params.countryId
           ? `/${selectedCountry.toLowerCase()}-${params.countryId}`
@@ -57,10 +56,14 @@ const BodyTypeItem = ({
       }`;
 
   const handleLinkClick = () => {
-    router.push(`${baseUrl}/${name.toLowerCase()}-${id}/1`);
+    router.push(
+      `${baseUrl}/${name.toLowerCase()}-${id}/1${
+        params.isReserved ? `?is_reserved=true` : ''
+      }`
+    );
     setLoadingState({ type: 'bodyTypeLoader' });
     if (hideDialog) {
-      hideDialog('SET_VALUE', '');
+      hideDialog('');
     }
   };
 
@@ -96,7 +99,7 @@ const BodyTypeItem = ({
       >
         {renderContent()}
         <span className="text-xs pl-1 flex-1 ">{name.toUpperCase()}</span>
-        {countryCount && <span className="mr-2">{bodyTypeCount}</span>}
+        <span className="mr-2">{bodyTypeCount}</span>
       </button>
     </div>
   );

@@ -3,10 +3,10 @@ import { NextRouter, useRouter } from 'next/router';
 import { useMakerModel } from 'react-query/hooks/api/marker-model';
 import Loading from 'components/loading';
 import Error from 'components/error';
-import MobileMakerModel from './components/MakerModel';
 import { useRouterParams } from 'src/hooks/router-params';
 import { Dialog, Transition } from '@headlessui/react';
 import CloseIcon from 'components/common/CloseIcon';
+import MobileMakerItem from './components/MakerItem';
 
 const MobileMakers = ({
   isLoading: makerIsLoading,
@@ -17,18 +17,11 @@ const MobileMakers = ({
   const router: NextRouter = useRouter();
   const params = useRouterParams(router.query);
 
-  const { data, isLoading, isError, isSuccess } = useMakerModel(
-    params.countryId,
-    params.auctionId
-  );
+  const { data, isLoading, isError, isSuccess } = useMakerModel(params);
 
   return (
     <Transition.Root show={isShowDialog === 'makerModel'} as={Fragment}>
-      <Dialog
-        as="div"
-        className="relative z-40"
-        onClose={() => hideDialog('SET_VALUE', '')}
-      >
+      <Dialog as="div" className="relative z-40" onClose={() => hideDialog('')}>
         <Transition.Child
           as={Fragment}
           enter="ease-in-out duration-500"
@@ -66,7 +59,7 @@ const MobileMakers = ({
                           <ul className="bg-white group-hover:scale-100 hover:sm:duration-0 text-[#2b2a2a] transition duration-150 ease-in-out origin-top w-full">
                             <div className="container-fluid mx-auto grid sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-6 pt-2 gap-4">
                               {data?.data?.map((item, i) => (
-                                <MobileMakerModel
+                                <MobileMakerItem
                                   loadingMakerId={makerId}
                                   makerIsLoading={makerIsLoading}
                                   key={i}
@@ -82,10 +75,10 @@ const MobileMakers = ({
                           </ul>
                         )}
 
-                        <div className="flex justify-end">
+                        <div className="flex justify-end mb-12">
                           <button
                             className="rounded-lg bg-primaryDark text-white p-2 mt-3"
-                            onClick={() => hideDialog('SET_VALUE', '')}
+                            onClick={() => hideDialog('')}
                           >
                             Close
                           </button>

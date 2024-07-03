@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import { motion } from 'framer-motion';
 import { NextRouter, useRouter } from 'next/router';
-import { useVehicleList } from 'react-query/hooks/api/vehicle-list';
 import { reactQuery } from 'src/common/constants';
 import { listingViews } from 'src/common/listing-views';
 import { useRouterParams } from 'src/hooks/router-params';
@@ -11,7 +10,7 @@ import {
 } from 'src/providers/LoadingContext';
 import { useVehicleListView } from 'src/providers/VehicleListView';
 import Loading from 'components/loading';
-import { useCurrentCountryName } from 'src/hooks/current-country-name';
+import { useVehicleList } from 'react-query/hooks/api/vehicle/vehicle-list';
 
 const SearchButton = ({
   handleOnKeyDown,
@@ -49,7 +48,7 @@ const SearchButton = ({
   const isLoadingReset = isPreviousData && loadingState === 'resetLoader';
 
   const renderButton = (label, onClickHandler, isLoading) => (
-    <div className="2xl:w-1/6 lg:w-1/6 md:w-1/2 sm:w-full xs:w-full xxs:w-full px-2 2xl:mb-2 lg:mb-2 md:mb-2 sm:mb-2 xs:mb-2 xxs:mb-2">
+    <div className="w-full px-2 2xl:mb-2 lg:mb-2 md:mb-2 sm:mb-2 xs:mb-2 xxs:mb-2">
       <motion.div
         whileHover={{ scale: 1.1 }}
         transition={{ type: 'spring', stiffness: 400, damping: 10 }}

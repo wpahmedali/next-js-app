@@ -10,7 +10,7 @@ const Title = ({ data }: { data: IVehicleDetail }) => {
           {data.makerName} {data.modelName} - {data.registrationYear}{' '}
         </h2>
       </div>
-      <div>
+      <div className='flex gap-3 items-center'>
         {data?.fuelName?.toLowerCase() === 'hybrid-gasoline' && (
           <span>
             <Image

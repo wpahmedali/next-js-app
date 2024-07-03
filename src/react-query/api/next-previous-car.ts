@@ -1,7 +1,7 @@
 import fetcher from 'react-query/lib/axios';
 import { IApiResponse } from 'src/interfaces/api-response.interface';
 import { ICarListParams } from 'src/interfaces/car-list-param.interface';
-import { INextPreviousVehicleList } from 'src/interfaces/vehicle-detail.interface copy';
+import { INextPreviousVehicleList } from 'src/interfaces/next-previous-vehicle-list.interface';
 
 export const getNextPreviousCarList = async (
   params: ICarListParams

@@ -13,23 +13,16 @@ const MobileBodyTypes = ({
   hideDialog,
 }: {
   isShowDialog: string;
-  hideDialog: (type: string, value: string) => void;
+  hideDialog: (type: string) => void;
 }) => {
   const router: NextRouter = useRouter();
   const params = useRouterParams(router.query);
 
-  const { data, isLoading, isError, isSuccess } = useBodyType(
-    params.countryId,
-    params.auctionId
-  );
+  const { data, isLoading, isError, isSuccess } = useBodyType(params);
 
   return (
     <Transition.Root show={isShowDialog === 'bodyType'} as={Fragment}>
-      <Dialog
-        as="div"
-        className="relative z-40"
-        onClose={() => hideDialog('SET_VALUE', '')}
-      >
+      <Dialog as="div" className="relative z-40" onClose={() => hideDialog('')}>
         <Transition.Child
           as={Fragment}
           enter="ease-in-out duration-500"
@@ -81,8 +74,8 @@ const MobileBodyTypes = ({
 
                         <div className="flex justify-end">
                           <button
-                            className="rounded-lg bg-primaryDark text-white p-2 mt-3"
-                            onClick={() => hideDialog('SET_VALUE', '')}
+                            className="rounded-lg bg-primaryDark text-white p-2 mt-3 mb-12"
+                            onClick={() => hideDialog('')}
                           >
                             Close
                           </button>

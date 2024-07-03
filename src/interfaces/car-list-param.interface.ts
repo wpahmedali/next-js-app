@@ -1,31 +1,39 @@
-import { ICountryList } from './site-setting.interface';
-
 export interface IMakerModel {
   makerId: number;
   modelId: number;
 }
 
 export interface ICarListParams {
-  countryId: number | null;
-  pCountryId: number | null;
-  isCountryFound: boolean;
-  fixPage: number;
-  page: number | null;
-  perPage: number | null;
-  customerReviewPerPage?: number | null;
-  makerId: string | null;
-  modelId: string | null;
+  countryId?: number;
+  yardId?: number;
+  isCountryFound?: boolean;
+  fixPage?: number;
+  page?: number;
+  perPage?: number;
+  customerReviewPerPage?: number;
+  makerId?: string;
+  modelId?: string;
+  chassisCodeId?: string;
   makerModel?: IMakerModel[];
-  bodyTypeId: string | null;
-  fromYear: string | null;
-  toYear: string | null;
-  steeringId: string | null;
-  transmissionId: string | null;
-  fuelId: string | null;
-  stockNo: string | null;
-  chassisNo: string | null;
-  auctionId: number | null;
-  carId: number | null;
-  currentCountryId?: number | null;
-  countryList?: ICountryList[];
+  bodyTypeId?: string;
+  fromYear?: string;
+  toYear?: string;
+  engine?: string;
+  year?: string;
+  purchaseFromDate?: string;
+  purchaseToDate?: string;
+  steeringId?: string;
+  transmissionId?: string;
+  fuelId?: string;
+  stockNo?: string;
+  chassisNo?: string;
+  pdDays?: string;
+  etaCrossed?: string;
+  dutyPaid?: string;
+  noInspection?: string;
+  searchKeyword?: string;
+  isReserved?: string;
+
+  carId?: number;
+  currentCountryId?: number;
 }

@@ -10,10 +10,7 @@ const WebBodyTypes = () => {
   const router: NextRouter = useRouter();
   const params = useRouterParams(router.query);
 
-  const { data, isLoading, isError, isSuccess } = useBodyType(
-    params.countryId,
-    params.auctionId
-  );
+  const { data, isLoading, isError, isSuccess } = useBodyType(params);
 
   return (
     <div className="max-w-full 2xl:block lg:block md:block sm:hidden xs:hidden xxs:hidden mt-2">

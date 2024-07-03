@@ -14,12 +14,9 @@ export const createAuctionQueryParams = (
 export const createAuctionQueryWithAllParams = (
   params: ICarListParams
 ): string => {
-  let query = `?country_id=${params.countryId ? params.countryId : '0'}&
-              page=${params.page ? params.page : '1'}&
-              auction_id=${params.auctionId}&
-              per_page=${
-                params.perPage ? params.perPage : vehiclePerPageList
-              }&`;
+  let query = `?country_id=${params.countryId ? params.countryId : '0'}&page=${
+    params.page ? params.page : '1'
+  }&per_page=${params.perPage ? params.perPage : vehiclePerPageList}&`;
 
   query += `${params.makerId ? 'maker_id=' + params.makerId + '&' : ''}`;
   query += `${params.modelId ? 'model_id=' + params.modelId + '&' : ''}`;

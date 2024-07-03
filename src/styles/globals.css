@@ -64,8 +64,49 @@ li>ul                 { transform: translateX(100%) scale(0) }
     -webkit-transition-delay: 0.175s;
     transition-delay: 0.175s;
   }
+  .active{
+    background-color:black;
+    }
+  .display-ruby{
+    display: block ruby;
+  }
+  #doubleDropdown{
+    position: absolute;
+  inset: 0px auto auto 0px;
+  margin: 0px;
+  transform: translate(304px, -2px);
+  }
   
-
+  @media screen and (max-width: 319px) {
+    .d-none-additional{
+      display: none;
+    }
+    .w-additional{
+      width: 50%;
+      margin: 0 5px;
+    }
+    .additional-margin{
+      margin: 8px;
+    }
+    .additional-padding{
+      padding: 8px;
+    }
+  }
+  @media screen and (max-width: 1600px) {
+    #doubleDropdown{
+    transform: translate(281px, -2px);
+    }
+  }
+  @media screen and (max-width: 1440px) {
+    #doubleDropdown{
+    transform: translate(268px, -2px);
+    }
+  }
+  @media screen and (max-width: 1280px) {
+    #doubleDropdown{
+    transform: translate(247px, -2px);
+    }
+  }
   @media screen and (max-width: 767px) and (min-width: 320px) {
     .main-banner .swiper-slide{ display: none}
     li:hover>ul { transform:none}
@@ -76,4 +117,40 @@ li>ul                 { transform: translateX(100%) scale(0) }
       max-width: inherit;
     }
   }
-  
+
+.summerreport td, th {
+    text-align: left;
+}
+.summerreport th {
+    background-color: #000;
+    font-weight: bold;
+    color: #fff;
+    white-space: nowrap;
+}
+.summerreport tbody th {
+	background-color: #000;
+}
+.summerreport tbody tr:nth-child(2n-1) {
+    background-color: #f5f5f5;
+    /* transition: all .125s ease-in-out; */
+}
+.summerreport tbody tr:hover {
+    background-color: rgba(166, 167, 166, 0.267);
+}
+
+.sticky-intersect {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 20;
+}
+
+.table-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.table-wrapper {
+  flex: 1;
+  min-width: 200px; 
+}

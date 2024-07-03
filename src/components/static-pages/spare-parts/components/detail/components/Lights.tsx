@@ -2,8 +2,6 @@ import Image from 'next/image';
 import React from 'react';
 
 const Lights = ({ setisOpenModal, setImageName }) => {
-  const lightImages = ['light-1', 'light-2', 'light-3', 'light-4'];
-
   return (
     <section
       id="lights"
@@ -33,25 +31,70 @@ const Lights = ({ setisOpenModal, setImageName }) => {
           </div>
         </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 pt-2">
-          {lightImages.map((item) => (
-            <button
-              key={item}
-              onClick={() => {
-                setisOpenModal(true);
-                setImageName(item);
-              }}
-            >
-              <div className="h-full shadow-2xl shadow-black-900 overflow-hidden group">
-                <Image
-                  alt=""
-                  width={500}
-                  height={500}
-                  src={`/assets/spare-parts-images/${item}.jpg`}
-                  className="w-full z-0  h-full object-fill example "
-                />
-              </div>
-            </button>
-          ))}
+          <button
+            onClick={() => {
+              setisOpenModal(true);
+              setImageName('light-1');
+            }}
+          >
+            <div className="h-full shadow-2xl shadow-black-900 overflow-hidden group">
+              <Image
+                alt=""
+                width={500}
+                height={500}
+                src="https://janjapan.com/resources/images/spare_parts/light-1.jpg"
+                className="w-full z-0  h-full object-fill example "
+              />
+            </div>
+          </button>
+          <button
+            onClick={() => {
+              setisOpenModal(true);
+              setImageName('light-2');
+            }}
+          >
+            <div className="h-full shadow-2xl shadow-black-900 overflow-hidden group">
+              <Image
+                alt=""
+                width={500}
+                height={500}
+                src="https://janjapan.com/resources/images/spare_parts/light-2.jpg"
+                className="w-full z-0  h-full object-fill example "
+              />
+            </div>
+          </button>
+          <button
+            onClick={() => {
+              setisOpenModal(true);
+              setImageName('light-3');
+            }}
+          >
+            <div className="h-full shadow-2xl shadow-black-900 overflow-hidden group">
+              <Image
+                alt=""
+                width={500}
+                height={500}
+                src="https://janjapan.com/resources/images/spare_parts/light-3.jpg"
+                className="w-full z-0  h-full object-fill example "
+              />
+            </div>
+          </button>
+          <button
+            onClick={() => {
+              setisOpenModal(true);
+              setImageName('light-4');
+            }}
+          >
+            <div className="h-full shadow-2xl shadow-black-900 overflow-hidden group">
+              <Image
+                alt=""
+                width={500}
+                height={500}
+                src="https://janjapan.com/resources/images/spare_parts/light-4.jpg"
+                className="w-full z-0  h-full object-fill example "
+              />
+            </div>
+          </button>
         </div>
       </div>
     </section>

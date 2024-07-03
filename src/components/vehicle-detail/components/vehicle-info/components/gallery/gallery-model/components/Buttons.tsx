@@ -1,11 +1,7 @@
 import React, { Fragment } from 'react';
 import { CaretLeftIcon, CaretRightIcon } from 'icons';
-import { useCurrentCountry } from 'src/hooks/current-country';
 
 const Buttons = ({ images, activeImage, setActiveImage }) => {
-  const SelectedCountry = useCurrentCountry();
-  const isAuctionSheetDisplay = SelectedCountry?.isAuctionSheetDisplay === 1;
-
   const handleImageCarousel = (operator: string) => {
     const itemIndex = images.findIndex(
       (x) => x.imagePath.replace('/s_thumb', '/thumb') === activeImage
@@ -27,15 +23,6 @@ const Buttons = ({ images, activeImage, setActiveImage }) => {
         break;
       default:
         result = itemIndex;
-    }
-
-    while (images[result].isAuctionSheet === 1 && !isAuctionSheetDisplay) {
-      result += operator === '+' ? 1 : -1;
-      if (result >= images.length) {
-        result = 0;
-      } else if (result < 0) {
-        result = images.length - 1;
-      }
     }
 
     setActiveImage(images[result].imagePath.replace('/s_thumb', '/thumb'));

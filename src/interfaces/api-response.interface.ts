@@ -5,3 +5,8 @@ export interface IApiResponse<T> {
   data: T;
   message: string;
 }
+
+export interface IApiResponseWithoutData {
+  success: boolean;
+  message: string;
+}

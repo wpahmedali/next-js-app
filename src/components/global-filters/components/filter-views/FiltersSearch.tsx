@@ -10,11 +10,9 @@ import SearchFuel from '../SearchFuel';
 import SearchMinYear from '../SearchMinYear';
 import SearchMaxYear from '../SearchMaxYear';
 import SearchBodyType from '../SearchBodyType';
-import SearchChassisNo from '../SearchChassisNo';
 import SearchButton from 'components/common/Searchbutton';
 import { IFilters } from 'components/global-filters/interfaces/filters.interface';
 import { IDropdownData } from 'components/global-filters/interfaces/dropdown-data.interface';
-import SearchStockNo from '../SearchStockNo';
 import { useDispatchLoadingState } from 'src/providers/LoadingContext';
 import { GetBacklistingUrl } from 'src/hooks/get-back-listing-url';
 import { useSetContext } from 'src/providers/ModelContext';
@@ -22,6 +20,9 @@ import { useRouterParams } from 'src/hooks/router-params';
 import { createFilterQuery } from 'utils/create-queries';
 import { ROUTES } from 'src/common/routes';
 import { useCurrentCountryName } from 'src/hooks/current-country-name';
+import SearchByText from '../SearchbyText';
+import SearchByCheck from '../SearchByCheck';
+import SearchByDate from '../SearchByDate';
 
 const FiltersSearch = () => {
   const [minYear, setMinYear] = useState(1970);
@@ -61,7 +62,15 @@ const FiltersSearch = () => {
         minYear: [],
         maxYear: [],
         bodyTypes: [],
+        engine: '',
+        year: '',
         stockNo: '',
+        purchaseDateFrom: '',
+        purchaseDateTo: '',
+        PDDay: '',
+        noInspection: '',
+        dutyPaid: '',
+        ETACrossed: '',
         chassisNo: '',
       });
     }
@@ -81,6 +90,14 @@ const FiltersSearch = () => {
       maxYear: [],
       bodyTypes: [],
       stockNo: '',
+      engine: '',
+      year: '',
+      purchaseDateFrom: '',
+      purchaseDateTo: '',
+      PDDay: '',
+      noInspection: '',
+      dutyPaid: '',
+      ETACrossed: '',
       chassisNo: '',
     });
     setResetToggle(!resetToggle);
@@ -113,16 +130,26 @@ const FiltersSearch = () => {
       }
 
       router.push(
-        pathname.length > 1
-          ? pathname + query
-          : `${
-              params.countryId
-                ? `/${selectedCountry.toLowerCase()}-${params.countryId}`
-                : ROUTES.ALL_STOCK
-            }/1` + query
+        `${
+          pathname.length > 1
+            ? `${pathname}${query}${
+                queryParams?.is_reserved
+                  ? `&is_reserved=${queryParams.is_reserved}`
+                  : ''
+              }`
+            : `${
+                params.countryId
+                  ? `/${selectedCountry.toLowerCase()}-${params.countryId}`
+                  : ROUTES.ALL_STOCK
+              }/1${query}${
+                queryParams?.is_reserved
+                  ? `&is_reserved=${queryParams.is_reserved}`
+                  : ''
+              }`
+        }`
       );
 
-      setContext('SET_VALUE', '');
+      setContext('');
       if (dropdownState) {
         setDropdownState('');
       }
@@ -143,10 +170,15 @@ const FiltersSearch = () => {
     };
   }, []);
 
+  const [active, setActive] = useState('');
+
+  const handleClick = (event) => {
+    setActive(event.target.id);
+  };
   return (
     <div
       ref={dropdownRef}
-      className="flex flex-wrap md:mt-2 sm:mt-2 xs:mt-2 xxs:mt-2 lg:-mt-12 relative backdrop-blur-xl 3xl:bg-black/70 2xl:bg-black/70 xl:bg-black/70 lg:bg-black/70 md:bg-black/70 sm:bg-none xs:bg-none xxs:bg-none hover:backdrop-blur-lg py-3 px-1 lg:mx-7 sm:mx-2 xs:mx-1 rounded-md md:mb-2 sm:mb-2 xs:mb-2 xxs:mb-2 z-20"
+      className="flex-col flex-wrap md:mt-2 sm:mt-2 xs:mt-2 xxs:mt-2 lg:mt-0 relative backdrop-blur-xl sm:bg-none xs:bg-none xxs:bg-none hover:backdrop-blur-lg py-3 px-1 lg:mx-0 sm:mx-2 xs:mx-1 rounded-md md:mb-2 sm:mb-14 xs:mb-12 xxs:mb-12 z-20 pb-12"
     >
       <SearchMaker
         updateFilters={updateFilters}
@@ -159,6 +191,27 @@ const FiltersSearch = () => {
       <SearchModel
         updateFilters={updateFilters}
         models={models}
+        resetToggle={resetToggle}
+        dropdownState={dropdownState}
+        setDropdownState={setDropdownState}
+      />
+      <SearchBodyType
+        updateFilters={updateFilters}
+        resetToggle={resetToggle}
+        dropdownState={dropdownState}
+        setDropdownState={setDropdownState}
+      />
+      <SearchMinYear
+        changeMinYear={changeMinYear}
+        updateFilters={updateFilters}
+        resetToggle={resetToggle}
+        setMinYear={setMinYear}
+        dropdownState={dropdownState}
+        setDropdownState={setDropdownState}
+      />
+      <SearchMaxYear
+        minYear={minYear}
+        updateFilters={updateFilters}
         resetToggle={resetToggle}
         dropdownState={dropdownState}
         setDropdownState={setDropdownState}
@@ -181,36 +234,21 @@ const FiltersSearch = () => {
         dropdownState={dropdownState}
         setDropdownState={setDropdownState}
       />
-      <SearchMinYear
-        changeMinYear={changeMinYear}
-        updateFilters={updateFilters}
-        resetToggle={resetToggle}
-        setMinYear={setMinYear}
-        dropdownState={dropdownState}
-        setDropdownState={setDropdownState}
-      />
-      <SearchMaxYear
-        minYear={minYear}
-        updateFilters={updateFilters}
-        resetToggle={resetToggle}
-        dropdownState={dropdownState}
-        setDropdownState={setDropdownState}
-      />
-      <SearchBodyType
-        updateFilters={updateFilters}
-        resetToggle={resetToggle}
-        dropdownState={dropdownState}
-        setDropdownState={setDropdownState}
-      />
-      <SearchStockNo
+      <SearchByText
         handleOnKeyDown={handleOnKeyDown}
         updateFilters={updateFilters}
         resetToggle={resetToggle}
         dropdownState={dropdownState}
         setDropdownState={setDropdownState}
       />
-      <SearchChassisNo
+      <SearchByDate
         handleOnKeyDown={handleOnKeyDown}
+        updateFilters={updateFilters}
+        resetToggle={resetToggle}
+        dropdownState={dropdownState}
+        setDropdownState={setDropdownState}
+      />
+      <SearchByCheck
         updateFilters={updateFilters}
         resetToggle={resetToggle}
         dropdownState={dropdownState}

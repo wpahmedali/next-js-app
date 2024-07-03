@@ -34,20 +34,10 @@ const Gallery = ({ data }: { data: IVehicleDetail }): JSX.Element => {
             <Image
               alt=""
               className="top-0 left-0 absolute z-50"
-              src={'/assets/reserved.png'}
-              width={90}
-              height={100}
+              src={'/assets/reservedtdetail.png'}
+              width={150}
+              height={150}
             ></Image>
-          )}
-
-          {data?.discountedPrice > 0 && (
-            <Image
-              alt=""
-              className="top-0 right-0"
-              src={'/assets/special.png'}
-              width={63}
-              height={63}
-            />
           )}
 
           <div

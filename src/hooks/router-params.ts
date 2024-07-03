@@ -9,19 +9,16 @@ import {
   IMakerModel,
 } from 'src/interfaces/car-list-param.interface';
 import { getIdFromParam } from 'utils/get-id-from-param';
-import { useCurrentLocation } from 'react-query/hooks/api/geo-location';
-import { siteSettings } from 'utils/siteSetting';
 import { useMakerModel } from 'react-query/hooks/api/marker-model';
-import { useSiteCountryShown } from 'react-query/hooks/api/site-country-shown';
 
 export const useRouterParams = ({
   country,
-  pCountry,
-  auction,
+  yard,
   maker,
   makers,
   model,
   models,
+  chassis,
   bodyType,
   body_types,
   from_year,
@@ -31,49 +28,36 @@ export const useRouterParams = ({
   fuels,
   chassis_no,
   stock_no,
+  is_reserved,
+  engine,
+  year,
+  purchase_date_from,
+  purchase_date_to,
+  pd_day,
+  ETA_Crossed,
+  Duty_Paid,
+  No_Inspection,
   carId,
   page,
 }: ParsedUrlQuery): ICarListParams => {
   const params = { ...emptyCarListParams };
 
-  const { defaultCountryShown } = siteSettings;
-  const { data: currentLocation } = useCurrentLocation();
-  const { data: countryList } = useSiteCountryShown();
-
-  if (countryList?.data) {
-    params.countryList = countryList?.data;
-  }
-
   // country section start
-  if (!country) {
+  if (!country || country === 'all_stock') {
     params.countryId = 0;
-  }
-  if (currentLocation && currentLocation?.data?.id && defaultCountryShown) {
-    params.countryId = currentLocation.data.id;
-    params.isCountryFound = true;
-  } else if (params.countryId && !defaultCountryShown) {
-    params.countryId = params.countryId;
-  }
-  if (country === 'all_stock') {
-    params.countryId = 0;
-  }
-  if (country && !Array.isArray(country) && country !== 'all_stock') {
+  } else if (country && !Array.isArray(country)) {
     params.countryId = getIdFromParam(country);
   }
   // country section end
 
-  if (pCountry && !Array.isArray(pCountry)) {
-    params.pCountryId = getIdFromParam(pCountry);
+  if (yard && !Array.isArray(yard)) {
+    params.yardId = getIdFromParam(yard);
   }
 
   if (carId && !Array.isArray(carId)) {
     params.carId = getIdFromParam(carId);
   } else {
     params.carId = 0;
-  }
-
-  if (auction && !Array.isArray(auction)) {
-    params.auctionId = getIdFromParam(auction);
   }
 
   if (maker && !Array.isArray(maker)) {
@@ -98,7 +82,13 @@ export const useRouterParams = ({
       .join(',');
   }
 
-  const { data } = useMakerModel(params.countryId, params.auctionId);
+  if (chassis && !Array.isArray(chassis)) {
+    params.chassisCodeId = String(
+      getIdFromParam(chassis) ? getIdFromParam(chassis) : ''
+    );
+  }
+
+  const { data } = useMakerModel(params);
 
   if (models && !Array.isArray(models) && data && data.data) {
     const makerIdArr =
@@ -185,8 +175,44 @@ export const useRouterParams = ({
     params.stockNo = stock_no;
   }
 
+  if (is_reserved && !Array.isArray(is_reserved) && is_reserved === 'true') {
+    params.isReserved = is_reserved;
+  }
+
   if (chassis_no && !Array.isArray(chassis_no)) {
     params.chassisNo = chassis_no;
+  }
+
+  if (engine && !Array.isArray(engine)) {
+    params.engine = engine;
+  }
+
+  if (year && !Array.isArray(year)) {
+    params.year = year;
+  }
+
+  if (purchase_date_from && !Array.isArray(purchase_date_from)) {
+    params.purchaseFromDate = purchase_date_from;
+  }
+
+  if (purchase_date_to && !Array.isArray(purchase_date_to)) {
+    params.purchaseToDate = purchase_date_to;
+  }
+
+  if (pd_day && !Array.isArray(pd_day)) {
+    params.pdDays = pd_day;
+  }
+
+  if (ETA_Crossed && !Array.isArray(ETA_Crossed)) {
+    params.etaCrossed = ETA_Crossed;
+  }
+
+  if (Duty_Paid && !Array.isArray(Duty_Paid)) {
+    params.dutyPaid = Duty_Paid;
+  }
+
+  if (No_Inspection && !Array.isArray(No_Inspection)) {
+    params.noInspection = No_Inspection;
   }
 
   if (page && !Array.isArray(page)) {
@@ -196,7 +222,7 @@ export const useRouterParams = ({
   }
 
   params.perPage = vehiclePerPageList;
-  params.customerReviewPerPage = 15;
+  params.customerReviewPerPage = 5;
 
   return params;
 };

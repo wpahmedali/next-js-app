@@ -6,7 +6,7 @@ import {
   useLoadingState,
 } from 'src/providers/LoadingContext';
 import Loading from 'components/loading';
-import { useIsAuctionCountry } from 'src/hooks/auction-country';
+// import { useIsAuctionCountry } from 'src/hooks/auction-country';
 import { ROUTES } from 'src/common/routes';
 import { useRouterParams } from 'src/hooks/router-params';
 
@@ -21,26 +21,26 @@ const CountryItem = ({
   const loadingState = useLoadingState();
   const setLoadingState = useDispatchLoadingState();
   const params = useRouterParams(router.query);
-  const isAuctionCountry = useIsAuctionCountry(item?.id);
+  // const isAuctionCountry = useIsAuctionCountry(item?.id);
 
   const gotoCountryCarList = () => {
     let url = ROUTES.ALL_STOCK + '/1';
 
     if (item.id !== 0) {
-      if (isAuctionCountry) {
-        url = `${ROUTES.AUCTION}/${item.auctionShortName.toLowerCase()}-${
-          item.auctionId
-        }/${item.id}/1`;
-      } else {
-        url = `${ROUTES.COUNTRY_CAR_LIST}/${item.countryName.toLowerCase()}-${
-          item.id
-        }/1`;
-      }
+      // if (isAuctionCountry) {
+      //   url = `${ROUTES.AUCTION}/${item.auctionShortName.toLowerCase()}-${
+      //     item.auctionId
+      //   }/${item.id}/1`;
+      // } else {
+      url = `${ROUTES.COUNTRY_CAR_LIST}/${item.countryName.toLowerCase()}-${
+        item.id
+      }/1`;
+      // }
     }
 
     if (url) {
       router.push(url);
-      hideDialog('SET_VALUE', '');
+      hideDialog('');
       setLoadingState({ type: 'countryLoading' });
     }
   };
@@ -63,7 +63,7 @@ const CountryItem = ({
         {renderContent()}
         <div className="mx-2 text-xs flex items-center">
           {name.toUpperCase()}
-          {item?.is_count && <span className="ml-2">{item?.countryCount}</span>}
+          <span className="ml-2">{item?.countryCount}</span>
         </div>
       </div>
     </button>

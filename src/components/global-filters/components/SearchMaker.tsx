@@ -25,15 +25,12 @@ const SearchMaker = ({
 
   const params = useRouterParams(router.query);
 
-  const { data, isLoading, isError, isSuccess } = useMakerModel(
-    params.countryId,
-    params.auctionId
-  );
+  const { data, isLoading, isError, isSuccess } = useMakerModel(params);
 
   let dropdownData: IDropdownData[] = [];
 
   if (isSuccess && data) {
-    dropdownData = data.data?.map((item) => ({
+    dropdownData = data.data.map((item) => ({
       id: item.makerId,
       name: item.makerName,
       image: item.cssClass.toLowerCase(),
@@ -89,7 +86,7 @@ const SearchMaker = ({
         }
       } else {
         selectedModels = data.data
-          ?.filter((item) =>
+          .filter((item) =>
             makerIdArr.includes(
               `${item.makerName.toLowerCase()}-${item.makerId}`
             )

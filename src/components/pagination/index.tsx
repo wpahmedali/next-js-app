@@ -8,6 +8,7 @@ import { useDispatchLoadingState } from 'src/providers/LoadingContext';
 import { ROUTES } from 'src/common/routes';
 import { useCurrentCountryName } from 'src/hooks/current-country-name';
 import { useRouterParams } from 'src/hooks/router-params';
+import { useSetContext } from 'src/providers/ModelContext';
 
 const Pagination = ({
   isLoading,
@@ -16,6 +17,7 @@ const Pagination = ({
   isLoading: boolean;
   data: IPagination;
 }) => {
+  const setContext = useSetContext();
   const setLoadingState = useDispatchLoadingState();
   const router: NextRouter = useRouter();
   const selectedCountry = useCurrentCountryName();
@@ -23,12 +25,14 @@ const Pagination = ({
   const { page } = router.query;
 
   const handlePrevPage = () => {
+    setContext('');
     const newPage = params.page - 1;
     newPage > 0 && gotoNewPage(router, newPage);
     setLoadingState({ type: 'tyreLoader' });
   };
 
   const handleNextPage = () => {
+    setContext('');
     const newPage = params.page + 1;
 
     if (newPage <= data?.totalPages) {
@@ -40,6 +44,7 @@ const Pagination = ({
   };
 
   const handlePageChange = (currentPage: number) => {
+    setContext('');
     setLoadingState({ type: 'tyreLoader' });
     if (page) {
       gotoNewPage(router, currentPage);

@@ -1,8 +1,17 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { Inter } from 'next/font/google';
-import Menu from 'components/menu';
-import TestiMonial from 'components/testimonial/TestiMonial';
 import Footer from 'components/footer';
+import Header from 'components/header';
+import SaleModel from 'components/sale-model';
+import CountryDialog from 'components/right-menu/components/country-dialog';
+import { useModelState, useSetContext } from 'src/providers/ModelContext';
+import FilterDialog from 'components/right-menu/components/FilterDialog';
+import YardDialog from 'components/right-menu/components/yard-toggle-menu/components/YardDialog';
+import ReportDialog from 'components/report-toggle/components/ReportDialog';
+import DemandCarModel from 'components/demand-cars/components/DemandCarModel';
+import ChangePasswordModel from 'components/change-password-model';
+import SmartMenuModel from 'components/smart-menu';
+import SpecialMenuItemModel from 'components/special-menu-item-model';
 
 const inter = Inter<any>({
   subsets: ['latin'],
@@ -10,6 +19,9 @@ const inter = Inter<any>({
 });
 
 const CommonLayout = ({ children }) => {
+  const setContext = useSetContext();
+  const modelState = useModelState();
+
   return (
     <main className={inter.className}>
       <AnimatePresence>
@@ -20,9 +32,24 @@ const CommonLayout = ({ children }) => {
           transition={{ delay: 0.3 }}
         >
           <main className="bg-light w-full min-h-screen">
-            <Menu />
+            <Header />
             {children}
-            <TestiMonial />
+            <SaleModel isShowDialog={modelState} hideDialog={setContext} />
+            <YardDialog isShowDialog={modelState} hideDialog={setContext} />
+            <ReportDialog isShowDialog={modelState} hideDialog={setContext} />
+            <FilterDialog isShowDialog={modelState} hideDialog={setContext} />
+            <CountryDialog isShowDialog={modelState} hideDialog={setContext} />
+            <DemandCarModel isShowDialog={modelState} hideDialog={setContext} />
+            <SmartMenuModel isShowDialog={modelState} hideDialog={setContext} />
+            <ChangePasswordModel
+              isShowDialog={modelState}
+              hideDialog={setContext}
+            />
+            <SpecialMenuItemModel
+              isShowDialog={modelState}
+              hideDialog={setContext}
+            />
+
             <Footer />
           </main>
         </motion.div>

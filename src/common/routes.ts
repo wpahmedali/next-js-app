@@ -10,7 +10,10 @@ export const ROUTES = Object.freeze({
   DETAIL: '/detail',
   JAPAN_OFFICES: '/japan-offices',
   USED_CARS: '/used-cars',
+  USED_CARS_YARDS: '/used-cars/yard-location',
   SEARCH: '/used-cars/search',
   USED_CAR: '/used-car',
   USED_VEHICLES: '/used-vehicles',
+  USED_VEHICLES_YARDS: '/used-vehicles/yard-location',
+  DEMAND_CARS: '/demand-cars',
 });

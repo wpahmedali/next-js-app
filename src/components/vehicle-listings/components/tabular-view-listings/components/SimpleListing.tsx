@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Fragment } from 'react';
 import Error from 'components/error';
 import { NextRouter, useRouter } from 'next/router';
@@ -12,12 +12,13 @@ import TabularHeader from './TabularHeader';
 import UpperSection from './UpperSection';
 import LowerSection from './LowerSection';
 import { reactQuery } from 'src/common/constants';
-import { useVehicleList } from 'react-query/hooks/api/vehicle-list';
+import { useVehicleList } from 'react-query/hooks/api/vehicle/vehicle-list';
 
 const SimpleTabularListing = () => {
   const router: NextRouter = useRouter();
   const loadingState = useLoadingState();
   const selectedCountry = useCurrentCountryName();
+  const [vehicleId, setVehicleId] = useState(null);
 
   const { country, auction, maker, model, bodyType } = router.query;
   const params = useRouterParams(router.query);
@@ -42,14 +43,12 @@ const SimpleTabularListing = () => {
       {!isError && (
         <Fragment>
           <Pagination
-            isLoading={
-              (isPreviousData || isLoading) && loadingState === 'tyreLoader'
-            }
+            isLoading={isPreviousData || isLoading}
             data={data?.data.pagination}
           />
           {isSuccess && data && (
             <div className="flex justify-between my-2">
-              <div className="table-list-main w-full sm:w-screen 3xl:overflow-auto 2xl:overflow-auto lg:overflow-auto md:overflow-auto sm:overflow-scroll xs:w-screen xs:overflow-scroll xxs:w-screen xxs:overflow-scroll">
+              <div className="table-list-main w-full 3xl:overflow-auto 2xl:overflow-auto lg:overflow-auto md:overflow-auto sm:overflow-scroll  xs:overflow-scroll xxs:overflow-scroll">
                 {data.data.pagination.total === 0 ? (
                   <div className="my-5 text-red-600 text-center">
                     Data Not Found
@@ -57,7 +56,6 @@ const SimpleTabularListing = () => {
                 ) : (
                   <table className="table-auto border-collapse border border-slate-400 w-full">
                     <TabularHeader />
-
                     <tbody>
                       {data.data.carList.map((data, index) => (
                         <Fragment key={index}>
@@ -82,6 +80,8 @@ const SimpleTabularListing = () => {
                             }/${data.carId}${
                               bodyType ? `?bodyType=${bodyType}` : ''
                             }`}
+                            vehicleId={vehicleId}
+                            setVehicleId={setVehicleId}
                           />
                         </Fragment>
                       ))}
@@ -91,12 +91,6 @@ const SimpleTabularListing = () => {
               </div>
             </div>
           )}
-          <Pagination
-            isLoading={
-              (isPreviousData || isLoading) && loadingState === 'tyreLoader'
-            }
-            data={data?.data.pagination}
-          />
         </Fragment>
       )}
     </main>

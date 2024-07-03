@@ -5,11 +5,11 @@ import React, {
   FC,
   ReactNode,
 } from 'react';
-import { IVehicleDetail } from 'src/interfaces/vehicle-detail.interface';
 
 type FavoriteCarsContextType = {
-  favoriteCars: IVehicleDetail[];
-  toggleFavorite: (carDetails: IVehicleDetail) => void;
+  favoriteCars: number[];
+  toggleFavorite: (carId: number) => void;
+  toggleRemoveFavorite: () => void;
 };
 
 const FavoriteCarsContext = createContext<FavoriteCarsContextType | undefined>(
@@ -30,7 +30,7 @@ const isLocalStorageAvailable = (): boolean => {
 export const FavoriteCarsProvider: FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [favoriteCars, setFavoriteCars] = useState<IVehicleDetail[]>(() => {
+  const [favoriteCars, setFavoriteCars] = useState<number[]>(() => {
     if (isLocalStorageAvailable()) {
       const storedFavoriteCars =
         JSON.parse(localStorage.getItem('favoriteVehicleList')) || [];
@@ -39,18 +39,18 @@ export const FavoriteCarsProvider: FC<{ children: ReactNode }> = ({
     return [];
   });
 
-  const toggleFavorite = (carDetails: IVehicleDetail) => {
+  const toggleFavorite = (carId: number) => {
     let favoriteVehicleData =
       JSON.parse(localStorage.getItem('favoriteVehicleList')) || [];
 
     const isDataExistingIndex = favoriteVehicleData.findIndex(
-      (item) => item.carId === carDetails.carId
+      (item) => item === carId
     );
 
     if (isDataExistingIndex !== -1) {
       favoriteVehicleData.splice(isDataExistingIndex, 1);
     } else {
-      favoriteVehicleData.push(carDetails);
+      favoriteVehicleData.push(carId);
     }
 
     localStorage.setItem(
@@ -61,11 +61,17 @@ export const FavoriteCarsProvider: FC<{ children: ReactNode }> = ({
     setFavoriteCars(favoriteVehicleData);
   };
 
+  const toggleRemoveFavorite = () => {
+    localStorage.setItem('favoriteVehicleList', JSON.stringify([]));
+
+    setFavoriteCars([]);
+  };
   return (
     <FavoriteCarsContext.Provider
       value={{
         favoriteCars,
         toggleFavorite,
+        toggleRemoveFavorite,
       }}
     >
       {children}

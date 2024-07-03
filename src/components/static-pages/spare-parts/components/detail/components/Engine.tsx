@@ -2,40 +2,6 @@ import Image from 'next/image';
 import React from 'react';
 
 const Engine = ({ setisOpenModal, setImageName, shareWhatsapp }) => {
-  const EngineImages = [
-    'engine-1',
-    'engine-2',
-    'engine-3',
-    'engine-4',
-    'engine1',
-    'engine2',
-    'engine3',
-    'engine4',
-    'engine5',
-    'engine6',
-    'engine7',
-    'engine8',
-    'engine9',
-    'engine10',
-    'engine11',
-    'engine12',
-    'engine13',
-    'engine14',
-    'engine15',
-    'engine16',
-    'engine17',
-    'engine18',
-    'engine19',
-    'engine20',
-    'engine21',
-    'engine22',
-    'engine23',
-    'engine24',
-    'engine25',
-    'engine26',
-    'engine27',
-  ];
-
   return (
     <section
       id="engines-section"
@@ -89,25 +55,71 @@ const Engine = ({ setisOpenModal, setImageName, shareWhatsapp }) => {
           </div>
         </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 pt-2">
-          {EngineImages.map((item) => (
-            <button
-              key={item}
-              onClick={() => {
-                setisOpenModal(true);
-                setImageName(item);
-              }}
-            >
-              <div className="h-full shadow-2xl shadow-black-900 overflow-hidden group">
-                <Image
-                  alt=""
-                  width={500}
-                  height={500}
-                  src={`/assets/spare-parts-images/${item}.jpg`}
-                  className="w-full z-0  h-full object-fill example "
-                />
-              </div>
-            </button>
-          ))}
+          <button
+            onClick={() => {
+              setisOpenModal(true);
+              setImageName('engine-1');
+            }}
+          >
+            <div className="h-full shadow-2xl shadow-black-900 overflow-hidden group">
+              <Image
+                alt=""
+                width={500}
+                height={500}
+                src="https://janjapan.com/resources/images/spare_parts/engine-1.jpg"
+                className="w-full z-0  h-full object-fill example "
+              />
+            </div>
+          </button>
+
+          <button
+            onClick={() => {
+              setisOpenModal(true);
+              setImageName('engine-2');
+            }}
+          >
+            <div className="h-full shadow-2xl shadow-black-900 overflow-hidden group">
+              <Image
+                alt=""
+                width={500}
+                height={500}
+                src="https://janjapan.com/resources/images/spare_parts/engine-2.jpg"
+                className="w-full z-0  h-full object-fill example "
+              />
+            </div>
+          </button>
+          <button
+            onClick={() => {
+              setisOpenModal(true);
+              setImageName('engine-3');
+            }}
+          >
+            <div className="h-full shadow-2xl shadow-black-900 overflow-hidden group">
+              <Image
+                alt=""
+                width={500}
+                height={500}
+                src="https://janjapan.com/resources/images/spare_parts/engine-3.jpg"
+                className="w-full z-0  h-full object-fill example "
+              />
+            </div>
+          </button>
+          <button
+            onClick={() => {
+              setisOpenModal(true);
+              setImageName('engine-3');
+            }}
+          >
+            <div className="h-full shadow-2xl shadow-black-900 overflow-hidden group">
+              <Image
+                alt=""
+                width={500}
+                height={500}
+                src="https://janjapan.com/resources/images/spare_parts/engine-3.jpg"
+                className="w-full z-0  h-full object-fill example "
+              />
+            </div>
+          </button>
         </div>
       </div>
     </section>

@@ -1,7 +1,8 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { Inter } from 'next/font/google';
-import Menu from 'components/menu';
 import Footer from 'components/footer';
+import Header from 'components/header';
+
 //just
 const inter = Inter<any>({
   subsets: ['latin'],
@@ -19,7 +20,7 @@ const CustomerReviewPageLayout = ({ children }) => {
           transition={{ delay: 0.3 }}
         >
           <main className="bg-light w-full min-h-screen">
-            <Menu />
+            <Header />
             {children}
             <Footer />
           </main>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useAuction } from 'react-query/hooks/api/auction';
 import { NextRouter, useRouter } from 'next/router';
 import Link from 'next/link';
 import { ROUTES } from 'src/common/routes';
@@ -12,19 +11,17 @@ const AuctionButtons = () => {
   const params = useRouterParams(router.query);
   const countryIcon = useSelectedCountryIcon();
 
-  const { data, isSuccess } = useAuction(params.countryId);
+  // const { data, isSuccess } = useAuction(params.countryId);
 
   return (
     <div className="grid w-full grid-cols-3 2xl:grid-cols-3 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-1 sm:grid-cols-1 xs:grid-cols-1 xxs:grid-cols-1 grid-rows-1 grid-flow-dense gap-2 ">
-      {isSuccess &&
+      {/* {isSuccess &&
         data?.data?.map((item) => (
           <Link
             key={item.auctionId}
             href={`${ROUTES.AUCTION}/${item.auctionShortName.toLowerCase()}-${
               item.auctionId
-            }/${params.countryId}${
-              params.pCountryId ? `/parent/${params.pCountryId}` : ''
-            }/1`}
+            }/${params.countryId}/1`}
           >
             <motion.div
               whileHover={{ scale: 1.1 }}
@@ -40,7 +37,7 @@ const AuctionButtons = () => {
                   params.auctionId === item.auctionId
                     ? 'bg-primary'
                     : 'bg-primaryDark'
-                }bg-primaryDark my-1 items-center justify-left gap-x-3 px-3 flex text-black`}
+                }bg-primaryDark my-1 items-center justify-left gap-x-3 px-1 flex text-black`}
               >
                 <div>{countryIcon} </div>
                 <div>
@@ -53,11 +50,10 @@ const AuctionButtons = () => {
                     </div>
                   </div>
                 </div>
-                {/* Time: 08:30:00 AM */}
               </div>
             </motion.div>
           </Link>
-        ))}
+        ))} */}
     </div>
   );
 };

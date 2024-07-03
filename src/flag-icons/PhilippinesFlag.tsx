@@ -7,8 +7,8 @@ const PhilippinesFlag = (props: SVGProps<SVGSVGElement>): JSX.Element => {
       xmlns="http://www.w3.org/2000/svg"
       data-name="Layer 1"
       viewBox="0 0 32 21"
-      width={32}
-      height={21}
+      width={22}
+      height={17}
       {...props}
     >
       <defs>

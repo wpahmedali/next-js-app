@@ -1,7 +1,6 @@
 import { cva, VariantProps } from 'class-variance-authority';
 import Link from 'next/link';
 import { HTMLAttributes } from 'react';
-import { useCountryCount } from 'src/hooks/country-count';
 import { useDispatchLoadingState } from 'src/providers/LoadingContext';
 
 export interface IMakerModelItemProps
@@ -21,7 +20,6 @@ const WebMakerModelItem = ({
   setIsHovered,
 }: IMakerModelItemProps): JSX.Element => {
   const setLoadingState = useDispatchLoadingState();
-  const countryCount = useCountryCount();
 
   return (
     <li>
@@ -34,7 +32,7 @@ const WebMakerModelItem = ({
         className={makerModelItemClass({ isActive })}
       >
         <span className="mr-2">{model.toUpperCase()}</span>
-        {countryCount && <span className="mr-2">{modelCount}</span>}
+        <span className="mr-2">{modelCount}</span>
       </Link>
     </li>
   );

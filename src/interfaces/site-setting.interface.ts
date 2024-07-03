@@ -5,4 +5,5 @@ export interface ICountryList {
 
 export interface ISiteSetting {
   defaultCountryShown: boolean;
+  countryList: ICountryList[];
 }

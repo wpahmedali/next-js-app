@@ -1,4 +1,5 @@
 import React from 'react';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import Loading from 'components/loading';
 import PaginationButton from './PaginationButton';
 import { IPaginationButtons } from '../interfaces/pagination-buttons.interface';
@@ -49,24 +50,24 @@ const PaginationButtons = ({
   return (
     <div className="2xl:flex lg:flex md:flex sm:flex-initial xs:flex-initial xxs:flex-initial items-center justify-between w-full">
       <div>
-        {currentCountry?.isCount && (
-          <p className="text-sm text-white sm:mb-2 2xl:mb-0 lg:mb-0">
-            Showing{' '}
-            <span className="font-medium">
-              {data ? data?.currentPage * data?.perPage - data?.perPage + 1 : 0}
-            </span>{' '}
-            to{' '}
-            <span className="font-medium">
-              {data
-                ? data?.currentPage * data?.perPage > data?.total
-                  ? data?.total
-                  : data?.currentPage * data?.perPage
-                : 0}
-            </span>{' '}
-            of <span className="font-medium">{data ? data?.total : 0}</span>{' '}
-            results
-          </p>
-        )}
+        
+        <p className="text-sm text-white sm:mb-2 2xl:mb-0 lg:mb-0">
+          Showing{' '}
+          <span className="font-medium">
+            {data ? data?.currentPage * data?.perPage - data?.perPage + 1 : 0}
+          </span>{' '}
+          to{' '}
+          <span className="font-medium">
+            {data
+              ? data?.currentPage * data?.perPage > data?.total
+                ? data?.total
+                : data?.currentPage * data?.perPage
+              : 0}
+          </span>{' '}
+          of <span className="font-medium">{data ? data?.total : 0}</span>{' '}
+          results
+        </p>
+        
       </div>
 
       {isLoading && <Loading />}
@@ -77,10 +78,10 @@ const PaginationButtons = ({
         >
           <button
             onClick={handlePrevPage}
-            className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-primary hover:text-black focus:z-20 focus:outline-offset-0"
+            className="relative inline-flex items-center rounded-l-md px-1 py-1 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-primary hover:text-black focus:z-20 focus:outline-offset-0"
           >
             <span className="sr-only">Previous</span>
-            Previous
+            <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
           </button>
 
           {pageNumbers.map((page) => (
@@ -114,7 +115,7 @@ const PaginationButtons = ({
             className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-primary hover:text-black focus:z-20 focus:outline-offset-0"
           >
             <span className="sr-only">Next</span>
-            Next
+            <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
           </button>
         </nav>
       </div>

@@ -1,11 +1,11 @@
 import { allModelsStr } from 'src/common/constants';
 import { getNameFromParam } from 'utils/get-name-from-param';
 import { capitalizeWord } from 'utils/capitalize-word';
-import { useVehicleDetail } from 'react-query/hooks/api/vehicle-detail';
 import { getIdFromParam } from 'utils/get-id-from-param';
+import { useVehicleDetail } from 'react-query/hooks/api/vehicle/vehicle-detail';
 
 export const useDynamicMetaData = (router) => {
-  const { country, auction, maker, model, contact, carId } = router.query;
+  const { country, maker, model, contact, carId } = router.query;
 
   if (
     carId &&
@@ -81,27 +81,27 @@ export const useDynamicMetaData = (router) => {
     };
   }
 
-  if (
-    (country && !Array.isArray(country) && country !== 'all_stock') ||
-    (auction && !Array.isArray(auction))
-  ) {
-    return {
-      title: `High Quality Used Japanese cars in ${
-        auction
-          ? capitalizeWord(getNameFromParam(auction))
-          : capitalizeWord(getNameFromParam(country))
-      }`,
-      description: `Buy Used Japanese vehicles in ${
-        auction
-          ? capitalizeWord(getNameFromParam(auction))
-          : capitalizeWord(getNameFromParam(country))
-      } from Jan Japan. One of the largest importers and exporters of used Japanese cars in ${
-        auction && !Array.isArray(auction)
-          ? capitalizeWord(getNameFromParam(auction))
-          : capitalizeWord(getNameFromParam(country))
-      }`,
-    };
-  }
+  // if (
+  //   (country && !Array.isArray(country) && country !== 'all_stock') ||
+  //   (auction && !Array.isArray(auction))
+  // ) {
+  //   return {
+  //     title: `High Quality Used Japanese cars in ${
+  //       auction
+  //         ? capitalizeWord(getNameFromParam(auction))
+  //         : capitalizeWord(getNameFromParam(country))
+  //     }`,
+  //     description: `Buy Used Japanese vehicles in ${
+  //       auction
+  //         ? capitalizeWord(getNameFromParam(auction))
+  //         : capitalizeWord(getNameFromParam(country))
+  //     } from Jan Japan. One of the largest importers and exporters of used Japanese cars in ${
+  //       auction && !Array.isArray(auction)
+  //         ? capitalizeWord(getNameFromParam(auction))
+  //         : capitalizeWord(getNameFromParam(country))
+  //     }`,
+  //   };
+  // }
 };
 
 export const useVehicleDetailDynamicMetaData = (router) => {

@@ -20,10 +20,7 @@ const SearchBodyType = ({
   const bodyTypeIdArr =
     body_types && !Array.isArray(body_types) ? body_types.split(',') : [];
 
-  const { data, isLoading, isError, isSuccess } = useBodyType(
-    params.countryId,
-    params.auctionId
-  );
+  const { data, isLoading, isError, isSuccess } = useBodyType(params);
 
   let dropdownData: IDropdownData[] = [];
 

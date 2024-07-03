@@ -3,10 +3,10 @@ import WebMakers from './components/web-view';
 import { useLoadingState } from 'src/providers/LoadingContext';
 import { NextRouter, useRouter } from 'next/router';
 import { useVehicleListView } from 'src/providers/VehicleListView';
-import { useVehicleList } from 'react-query/hooks/api/vehicle-list';
 import { reactQuery } from 'src/common/constants';
 import { listingViews } from 'src/common/listing-views';
 import { useRouterParams } from 'src/hooks/router-params';
+import { useVehicleList } from 'react-query/hooks/api/vehicle/vehicle-list';
 
 const Makers = (): JSX.Element => {
   const { query }: NextRouter = useRouter();

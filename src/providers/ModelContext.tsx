@@ -8,26 +8,13 @@ import {
 
 type ViewActionType = {
   type: string;
-  payload?: any;
 };
 
-type StateType = {
-  value: string;
-  isFeature?: boolean;
-};
-
-const StateContext = createContext<StateType>({ value: '', isFeature: false });
+const StateContext = createContext<string>('');
 const ModelContext = createContext<Dispatch<ViewActionType>>(() => null);
 
-const reducerFun = (state: StateType, action: ViewActionType): StateType => {
-  switch (action.type) {
-    case 'SET_VALUE':
-      return { ...state, value: action.payload };
-    case 'SET_FEATURE':
-      return { ...state, isFeature: action.payload };
-    default:
-      return state;
-  }
+const reducerFun = (state: string, action: ViewActionType): string => {
+  return action.type;
 };
 
 type ModelContextProviderType = {
@@ -38,12 +25,8 @@ type ModelContextProviderType = {
 export const ModelContextProvider = ({
   children,
   initialValue = '',
-  isFeature = false,
-}: ModelContextProviderType & { isFeature?: boolean }) => {
-  const [state, dispatch] = useReducer(reducerFun, {
-    value: initialValue,
-    isFeature,
-  });
+}: ModelContextProviderType) => {
+  const [state, dispatch] = useReducer(reducerFun, initialValue);
 
   return (
     <ModelContext.Provider value={dispatch}>
@@ -54,12 +37,11 @@ export const ModelContextProvider = ({
 
 export const useModelState = () => useContext(StateContext);
 export const useDispatchModelState = () => useContext(ModelContext);
-
 export const useSetContext = () => {
   const dispatch = useDispatchModelState();
 
-  const setContext = (type: string, payload?: any) => {
-    dispatch({ type, payload });
+  const setContext = (type: string) => {
+    dispatch({ type: type });
   };
 
   return setContext;

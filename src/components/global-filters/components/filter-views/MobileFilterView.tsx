@@ -6,11 +6,7 @@ import CloseIcon from 'components/common/CloseIcon';
 const MobileFilterView = ({ isShowDialog, hideDialog }) => {
   return (
     <Transition.Root show={isShowDialog === 'filter'} as={Fragment}>
-      <Dialog
-        as="div"
-        className="relative z-40"
-        onClose={() => hideDialog('SET_VALUE', '')}
-      >
+      <Dialog as="div" className="relative z-40" onClose={() => hideDialog('')}>
         <div className="fixed inset-0 overflow-hidden">
           <div className="absolute inset-0 overflow-hidden">
             <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 md:pl-0 2xl:pl-10 xl:pl-10 lg:pl-10 sm:pl-0 xs:pl-0 xxs:pl-0">
@@ -31,10 +27,10 @@ const MobileFilterView = ({ isShowDialog, hideDialog }) => {
                         <Dialog.Title>Search Vehicles</Dialog.Title>
 
                         <FiltersSearch />
-                        <div className="flex justify-end">
+                        <div className="flex justify-end mb-12">
                           <button
                             className="rounded-lg bg-primaryDark text-white p-2 mt-3"
-                            onClick={() => hideDialog('SET_VALUE', '')}
+                            onClick={() => hideDialog('')}
                           >
                             Close
                           </button>

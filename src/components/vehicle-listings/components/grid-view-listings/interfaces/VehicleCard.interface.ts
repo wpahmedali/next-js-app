@@ -8,9 +8,3 @@ export interface IEngineSpec {
   steeringName: string;
   transmissionName: string;
 }
-
-export interface IBodySpec {
-  data: IVehicleDetail;
-  url: string;
-  isPriceDisplay: number;
-}

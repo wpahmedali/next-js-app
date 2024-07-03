@@ -3,26 +3,19 @@ import { motion, AnimatePresence } from 'framer-motion';
 import VehicleInfo from './components/vehicle-info';
 import Title from './components/Title';
 import Buttons from './components/buttons';
-import ViewCountBar from './components/ViewCountBar';
 import Auction from './components/Auction';
-import Enquiry from './components/enquiry';
-import SalesTeam from './components/sales-team';
-import ContactInfo from './components/contact-info';
-import AuctionButtons from 'components/auction-buttons';
-import { useVehicleDetail } from 'react-query/hooks/api/vehicle-detail';
 import Error from 'components/error';
 import { NextRouter, useRouter } from 'next/router';
-import { useIsAuctionCountry } from 'src/hooks/auction-country';
 import { useNextPreviousCarList } from 'react-query/hooks/api/next-previous-car';
 import PageLoader from 'components/page-loader';
-import { getVehicleDetail } from 'react-query/api/vehicle-detail';
 import { useQueryClient } from 'react-query';
 import { useRouterParams } from 'src/hooks/router-params';
 import { useCurrentCountry } from 'src/hooks/current-country';
+import { getVehicleDetail } from 'react-query/api/vehicle/vehicle-detail';
+import { useVehicleDetail } from 'react-query/hooks/api/vehicle/vehicle-detail';
 
 const VehicleDetail = (): JSX.Element => {
   const queryClient = useQueryClient();
-  const isAuctionCountry = useIsAuctionCountry();
   const currentCountry = useCurrentCountry();
 
   const { query }: NextRouter = useRouter();
@@ -72,7 +65,6 @@ const VehicleDetail = (): JSX.Element => {
           transition={{ delay: 0.3 }}
         >
           <main className="bg-light w-full min-h-screen">
-            {isAuctionCountry && <AuctionButtons />}
             <Buttons />
             {(!data || isError) && !isLoading && <Error />}
             {nextIsSuccess &&
@@ -81,17 +73,15 @@ const VehicleDetail = (): JSX.Element => {
                 <Fragment>
                   <Title data={data.data} />
                   <VehicleInfo data={data.data} />
-                  <ViewCountBar data={data.data} />
 
-                  <div className="flex justify-between items-center px-2 text-sm text-white uppercase font-medium sm:font-normal sm:text-sm xs:text-xs xxs:text-xs p-2 mt-2 mb-2 bg-[#099731] 3xl:text-lg xl:text-lg lg:text-lg border w-full">
+                  <div className="flex justify-between items-center px-2 text-sm text-white uppercase font-medium sm:font-normal sm:text-sm xs:text-xs xxs:text-xs p-2 mt-2 mb-16 bg-[#099731] 3xl:text-lg xl:text-lg lg:text-lg border w-full">
                     <span>
                       Stock Available In {data.data.countryName},{' '}
                       {data.data.cityName}
                     </span>
-                    {data.data.fobPrice !== 0 &&
+                    {data.data.fobPrice !== '0' &&
                       data.data.currencySymbol &&
-                      currentCountry.isPriceDisplay === 1 &&
-                      data.data.priceAsk !== 1 && (
+                      currentCountry.isPriceDisplay === 1 && (
                         <span>
                           Price: {data.data.currencySymbol} {data.data.fobPrice}
                         </span>
@@ -110,14 +100,7 @@ const VehicleDetail = (): JSX.Element => {
                             ?.imagePath.replace('/s_thumb', '/thumb')}
                         />
                       )}
-                    <Enquiry carId={data.data.carId} />
                   </div>
-                  {data.data.staffMembers?.length > 0 && (
-                    <SalesTeam staffMembers={data.data.staffMembers} />
-                  )}
-                  {data.data.contactInformation?.length > 0 && (
-                    <ContactInfo contactInfo={data.data.contactInformation} />
-                  )}
                 </Fragment>
               )}
           </main>

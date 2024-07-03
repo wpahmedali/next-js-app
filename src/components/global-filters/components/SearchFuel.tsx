@@ -20,7 +20,7 @@ const SearchFuel = ({
   let dropdownData: IDropdownData[] = [];
 
   if (isSuccess && data) {
-    dropdownData = data.data?.fuel.map((item) => ({
+    dropdownData = data.data.fuel.map((item) => ({
       id: item.fuelId,
       name: item.fuelName,
       isChecked: false,

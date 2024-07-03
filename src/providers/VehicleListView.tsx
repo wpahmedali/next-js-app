@@ -10,7 +10,7 @@ import { vehicleListViews } from 'src/common/constants';
 const defaultView = vehicleListViews.grid;
 
 type ViewActionType = {
-  type: 'GRID' | 'TABULAR' | 'S_GRID';
+  type: 'GRID' | 'TABULAR';
 };
 
 const StateContext = createContext<string>('');
@@ -20,8 +20,6 @@ const reducerFun = (state: string, action: ViewActionType): string => {
   switch (action.type) {
     case 'GRID':
       return vehicleListViews.grid;
-    case 'S_GRID':
-      return vehicleListViews.s_grid;
     case 'TABULAR':
       return vehicleListViews.tabular;
     default:

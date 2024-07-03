@@ -20,7 +20,7 @@ const ContactInfo = ({
           >
             <div className="text-lg">
               <p className="text-3xl font-bold">
-                {data?.companyName?.replace(/<\/?b>/g, '')}
+                {data.quickContactCompanyName}
               </p>
               <p className="font-bold my-2">Address:</p>
               <p>{data.address}</p>

@@ -8,7 +8,5 @@ export interface ICurrentCountry {
   FBAppId?: string;
   flagIcon: JSX.Element;
   id?: number;
-  subCountry?: boolean;
   isPriceDisplay?: number;
-  whatsappNumber?: string;
 }

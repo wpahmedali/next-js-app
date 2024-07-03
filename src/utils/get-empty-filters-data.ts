@@ -13,6 +13,14 @@ export const getEmptyFiltersData = (query: ParsedUrlQuery): IFilters => {
     fuels,
     stock_no,
     chassis_no,
+    engine,
+    year,
+    purchase_date_from,
+    purchase_date_to,
+    pd_day,
+    ETA_Crossed,
+    Duty_Paid,
+    No_Inspection,
   } = query;
 
   return {
@@ -31,5 +39,21 @@ export const getEmptyFiltersData = (query: ParsedUrlQuery): IFilters => {
       body_types && !Array.isArray(body_types) ? body_types.split(',') : [],
     stockNo: stock_no && !Array.isArray(stock_no) ? stock_no : '',
     chassisNo: chassis_no && !Array.isArray(chassis_no) ? chassis_no : '',
+
+    engine: engine && !Array.isArray(engine) ? engine : '',
+    year: year && !Array.isArray(year) ? year : '',
+    purchaseDateFrom:
+      purchase_date_from && !Array.isArray(purchase_date_from)
+        ? purchase_date_from
+        : '',
+    purchaseDateTo:
+      purchase_date_to && !Array.isArray(purchase_date_to)
+        ? purchase_date_to
+        : '',
+    PDDay: pd_day && !Array.isArray(pd_day) ? pd_day : '',
+    noInspection:
+      No_Inspection && !Array.isArray(No_Inspection) ? No_Inspection : '',
+    dutyPaid: Duty_Paid && !Array.isArray(Duty_Paid) ? Duty_Paid : '',
+    ETACrossed: ETA_Crossed && !Array.isArray(ETA_Crossed) ? ETA_Crossed : '',
   };
 };
